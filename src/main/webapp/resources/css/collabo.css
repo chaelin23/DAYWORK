@@ -1,0 +1,378 @@
+@charset "UTF-8";
+
+/* ---------- 업무 박스 ------------*/
+
+.collabo-workBox{
+	height: 300px;
+}
+
+.collabo-workBox-top{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.collabo-workBox-top-text{
+	font-weight: bold;
+	margin-right: 530px;
+}
+#workBox-search{
+	border-radius: 8px;
+}
+
+#new{
+	border-style: none;
+	font-size: 20px;
+	font-weight: bold;
+	background-color: white;
+}
+
+.collabo-workBox-content{
+	display: flex;
+	flex-direction: column;
+}
+
+.collabo-workBox-btns{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.collabo-workBox-btn{
+	padding: 0px 20px;
+	width: 100px;
+}
+
+
+#call, #progress, #finish, #feedback, #postpone{
+	width: 100px;
+	height: 25px;
+	border-radius: 10px;
+	border-style: none;
+	margin-bottom: 10px;
+}
+
+#call{
+	background-color: pink;
+}
+
+#progress{
+	background-color: orange;
+}
+
+#finish{
+	background-color: dodgerblue;
+}
+
+#feedback{
+	background-color: limegreen;
+}
+
+.collabo-workBox-boxes{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	height: 565px;
+}
+
+.collabo-workBox-box{
+	border:1px solid darkgrey;
+	padding:20px;
+	font-size: 12px;
+	border-radius: 7px;
+	width:100px;
+	margin-bottom:10px;
+}
+
+.collabo-workBox-box-column{
+	display: flex;
+	flex-direction: column;	
+	width:142px;
+}
+
+.collabo-workBox-box-a{
+	display: flex;
+	flex-direction: row;
+}
+
+
+/*---------------- 업무요청 글작성 --------------*/
+.collabo-create{
+	display: flex;
+	flex-direction: column;
+	overflow-x:hidden; 
+}
+
+.collabo-create-box{
+	width: 770px;
+	height: 370px;
+	border: 1px solid darkgrey;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.collabo-crate-box-top{
+	border-bottom: 1px solid darkgrey;
+	height: 45px;
+    line-height: 45px;
+    background-color: #cce8f4;
+}
+
+.create-box-top-margin{
+	font-weight: bold;
+	margin-left: 30px;
+}
+
+.collabo-crate-box-bottom{
+	border-top: 1px solid darkgrey;
+}
+
+.create-box-bottom-margin{
+	margin:15px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#box-bottom-btn-a, .box-bottom-btn-b{
+	border-color: darkgrey;
+	width: 100px;
+	height: 30px;
+	background-color: white;
+	border-radius: 2px;
+	margin-left: 5px;
+	font-size: 12px;
+}
+
+
+#box-bottom-btn-a:hover{
+	cursor: pointer;
+	background-color: grey;
+}
+
+.box-bottom-btn-b:hover{
+	cursor: pointer;
+	background-color: black;
+	color: white;
+}
+
+.collabo-crate-box-content{
+	height: 263px;
+	padding: 0px 30px;
+	font-size: 12px;
+}
+
+.create-content-title{
+	border-bottom: 1px solid grey;	
+	padding: 8px 0px;
+}
+
+#list-title{
+	width: 500px;
+}
+
+.create-content-add{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-bottom: 1px solid grey;
+	padding: 8px 0px;
+	font-size: 12px;
+}
+
+#b_call, #b_progress, #b_finish, #b_feedback, #b_postpone{
+	width: 60px;
+	height: 25px;
+	border-radius: 10px;
+	border-style: none;
+}
+
+#b_call:hover{
+	background-color: pink;
+}
+
+#b_progress:hover{
+	background-color: orange;
+}
+
+#b_finish:hover{
+	background-color: dodgerblue;
+}
+
+#b_feedback:hover{
+	background-color: limegreen;
+}
+
+#create-add-date-a{
+	margin-right: 10px;
+}
+#create-add-date-b{
+	margin-right: 20px;
+}
+#create-add-people{
+	border: none;
+}
+
+#create-content-style{
+	border:none;
+	margin:20px 0px;
+}
+
+
+/*------------ 업무리스트 ------------*/
+.collabo-create{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.collabo-list-box{
+	width: 770px;
+	border: 1px solid darkgrey;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	
+}
+
+.collabo-list-box.active{
+	display: none;
+}
+
+.collabo-list-box-update{
+	width: 770px;
+	border: 1px solid darkgrey;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	display: none;
+}
+
+.collabo-list-box-update.active{
+	display: block;
+}
+
+.collabo-list-box-top{
+	border-bottom: 1px solid darkgrey;
+	height: 45px;
+    line-height: 45px;
+}
+
+.list-box-top-margin{
+	margin-left: 30px;
+}
+
+.collabo-list-box-bottom{
+	border-top: 1px solid darkgrey;
+}
+
+.list-box-bottom-margin{
+	margin:15px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#box-bottom-btn-a, .box-bottom-btn-b{
+	border-color: darkgrey;
+	width: 100px;
+	height: 30px;
+	background-color: white;
+	border-radius: 2px;
+	margin-left: 5px;
+	font-size: 12px;
+}
+
+
+#box-bottom-btn-a:hover{
+	cursor: pointer;
+	background-color: grey;
+}
+
+.box-bottom-btn-b:hover{
+	cursor: pointer;
+	background-color: black;
+	color: white;
+}
+
+.collabo-list-box-content{
+	padding: 0px 30px;
+	font-size: 12px;
+}
+
+.list-content-title{
+	border-bottom: 1px solid grey;	
+	padding: 8px 0px;
+}
+
+.list-content-add{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-bottom: 1px solid grey;
+	padding: 8px 0px;
+	font-size: 12px;
+}
+
+.list-content-content{
+	margin:30px 0px;
+}
+
+#b_call, #b_progress, #b_finish, #b_feedback, #b_postpone{
+	width: 60px;
+	height: 25px;
+	border-radius: 10px;
+	border-style: none;
+}
+
+#b_call:hover{
+	background-color: pink;
+}
+
+#b_progress:hover{
+	background-color: orange;
+}
+
+#b_finish:hover{
+	background-color: dodgerblue;
+}
+
+#b_feedback:hover{
+	background-color: limegreen;
+}
+
+#list-add-date-a{
+	margin-right: 10px;
+}
+#list-add-date-b{
+	margin-right: 20px;
+}
+#list-add-people{
+	border: none;
+}
+
+#list-content-style{
+	border:none;
+	margin:20px 0px;
+}
+
+/*------------ selectCate ------------*/
+.collabo-workList-cate{
+	margin-bottom: 5px;
+	margin-right: 400px;
+}
+
+.statusBtn{
+	border:none;
+	border-right: 1px solid black;
+	background: none;
+	font-size: 15px;
+}
+
+.statusBtn:hover{
+	background-color: black;
+	color: white;
+	cursor: pointer;	
+}
+
+#status_its{
+	border-left:  1px solid black;
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Confing 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.kh.spring.member.model.vo.Member" alias="Member"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mapper/address-mapper.xml"/>
+		<mapper resource="mapper/approval-mapper.xml"/>
+		<mapper resource="mapper/calendar-mapper.xml"/>
+		<mapper resource="mapper/chat-mapper.xml"/>
+		<mapper resource="mapper/collaboration-mapper.xml"/>
+		<mapper resource="mapper/common-mapper.xml"/>
+		<mapper resource="mapper/member-mapper.xml"/>
+		<mapper resource="mapper/notice-mapper.xml"/>
+		<mapper resource="mapper/servlet-mapper.xml"/>
+		<mapper resource="mapper/survey-mapper.xml"/>
+	</mappers>
+</configuration>
