@@ -7,19 +7,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/board.css">
 <link rel="stylesheet" href="resources/css/index.css">
-<style>
-.addressList {
-	/* border-top: 1px solid lightgray; */
-	text-align: center;
-	line-height: 40px;
-	border-collapse: collapse;
-}
-
-table tr {
-	border-bottom: 1px solid lightgray;
-	font-size: 12px;
-}
-</style>
+<link rel="stylesheet" href="resources/css/survey.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -32,25 +21,34 @@ table tr {
 
 			<br>
 
-			<form>
-				<div
-					style="display: flex; justify-content: space-between; flex-direction: row;">
+			<form action="" onsubmit="return search();">
+				<div class="top-menu">
 					<div>
-						<input type="text" style="height: 20px;" placeholder="제목 검색">
-						<button type="submit"
-							style="width: 80px; height: 30px; border-radius: 5px; border: none; cursor: pointer">검색</button>
+						<input type="text" id="search-input" placeholder="제목 검색">
+						<button type="submit" class="button">검색</button>
 					</div>
 					<div>
-						<button type="button"
-							style="width: 80px; height: 30px; border-radius: 5px; border: none; cursor: pointer">추가하기</button>
+						<select id="status">
+							<option>-상태-</option>
+							<option>진행중</option>
+							<option>마감</option>
+							<option>모두</option>
+						</select>
 					</div>
+
+					<div style="flex: 1"></div>
+
+					<div>
+						<button type="button" class="button">설문하기</button>
+					</div>
+
 				</div>
 			</form>
 
 			<br> <br> <br>
 
-			<table class="addressList" style="font-size: 14px;">
-				<tr class="test" style="border-bottom: 1px solid black;">
+			<table class="suveyList">
+				<tr>
 					<th style="width: 50px;">번호</th>
 					<th style="width: 450px;">설문 제목</th>
 					<th style="width: 120px;">등록자</th>
@@ -138,7 +136,7 @@ table tr {
 					<td>2021-5-10</td>
 					<td>마감</td>
 				</tr>
-				
+
 			</table>
 			<div style="height: 70px">&nbsp;</div>
 			<div style="text-align: center;">&lt;&lt; &nbsp;&nbsp; &lt;
@@ -147,6 +145,20 @@ table tr {
 		</div>
 
 	</div>
+
+	<script>
+		/* 검색 버튼 */
+		function search() {
+			var value = document.getElementById("search-input").value;
+
+			if (value == "" || value.length == 0) {
+				alert("검색할 설문 제목을 입력해주세요.");
+				return false;
+			} else {
+				$('#suveyForm').submit();
+			}
+		}
+	</script>
 
 </body>
 </html>

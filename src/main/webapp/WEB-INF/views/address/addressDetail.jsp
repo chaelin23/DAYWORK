@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,30 +7,27 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/board.css">
 <link rel="stylesheet" href="resources/css/index.css">
-<style>
-	input, textarea {
-		border: 1px solid lightgray;
-		border-radius: 3px;
-	}
-</style>
+<link rel="stylesheet" href="resources/css/address.css">
 </head>
 <body>
 
-<div class="main-king">
+	<div class="main-king">
 
-<%@ include file = "/index.jsp" %>
+		<%@ include file="/index.jsp"%>
 
-<!-- 오른쪽 내용 박스 -->
+		<!-- 오른쪽 내용 박스 -->
 		<div class="main-right">
-			<div style="font-size: 20px;">
-				주소록</div>
-				
-			<br><br><br>
-			<table style="line-height: 30px; font-size: 12px;">
+
+			<div class="address-title">주소록</div>
+
+			<br> <br> <br>
+
+			<table id="address-detail" class="table-form">
 				<tr>
-					<td style="width: 150px;">사진</td>
-					<td><div style="display: flex; align-items: baseline;"><div style="width: 120px; height: 120px; background: url('../image/man.png'); background-repeat: no-repeat; background-size: cover;"></div>
-					</div></td>
+					<td class="address-table-margin">사진</td>
+					<td><div class="photo">
+							<div class="basic-photo"></div>
+						</div></td>
 				</tr>
 				<tr>
 					<td>이름</td>
@@ -66,17 +63,18 @@
 				</tr>
 				<tr>
 					<td>메모</td>
-					<td><textarea cols="50" rows="7" style="resize: none;" readonly>안녕하세요~!</textarea></td>
+					<td><textarea cols="50" rows="7" readonly>안녕하세요~!</textarea></td>
 				</tr>
-				
 			</table>
+
 			<br>
-			<br>
+
 			<div>
-				<button type="submit" style="width: 80px; height: 30px; border-radius: 5px; background: skyblue; margin: 0px 15px; border: none; cursor: pointer">수정하기</button>
-				<button type="button" style="width: 80px; height: 30px; border-radius: 5px; border: none; cursor: pointer">뒤로가기</button>
+				<button type="submit" class="button point button-margin">수정하기</button>
+				<button type="button" class="button" onclick="history.back();">뒤로가기</button>
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>
