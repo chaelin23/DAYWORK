@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" />
 </head>
 <body><div class="main-king">
-<%@ include file = "/index.jsp" %>
+<%@ include file="../common/mainLeft.jsp"%>
 	<!-- 오른쪽 내용 박스 -->
 	<div class="main-right">
 	<h3>근태 현황</h3>

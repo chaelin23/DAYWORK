@@ -7,7 +7,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-		classpath*:root-context.xml
+		classpath:root-context.xml
 		/WEB-INF/spring/spring-security.xml
 		</param-value>
 	</context-param>
@@ -30,7 +30,7 @@
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	
 	<!-- 필터로 인코딩 설정, Spring에서 제공하므로 라이브러리 안가져 와도 됨 -->

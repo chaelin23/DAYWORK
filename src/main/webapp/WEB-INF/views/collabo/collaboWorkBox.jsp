@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="main-king">
-	<%@ include file = "/index.jsp" %>
+	<%@ include file="../common/mainLeft.jsp"%>
 
 	<!-- 오른쪽 내용 박스 -->
 		<div class="main-right">

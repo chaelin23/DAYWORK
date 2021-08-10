@@ -15,12 +15,11 @@
 		<config>src/main/webapp/WEB-INF/spring/appServlet/common-context.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/notice-context.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/survey-context.xml</config>
-		<config>src/test/resources/root-context.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/spring-security.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/collabo-context.xml</config>
+		<config>src/main/resources/root-context.xml</config>
 	</configs>
 	<autoconfigs>
-		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
