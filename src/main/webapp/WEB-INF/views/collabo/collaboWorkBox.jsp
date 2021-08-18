@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 				<div class="collabo-workBox-top">
 					<div class="collabo-workBox-top-text">WORKBOX</div>
 					<div class="collabo-workBox-top-search"><input type="text" id="workBox-search" placeholder="검색"></div>
-					<div class="collabo-workBox-top-new"><button id="new"> + </button></div>
+					<div class="collabo-workBox-top-new"><button id="new" onclick="location.href='gocollaboList.co'"> + </button></div>
 				</div>
 				<hr style="margin-top:20px; margin-bottom: 20px;">
 				<div class="collabo-workBox-content">
@@ -32,179 +33,118 @@
 					<div class="collabo-workBox-boxes" >
 						<!-- 요청 -->
 						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)">
-							<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box1">
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">테스트</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">강건강, 남나눔</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">2021/07/20</div>
-								</div>
-							</div>
-							<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box2">
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">테스트</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">도대담</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">2021/07/20</div>
-								</div>
-							</div>
+							<c:forEach var="c" items="${ cList }">
+								<c:if test="${ c.cBctNo eq 'C1' }">
+									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box${ c.cNo }">
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
+										</div>
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b">${ c.cPeople }</div>
+										</div>
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">${ c.cEndDate }</div>
+											<div class="collabo-workBox-box-b">까지</div>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
 						</div>
 						
 						<!-- 진행중 -->
 						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)">
-							<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box3">
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">테스트</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">류라라, 문미미, 강건강</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">2021/07/20</div>
-								</div>
-							</div>
-							<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box4">
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">테스트</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">개발1팀</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">2021/07/20</div>
-								</div>
-							</div>
-							<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box5">
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">테스트</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">강건강, 남나눔</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">2021/07/20</div>
-								</div>
-							</div>
-							
+							<c:forEach var="c" items="${ cList }">
+								<c:if test="${ c.cBctNo eq 'C2' }">
+									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box${ c.cNo }">
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
+										</div>
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b">${ c.cPeople }</div>
+										</div>
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">${ c.cEndDate }</div>
+											<div class="collabo-workBox-box-b">까지</div>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
 						</div>
+						
 						<!-- 완료 -->
 						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)">
-							<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box6">
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">테스트</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">강건강, 남나눔</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">2021/07/20</div>
-								</div>
-							</div>
+							<c:forEach var="c" items="${ cList }">
+								<c:if test="${ c.cBctNo eq 'C3' }">
+									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box${ c.cNo }">
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
+										</div>
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b">${ c.cPeople }</div>
+										</div>
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">${ c.cEndDate }</div>
+											<div class="collabo-workBox-box-b">까지</div>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
 						</div>
+						
 						<!-- 피드백 -->
 						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)">
-							<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box7">
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">테스트</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">강건강, 남나눔</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">2021/07/20</div>
-								</div>
-							</div>
-							<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box8">
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">테스트</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">강건강, 남나눔</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">2021/07/20</div>
-								</div>
-							</div>
-							<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box9">
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">테스트</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">강건강, 남나눔</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">2021/07/20</div>
-								</div>
-							</div>
-							<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box10">
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">테스트</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">강건강, 남나눔</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">2021/07/20</div>
-								</div>
-							</div>
+							<c:forEach var="c" items="${ cList }">
+								<c:if test="${ c.cBctNo eq 'C4' }">
+									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box${ c.cNo }">
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
+										</div>
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b">${ c.cPeople }</div>
+										</div>
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">${ c.cEndDate }</div>
+											<div class="collabo-workBox-box-b">까지</div>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
 						</div>
+						
 						<!-- 보류 -->
 						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)">
-							<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box11">
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">테스트</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">강건강, 남나눔</div>
-								</div>
-								<div class="collabo-workBox-box-a">
-									<div class="collabo-workBox-box-b">#</div>
-									<div class="collabo-workBox-box-b">2021/07/20</div>
-								</div>
-							</div>
+							<c:forEach var="c" items="${ cList }">
+								<c:if test="${ c.cBctNo eq 'C5' }">
+									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box${ c.cNo }">
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
+										</div>
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b">${ c.cPeople }</div>
+										</div>
+										<div class="collabo-workBox-box-a">
+											<div class="collabo-workBox-box-b">${ c.cEndDate }</div>
+											<div class="collabo-workBox-box-b">까지</div>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
 						</div>
+						
 					</div>
 				</div>
 			</div>
-			
+	</div>
 </div>
 
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@
 			<div class="main-myInfo">
 				<div class="main-profile">
 					<div class="main-profile-photo"></div>
-					<div class="main-profile-name">강건강</div>
+					<div class="main-profile-name">${ loginUser.mName }</div>
 					<div class="main-profile-position">팀원</div>
 				</div>
 				<div class="main-line">

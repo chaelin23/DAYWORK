@@ -38,8 +38,5 @@
 		<button onclick="location.href='home.do'">홈으로</button> 		
 	</c:if>
 		
-		<script>
-			
-		</script>
 </body>
 </html>

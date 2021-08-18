@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
+
+	html {font-family: 'Pretendard-Regular'; }
+
 /* ---------- 업무 박스 ------------*/
 
 .collabo-workBox{
@@ -25,6 +35,7 @@
 	font-size: 20px;
 	font-weight: bold;
 	background-color: white;
+	cursor: pointer;
 }
 
 .collabo-workBox-content{
@@ -150,7 +161,7 @@
 	background-color: grey;
 }
 
-.box-bottom-btn-b:hover{
+#box-bottom-btn-b:hover{
 	cursor: pointer;
 	background-color: black;
 	color: white;
@@ -167,8 +178,8 @@
 	padding: 8px 0px;
 }
 
-#list-title{
-	width: 500px;
+.new-title, .list-title, #up-title{
+	width: 700px;;
 }
 
 .create-content-add{
@@ -203,19 +214,25 @@
 	background-color: limegreen;
 }
 
-#create-add-date-a{
+.new-date-s, #up-date-s{
 	margin-right: 10px;
+	border-style: none;
 }
-#create-add-date-b{
+.new-date-e, #up-date-e{
 	margin-right: 20px;
+	border-style: none;
 }
-#create-add-people{
-	border: none;
+.new-people, .list-people, #up-people{
+	border-style: none;
 }
 
-#create-content-style{
-	border:none;
+.new-content, #up-content{
+	border-style: none;
 	margin:20px 0px;
+}
+
+.list-content{
+	padding:20px 0px 20px 10px;
 }
 
 
@@ -271,7 +288,7 @@
 	justify-content: space-between;
 }
 
-#box-bottom-btn-a, .box-bottom-btn-b{
+#box-bottom-btn-a, #box-bottom-btn-b{
 	border-color: darkgrey;
 	width: 100px;
 	height: 30px;

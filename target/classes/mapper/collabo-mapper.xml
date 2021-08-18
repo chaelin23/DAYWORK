@@ -1,4 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="collabo-mapper">
+	<insert id="insertBoardC">
+		insert into board values
+		(BO_seq.nextval, #{bDept}, #{bTitle}, #{bContent}, SYSDATE, SYSDATE, 0, 3, default, #{bMNo}, null, null)
+	</insert>
+	
+	<select id="selectBNo" resultType="_int">
+		select B_NO
+		from board
+		where ROWNUM = 1 ORDER BY B_NO DESC
+	</select>
+	
+	<insert id="insertCollabo">
+		insert into collabo values
+		(co_seq.nextval, #{cBNo}, #{cMNo}, #{cStartDate}, #{cEndDate}, #{cPeople}, default, #{cBctNo})
+	</insert>
+	
+	<select id="selectListC" resultMap="collaboResultSet">
+		select c_no, c_b_no, c_m_no, c_start_date, c_end_date, c_people, c_first, cbct_no, cbct_status,
+		       b_title, b_content, b_modify_date, m_name
+    		from board
+	    		join collabo on(b_no = c_b_no)
+	    		join collabo_cate using(cbct_no)
+	    		join member on(b_m_no = m_no)
+	    	where b_status='Y'
+	    		and c_people like #{mName2}
+	    	order by c_no desc
+	</select>
+	
+	<resultMap type="Collabo" id="collaboResultSet">
+		<id column="C_NO" property="cNo"/>
+		<result column="C_B_NO" property="cBNo"/>
+		<result column="C_M_NO" property="cMNo"/>
+		<result column="C_START_DATE" property="cStartDate"/>
+		<result column="C_END_DATE" property="cEndDate"/>
+		<result column="C_PEOPLE" property="cPeople"/>
+		<result column="C_FIRST" property="cFirst"/>
+		<result column="CBCT_NO" property="cBctNo"/>
+		<result column="CBCT_STATUS" property="cBctStatus"/>
+		<result column="B_TITLE" property="bTitle"/>
+		<result column="B_CONTENT" property="bContent"/>
+		<result column="B_MODIFY_DATE" property="bModifyDate"/>
+		<result column="M_NAME" property="bWriter"/>
+	</resultMap>
+	
+	<select id="selectListB" resultMap="boardCResultSet">
+		select b_no, b_dept, b_title, b_content, b_create_date, b_modify_date, b_type,
+			   b_m_no, m_name 
+    		from board
+	    		join collabo on(b_no = c_b_no)
+	    		join collabo_cate using(cbct_no)
+	    		join Member on(b_m_no = m_no)
+    		where b_status='Y'
+    		order by b_no desc
+	</select>
+	
+	<resultMap type="Board" id="boardCResultSet">
+		<id column="B_NO" property="bNo"/>
+		<result column="B_DEPT" property="bDept" />
+		<result column="B_TITLE" property="bTitle" />
+		<result column="B_CONTENT" property="bContent" />
+		<result column="B_CREATE_DATE" property="bCreateDate" />
+		<result column="B_MODIFY_DATE" property="bModifyDate" />
+		<result column="B_COUNT" property="bCount" />
+		<result column="B_TYPE" property="bType" />
+		<result column="B_STATUS" property="bStatus" />
+		<result column="B_M_NO" property="bMNo" />
+		<result column="M_NAME" property="mName" />
+		<result column="ORIGINAL_FILENAME" property="originalFileName" />
+		<result column="RENAME_FILENAME" property="renameFileName" />
+	</resultMap>
 </mapper>
