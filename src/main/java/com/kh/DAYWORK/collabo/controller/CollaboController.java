@@ -97,4 +97,15 @@ public class CollaboController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping("updateBtn.co")
+	@ResponseBody
+	public String updateBtn(@ModelAttribute Collabo co) {
+		int result = cService.updateBtn(co);
+		if(result > 0) {
+			return "success";
+		} else {
+			throw new CollaboException("상태변경에 실패하였습니다.");
+		}
+	}
 }

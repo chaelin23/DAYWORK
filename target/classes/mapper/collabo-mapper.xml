@@ -71,4 +71,8 @@
 		<result column="ORIGINAL_FILENAME" property="originalFileName" />
 		<result column="RENAME_FILENAME" property="renameFileName" />
 	</resultMap>
+	
+	<update id="updateBtn">
+		UPDATE COLLABO SET CBCT_NO=#{cBctNo} WHERE C_NO=#{cNo}
+	</update>
 </mapper>

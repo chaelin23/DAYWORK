@@ -34,7 +34,9 @@ public class CollaboService {
 		return cDAO.selectListC(sqlSession, mName);
 	}
 
-//	public ArrayList<Collabo> selectListB() {
-//		return cDAO.selectListB(sqlSession);
-//	}
+	public int updateBtn(Collabo co) {
+		return cDAO.updateBtn(sqlSession, co);
+	}
+
+
 }

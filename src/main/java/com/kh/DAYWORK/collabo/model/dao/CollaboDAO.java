@@ -28,10 +28,8 @@ public class CollaboDAO {
 		return (ArrayList)sqlSession.selectList("collabo-mapper.selectListC", mName2);
 	}
 
-//	public ArrayList<Collabo> selectListB(SqlSessionTemplate sqlSession) {
-//		return (ArrayList)sqlSession.selectList("collabo-mapper.selectListB");
-//	}
-
-	
+	public int updateBtn(SqlSessionTemplate sqlSession, Collabo co) {
+		return sqlSession.update("collabo-mapper.updateBtn", co);
+	}
 
 }

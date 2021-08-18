@@ -178,9 +178,12 @@
 	padding: 8px 0px;
 }
 
-.new-title, .list-title, #up-title{
-	width: 700px;;
+.new-title, .list-title, new2-title{
+	width: 700px;
+	border-style: none;
+	font-weight: bold;
 }
+
 
 .create-content-add{
 	display: flex;
@@ -191,42 +194,52 @@
 	font-size: 12px;
 }
 
-#b_call, #b_progress, #b_finish, #b_feedback, #b_postpone{
+.b_call, .b_progress, .b_finish, .b_feedback, .b_postpone{
 	width: 60px;
 	height: 25px;
 	border-radius: 10px;
 	border-style: none;
+	margin-right: 5px;
+	font-size:13px;
 }
 
-#b_call:hover{
+.b_call:hover{
 	background-color: pink;
+	cursor: pointer;
 }
 
-#b_progress:hover{
+.b_progress:hover{
 	background-color: orange;
+	cursor: pointer;
 }
 
-#b_finish:hover{
+.b_finish:hover{
 	background-color: dodgerblue;
+	cursor: pointer;
 }
 
-#b_feedback:hover{
+.b_feedback:hover{
 	background-color: limegreen;
+	cursor: pointer;
 }
 
-.new-date-s, #up-date-s{
+.b_postpone:hover{
+	cursor: pointer;
+}
+
+.new-date-s, #up-date-s ,.new2-date-s{
 	margin-right: 10px;
 	border-style: none;
 }
-.new-date-e, #up-date-e{
+.new-date-e, #up-date-e, .new2-date-e{
 	margin-right: 20px;
 	border-style: none;
 }
-.new-people, .list-people, #up-people{
+.new-people, .list-people, #up-people, .new2-people{
 	border-style: none;
 }
 
-.new-content, #up-content{
+.new-content, #up-content, .new2-content{
 	border-style: none;
 	margin:20px 0px;
 }
@@ -251,9 +264,6 @@
 	
 }
 
-.collabo-list-box.active{
-	display: none;
-}
 
 .collabo-list-box-update{
 	width: 770px;
@@ -263,9 +273,6 @@
 	display: none;
 }
 
-.collabo-list-box-update.active{
-	display: block;
-}
 
 .collabo-list-box-top{
 	border-bottom: 1px solid darkgrey;
@@ -286,6 +293,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+}
+
+.box-bottom-btn-status{
+	font-size: 15px;
+}
+.box-bottom-btn-update{
+	font-size: 0px;
+	
 }
 
 #box-bottom-btn-a, #box-bottom-btn-b{
@@ -333,28 +348,28 @@
 	margin:30px 0px;
 }
 
-#b_call, #b_progress, #b_finish, #b_feedback, #b_postpone{
-	width: 60px;
-	height: 25px;
-	border-radius: 10px;
-	border-style: none;
-}
+/* .b_call, .b_progress, .b_finish, .b_feedback, .b_postpone{ */
+/* 	width: 60px; */
+/* 	height: 25px; */
+/* 	border-radius: 10px; */
+/* 	border-style: none; */
+/* } */
 
-#b_call:hover{
-	background-color: pink;
-}
+/* .b_call:hover{ */
+/* 	background-color: pink; */
+/* } */
 
-#b_progress:hover{
-	background-color: orange;
-}
+/* .b_progress:hover{ */
+/* 	background-color: orange; */
+/* } */
 
-#b_finish:hover{
-	background-color: dodgerblue;
-}
+/* .b_finish:hover{ */
+/* 	background-color: dodgerblue; */
+/* } */
 
-#b_feedback:hover{
-	background-color: limegreen;
-}
+/* .b_feedback:hover{ */
+/* 	background-color: limegreen; */
+/* } */
 
 #list-add-date-a{
 	margin-right: 10px;
