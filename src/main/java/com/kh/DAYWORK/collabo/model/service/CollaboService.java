@@ -38,5 +38,28 @@ public class CollaboService {
 		return cDAO.updateBtn(sqlSession, co);
 	}
 
+	public void updateCollabo(Collabo co) {
+		cDAO.updateCollaboB(sqlSession, co);
+		
+		cDAO.updateCollaboC(sqlSession, co);
+		
+	}
+
+	public ArrayList<Collabo> selectCollaboCate(Collabo co) {
+		ArrayList<Collabo> cList = new ArrayList<Collabo>();
+		String cBctNo = co.getcBctNo();
+		int cMNo = co.getcMNo();
+		
+		if(cMNo == 0) {
+			cList = cDAO.selectCateCBctNo(sqlSession, cBctNo);
+		} else if(cBctNo.equals("null")){
+			cList = cDAO.selectCateCMNo(sqlSession, cMNo);
+		}
+		
+		System.out.println(cList);
+		
+		return cList;
+	}
+
 
 }

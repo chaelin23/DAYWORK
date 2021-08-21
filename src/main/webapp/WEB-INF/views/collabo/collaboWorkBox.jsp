@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/index.css">
 <link rel="stylesheet" href="resources/css/collabo.css">
+<script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<div class="main-king">
@@ -32,10 +33,11 @@
 					</div>
 					<div class="collabo-workBox-boxes" >
 						<!-- 요청 -->
-						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)">
+						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)" id="C1">
 							<c:forEach var="c" items="${ cList }">
 								<c:if test="${ c.cBctNo eq 'C1' }">
-									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box${ c.cNo }">
+									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="${ c.cNo }">
+										<input type="hidden" value="${c.cNo }">
 										<div class="collabo-workBox-box-a">
 											<div class="collabo-workBox-box-b">#</div>
 											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
@@ -54,10 +56,11 @@
 						</div>
 						
 						<!-- 진행중 -->
-						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)">
+						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)" id="C2">
 							<c:forEach var="c" items="${ cList }">
 								<c:if test="${ c.cBctNo eq 'C2' }">
-									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box${ c.cNo }">
+									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="${ c.cNo }">
+										<input type="hidden" value="${c.cNo }">
 										<div class="collabo-workBox-box-a">
 											<div class="collabo-workBox-box-b">#</div>
 											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
@@ -76,10 +79,11 @@
 						</div>
 						
 						<!-- 완료 -->
-						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)">
+						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)" id="C3">
 							<c:forEach var="c" items="${ cList }">
 								<c:if test="${ c.cBctNo eq 'C3' }">
-									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box${ c.cNo }">
+									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="${ c.cNo }">
+										<input type="hidden" value="${c.cNo }">
 										<div class="collabo-workBox-box-a">
 											<div class="collabo-workBox-box-b">#</div>
 											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
@@ -98,10 +102,11 @@
 						</div>
 						
 						<!-- 피드백 -->
-						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)">
+						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)" id="C4">
 							<c:forEach var="c" items="${ cList }">
 								<c:if test="${ c.cBctNo eq 'C4' }">
-									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box${ c.cNo }">
+									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="${ c.cNo }">
+										<input type="hidden" value="${c.cNo }">
 										<div class="collabo-workBox-box-a">
 											<div class="collabo-workBox-box-b">#</div>
 											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
@@ -120,10 +125,11 @@
 						</div>
 						
 						<!-- 보류 -->
-						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)">
+						<div class="collabo-workBox-box-column" ondragover="allowDrop()" ondrop="dropItem(Event)" id="C5">
 							<c:forEach var="c" items="${ cList }">
 								<c:if test="${ c.cBctNo eq 'C5' }">
-									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="box${ c.cNo }">
+									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="${ c.cNo }">
+										<input type="hidden" value="${c.cNo }">
 										<div class="collabo-workBox-box-a">
 											<div class="collabo-workBox-box-b">#</div>
 											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
@@ -160,6 +166,15 @@
 		    var dropid = event.dataTransfer.getData('text');
 		    var moveEle = document.getElementById(dropid);
 		    dropele.appendChild(moveEle);
+		    
+		    $.ajax({
+		    	url: 'updateBtn.co',
+		    	data: {cNo:dropid,
+		    		   cBctNo:dropele.id},
+		    	success: function(data){
+		    		console.log(0);	
+		    	}
+		    });
 		}
 		
 		function dragStart() {
@@ -167,5 +182,10 @@
 			 var selectId = selectEle.id;
 			 event.dataTransfer.setData('text/plain', selectId); 
 		}		
+		
+		$('.collabo-workBox-box').on('click', function(){
+			cNo = $(this).children().eq(0).val();
+			location.href='goCollaboBox.co?cNo='+ cNo;
+		});
 	</script>
 </html>

@@ -11,8 +11,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -106,6 +108,50 @@ public class CollaboController {
 			return "success";
 		} else {
 			throw new CollaboException("상태변경에 실패하였습니다.");
+		}
+	}
+	
+	@RequestMapping("updateCollabo.co")
+	@ResponseBody
+	public String updateCollabo(@ModelAttribute Collabo co) {
+		cService.updateCollabo(co);
+		return "success";
+	}
+	
+	@RequestMapping("goCollaboBox.co")
+	public ModelAndView goCollaboBox(@RequestParam("cNo") int cNo, ModelAndView mv, HttpSession session) {
+		Date dat = new Date(new GregorianCalendar().getTimeInMillis());
+		mv.addObject("dat",dat);
+		
+		Member m = (Member)session.getAttribute("loginUser");
+		String mName = m.getmName();
+		
+		ArrayList<Collabo> cList = cService.selectListC(mName);
+		
+		mv.addObject("cList", cList).addObject("cNoBox", cNo);
+		mv.setViewName("collaboList");
+		
+		return mv;
+	}
+	
+	@RequestMapping("selectCollaboCate.co")
+	@ResponseBody
+	public void selectCollaboCate(@ModelAttribute Collabo co, HttpServletResponse response) {
+		System.out.println(co.getcBctNo());
+		System.out.println(co.getcMNo());
+		ArrayList<Collabo> cList = cService.selectCollaboCate(co);
+		
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson  = gb.create();
+		
+		System.out.println(cList);
+		
+		try {
+			gson.toJson(cList, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

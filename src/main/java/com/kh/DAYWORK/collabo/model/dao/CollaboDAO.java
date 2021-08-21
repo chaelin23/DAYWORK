@@ -32,4 +32,20 @@ public class CollaboDAO {
 		return sqlSession.update("collabo-mapper.updateBtn", co);
 	}
 
+	public void updateCollaboB(SqlSessionTemplate sqlSession, Collabo co) {
+		sqlSession.update("collabo-mapper.updateCollaboB", co);
+	}
+
+	public void updateCollaboC(SqlSessionTemplate sqlSession, Collabo co) {
+		sqlSession.update("collabo-mapper.updateCollaboC", co);
+	}
+
+	public ArrayList<Collabo> selectCateCBctNo(SqlSessionTemplate sqlSession, String cBctNo) {
+		return (ArrayList)sqlSession.selectList("collabo-mapper.selectCateCBctNo", cBctNo);
+	}
+
+	public ArrayList<Collabo> selectCateCMNo(SqlSessionTemplate sqlSession, int cMNo) {
+		return (ArrayList)sqlSession.selectList("collabo-mapper.selectCateCMNo", cMNo);
+	}
+
 }

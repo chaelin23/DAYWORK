@@ -278,10 +278,22 @@
 	border-bottom: 1px solid darkgrey;
 	height: 45px;
     line-height: 45px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .list-box-top-margin{
 	margin-left: 30px;
+}
+
+.list-box-top-right{
+	display: flex;
+	font-size: 10px;
+	margin-right: 20px;
+}
+
+.box-top-createDate{
+	margin-right: 10px;
 }
 
 .collabo-list-box-bottom{
@@ -392,14 +404,14 @@
 	margin-right: 400px;
 }
 
-.statusBtn{
+.cateBtn{
 	border:none;
 	border-right: 1px solid black;
 	background: none;
 	font-size: 15px;
 }
 
-.statusBtn:hover{
+.cateBtn:hover{
 	background-color: black;
 	color: white;
 	cursor: pointer;	
@@ -407,4 +419,17 @@
 
 #status_its{
 	border-left:  1px solid black;
+}
+
+/*------------ feedback-zone ----------*/
+.feedback-zone{
+	margin-left: 20px;
+}
+.feedback-view{
+	display: flex;
+	flex-direction: row;
+}
+
+.feedback-write{
+	margin-bottom: 20px;
 }

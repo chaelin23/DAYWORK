@@ -57,12 +57,12 @@
 				</div>
 				
 				<div class="collabo-workList-cate">
-					<button class="statusBtn" id="status_its">내가 쓴 글</button>
-					<button class="statusBtn" id="status_call">요청</button>
-					<button class="statusBtn" id="status_progress">진행중</button>
-					<button class="statusBtn" id="status_finish">완료</button>
-					<button class="statusBtn" id="status_feedback">피드백</button>
-					<button class="statusBtn" id="status_postpone">보류</button>			
+						<button class="cateBtn" name = 'cMNo' value='${ loginUser.mNo }'>내가 쓴 글</button>
+						<button class="cateBtn" name = 'cBctNo' value='C1'>요청</button>
+						<button class="cateBtn" name = 'cBctNo' value='C2'>진행중</button>
+						<button class="cateBtn" name = 'cBctNo' value='C3'>완료</button>
+						<button class="cateBtn" name = 'cBctNo' value='C4'>피드백</button>
+						<button class="cateBtn" name = 'cBctNo' value='C5'>보류</button>
 				</div>
 				
 				<c:if test="${ cList == null }">
@@ -71,7 +71,8 @@
 				<c:if test="${ cList != null }">
 					<div class="dd">
 						<c:forEach var="c" items="${ cList }">
-								<div class="collabo-list-box" id="box${ c.cNo }">
+<%-- 							<a type="hidden" class="cNoBox" value="${ cNoBox }"> --%>
+								<div class="collabo-list-box" id="${c.cNo}" >
 									<div class="collabo-list-box-top">
 										<div class="list-box-top-margin">
 											<c:if test="${c.cBctNo eq 'C1' }">
@@ -89,6 +90,14 @@
 											<c:if test="${c.cBctNo eq 'C5' }">
 												<button id="postpone">보류</button>
 											</c:if>
+										</div>
+										<div class="list-box-top-right">
+											<div class="box-top-createDate">
+												${ c.bModifyDate }
+											</div>
+											<div class="box-top-writer">
+												${ c.bWriter }
+											</div>
 										</div>
 									</div>
 									<div class="collabo-list-box-content">
@@ -122,121 +131,38 @@
 										</div>
 									</div>
 								</div>
+								<div class='feedback-zone'>
+									<div class='feedback-view'>
+										<div class='view-gori'>ㄴ</div>
+										<div class='view-image'></div>
+										<div class='view-dept'>개발1팀</div>
+										<div class='view-name'>강건강</div>
+										<div class='view-job'>팀원</div>
+										<div class='view-cotent'>내용 좋습니다.</div>
+										<div class='view-date'>2021/08/20</div>
+										<!-- yyyy-MM-dd HH:mm -->
+									</div>
+									<div class='feedback-write'>
+										<input type='text' name='d'>
+										<button class='feedback-btn'>등록하기</button>
+									</div>
+								</div>
 						</c:forEach>
 					</div>
 				</c:if>
 			</div>
 		</div>
 	</div>
+	<a href="#${cNoBox}" id="cNoBox" style="display:none;"></a>
 </body>
 
 <script>
 
-	$('.box-bottom-btn-up').on('click',function(){
-		var cNo = $(this).parent().parent().children().eq(0).children().eq(0).val();
-		var empty = $(this).parent().parent().parent().parent();
-		
-		$.ajax({
-			url:'gocollaboListAjax.co',
-			success: function(data){
-				console.log(data);
-						empty.html('');
-				
-				for(var i=0; i< data.length; i++){
-					var c = data[i];
-					
-					if(cNo == c.cNo){
-					
-						var addHtml = "";
-							
-							addHtml += "<div class='collabo-list-box-top'>";
-							addHtml += "<div class='list-box-top-margin'>";
-								if(c.cBctNo == 'C1'){
-							addHtml +=	"<button id='call'>요청</button>";
-									} else if(c.cBctNo == 'C2'){
-							addHtml +=	"<button id='progress'>진행중</button>";
-									} else if(c.cBctNo == 'C3'){
-							addHtml +=	"<button id='finish'>완료</button>";			
-									} else if(c.cBctNo == 'C4'){
-							addHtml +=	"<button id='feedback'>피드백</button>";			
-									} else if(c.cBctNo == 'C5'){
-							addHtml +=	"<button id='postpone'>보류</button>";			
-									}
-							addHtml += "</div>";
-							addHtml += "</div>";
-							
-							addHtml += "<div class='collabo-list-box-content'>";
-							addHtml += "<div class='list-content-title'>";
-							addHtml += "<div class='list-title'>"
-							addHtml += "<input class='new2-title' type='text' name='bTitle' value='"+ c.bTitle + "'>"; 
-							addHtml += "</div>";
-							addHtml += "</div>"; 
-									
-							addHtml += "<div class='list-content-add'>";
-							addHtml += "<label><input class='new2-date-s' type='date' name='cStartDate' value='" + c.cStartDate + "'></label>";
-							addHtml += "<label><input class='new2-date-e' type='date' name='cEndDate' value='" + c.cEndDate + "'></label>";
-							addHtml += "<label> & <input class='new2-people' type='text' name='cPeople' value='"+ c.cPeople + "'></label>";
-							addHtml += "</div>";
-							
-							addHtml += "<div class='list-content'>";
-							addHtml += "<textarea class='new2-content' rows='10' cols='96' name='bContent'>"+ c.bContent +"</textarea>";
-							addHtml += "</div>";
-							addHtml += "</div>";
-							
-							addHtml += "<div class='collabo-list-box-bottom'>";
-							addHtml += "<div class='list-box-bottom-margin'>";
-							
-							addHtml += "<div class='box-bottom-btn-status'>";
-							addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C1'>요청";
-							addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C2'>진행중";
-							addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C3'>완료";
-							addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C4'>피드백";
-							addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C5'>대기";
-							addHtml += "</div>";
-							
-							addHtml += "<div class='box-bottom-btn-ab'>";
-							addHtml += "<button class='box-bottom-btn-end'>완료</button>";
-							addHtml += "</div>";
-							addHtml += "</div>";
-							addHtml += "</div>";
-							
-							empty.append(addHtml);
-					}
-				}
-			}
-		});
-	});
-	
-	$(document).on('click', '.updateBtn', function(){
-		var cNo = $(this).parent().children().eq(0).val();
-		var btn = $(this).val();
-		
-		if(btn == 'C1'){
-			var bool = window.confirm("'요청'으로 상태변경 하시겠어요?");
-		} else if(btn == 'C2'){
-			var bool = window.confirm("'진행중'으로 상태변경 하시겠어요?");
-		} else if(btn == 'C3'){
-			var bool = window.confirm("'완료'로 상태변경 하시겠어요?");
-		} else if(btn == 'C4'){
-			var bool = window.confirm("'피드백'으로 상태변경 하시겠어요?");
-		}	else if(btn == 'C5'){
-			var bool = window.confirm("'보류'로 상태변경 하시겠어요?");
-		}
-		
-		if(bool){
-			$.ajax({
-				url : 'updateBtn.co',
-				data : {cNo:cNo,
-						cBctNo:btn},
-				success : function(data){
-					if(data == 'success'){
-						getCollaboList();		
-					}
-				}
-			});
-		};
-	});
-	
+	window.onload = function(){
+			document.getElementById('cNoBox').click();
+	}
+
+
 	$('#box-bottom-btn-b').on('click',function(){
 		var bTitle = $('.new-title').val();
 		var cStartDate = $('.new-date-s').val();
@@ -300,6 +226,10 @@
 						addHtml +=	"<button id='postpone'>보류</button>";			
 								}
 						addHtml += "</div>";
+						addHtml += "<div class='list-box-top-right'>";
+						addHtml += "<div class='box-top-createDate'>" + c.bModifyDate + "</div>";
+						addHtml += "<div class='box-top-writer'>" + c.bWriter + "</div>";
+						addHtml += "</div>";
 						addHtml += "</div>";
 						
 						addHtml += "<div class='collabo-list-box-content'>";
@@ -322,6 +252,7 @@
 						addHtml += "<div class='list-box-bottom-margin'>";
 						addHtml += "<div class='box-bottom-btn-status' >";
 						addHtml += "<input type='hidden' id='whatcNo' value ='" + c.cNo + "'>";
+						addHtml += "<input type='hidden' id='whatcNo' value ='" + c.cBNo + "'>";
 						addHtml += "<button class='b_call updateBtn' value='C1'>요청</button>";
 						addHtml += "<button class='b_progress updateBtn' value='C2'>진행중</button>";
 						addHtml += "<button class='b_finish updateBtn' value='C3'>완료</button>";
@@ -342,9 +273,263 @@
 		});
 	};
 	
+	$(document).on('click', '.updateBtn', function(){
+		var cNo = $(this).parent().children().eq(0).val();
+		var btn = $(this).val();
+		
+		if(btn == 'C1'){
+			var bool = window.confirm("'요청'으로 상태변경 하시겠어요?");
+		} else if(btn == 'C2'){
+			var bool = window.confirm("'진행중'으로 상태변경 하시겠어요?");
+		} else if(btn == 'C3'){
+			var bool = window.confirm("'완료'로 상태변경 하시겠어요?");
+		} else if(btn == 'C4'){
+			var bool = window.confirm("'피드백'으로 상태변경 하시겠어요?");
+		}	else if(btn == 'C5'){
+			var bool = window.confirm("'보류'로 상태변경 하시겠어요?");
+		}
+		
+		if(bool){
+			$.ajax({
+				url : 'updateBtn.co',
+				data : {cNo:cNo,
+						cBctNo:btn},
+				success : function(data){
+					if(data == 'success'){
+						getCollaboList();		
+					}
+				}
+			});
+		};
+	});
+	
+	$(document).on('click', '.box-bottom-btn-up', function(){
+		var cNo = $(this).parent().parent().children().eq(0).children().eq(0).val();
+		var empty = $(this).parent().parent().parent().parent();
+		
+		$.ajax({
+			url:'gocollaboListAjax.co',
+			success: function(data){
+				console.log(data);
+						empty.html('');
+				
+				for(var i=0; i< data.length; i++){
+					var c = data[i];
+					
+					if(cNo == c.cNo){
+					
+						var addHtml = "";
+							
+							addHtml += "<div class='collabo-list-box-top'>";
+							addHtml += "<div class='list-box-top-margin'>";
+								if(c.cBctNo == 'C1'){
+							addHtml +=	"<button id='call'>요청</button>";
+									} else if(c.cBctNo == 'C2'){
+							addHtml +=	"<button id='progress'>진행중</button>";
+									} else if(c.cBctNo == 'C3'){
+							addHtml +=	"<button id='finish'>완료</button>";			
+									} else if(c.cBctNo == 'C4'){
+							addHtml +=	"<button id='feedback'>피드백</button>";			
+									} else if(c.cBctNo == 'C5'){
+							addHtml +=	"<button id='postpone'>보류</button>";			
+									}
+							addHtml += "</div>";
+							addHtml += "<div class='list-box-top-right'>";
+							addHtml += "<div class='box-top-createDate'>" + c.bModifyDate + "</div>";
+							addHtml += "<div class='box-top-writer'>" + c.bWriter + "</div>";
+							addHtml += "</div>";
+							addHtml += "</div>";
+							
+							addHtml += "<div class='collabo-list-box-content'>";
+							addHtml += "<div class='list-content-title'>";
+							addHtml += "<div class='list-title'>"
+							addHtml += "<input class='new2-title' type='text' name='bTitle' value='"+ c.bTitle + "'>"; 
+							addHtml += "</div>";
+							addHtml += "</div>"; 
+									
+							addHtml += "<div class='list-content-add'>";
+							addHtml += "<label><input class='new2-date-s' type='date' name='cStartDate' value='" + c.cStartDate + "'></label>";
+							addHtml += "<label><input class='new2-date-e' type='date' name='cEndDate' value='" + c.cEndDate + "'></label>";
+							addHtml += "<label> & <input class='new2-people' type='text' name='cPeople' value='"+ c.cPeople + "'></label>";
+							addHtml += "</div>";
+							
+							addHtml += "<div class='list-content'>";
+							addHtml += "<textarea class='new2-content' rows='10' cols='96' name='bContent'>"+ c.bContent +"</textarea>";
+							addHtml += "</div>";
+							addHtml += "</div>";
+							
+							addHtml += "<div class='collabo-list-box-bottom'>";
+							addHtml += "<div class='list-box-bottom-margin'>";
+							
+							addHtml += "<div class='box-bottom-btn-status'>";
+							addHtml += "<input type='hidden' id='whatcNo' value ='" + c.cNo + "'>";
+							addHtml += "<input type='hidden' id='whatcNo' value ='" + c.cBNo + "'>";
+							if(c.cBctNo == 'C1'){
+							addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C1' checked>요청";
+							addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C2' >진행중";
+							addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C3' >완료";
+							addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C4' >피드백";
+							addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C5' >보류";
+							} else if(c.cBctNo == 'C2'){
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C1' >요청";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C2' checked>진행중";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C3' >완료";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C4' >피드백";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C5' >보류";
+							} else if(c.cBctNo == 'C3'){
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C1' >요청";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C2' >진행중";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C3' checked>완료";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C4' >피드백";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C5' >보류";
+							} else if(c.cBctNo == 'C4'){
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C1' >요청";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C2' >진행중";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C3' >완료";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C4' checked>피드백";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C5' >보류";
+							} else if(c.cBctNo == 'C5'){
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C1' >요청";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C2' >진행중";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C3' >완료";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C4' >피드백";
+								addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C5' checked>보류";
+							}
+							addHtml += "</div>";
+							
+							addHtml += "<div class='box-bottom-btn-ab'>";
+							addHtml += "<button class='box-bottom-btn-end'>완료</button>";
+							addHtml += "</div>";
+							addHtml += "</div>";
+							addHtml += "</div>";
+							
+							empty.append(addHtml);
+					}
+				}
+			}
+		});
+	});
+	
+	
 	$(document).on('click', '.box-bottom-btn-end', function(){
-		var bTitle = $('.new2-title').val();
-		console.log(bTitle);
+		var cNo = $(this).parent().parent().children().eq(0).children().eq(0).val();
+		var cBNo = $(this).parent().parent().children().eq(0).children().eq(1).val();
+		var bTitle = $(this).parent().parent().parent().parent().children().eq(1).children().children().children().val();
+		var cStartDate = $(this).parent().parent().parent().parent().children().eq(1).children().eq(1).children().eq(0).children().val();
+		var cEndDate = $(this).parent().parent().parent().parent().children().eq(1).children().eq(1).children().eq(1).children().val();
+		var cPeople = $(this).parent().parent().parent().parent().children().eq(1).children().eq(1).children().eq(2).children().val();
+		var bContent = $(this).parent().parent().parent().parent().children().eq(1).children().eq(2).children().val();
+		var cBctNo = $(this).parent().parent().parent().children().eq(0).children().find('input:radio:checked').val();
+		
+		
+		$.ajax({
+			url:'updateCollabo.co',
+			data: {cNo:cNo,
+				   cBNo:cBNo,
+				   bTitle:bTitle,
+				   cStartDate:cStartDate,
+				   cEndDate:cEndDate,
+				   cPeople:cPeople,
+				   bContent:bContent,
+				   cBctNo:cBctNo},
+			success: function(data){
+					if(data == 'success'){
+						getCollaboList();
+					}
+			}
+		});
+		
+	});
+	
+	
+	$(document).on('click', '.cateBtn', function(){
+		var btn =  $(this).val();
+		var cMNo = null;
+		var cBctNo = null;
+		if(btn != 'C1' && btn != 'C2' && btn != 'C3' && btn != 'C4' && btn != 'C5'){
+			cMNo = btn;
+			cBctNo = 'null';
+		} else{
+			cMNo = 0;
+			cBctNo = btn;
+		}
+		
+		console.log(cMNo);
+		console.log(cBctNo);
+	
+		$.ajax({
+			url:'selectCollaboCate.co',
+			data:{cMNo:cMNo,
+				  cBctNo:cBctNo},
+			success: function(data){
+				$('.dd').html('');
+		
+			for(var i=0; i< data.length; i++){
+				var c = data[i];
+				
+				var addHtml = "";
+					
+					addHtml += "<div class='collabo-list-box' id=box"+c.cNo+">";
+					addHtml += "<div class='collabo-list-box-top'>";
+					addHtml += "<div class='list-box-top-margin'>";
+						if(c.cBctNo == 'C1'){
+					addHtml +=	"<button id='call'>요청</button>";
+							} else if(c.cBctNo == 'C2'){
+					addHtml +=	"<button id='progress'>진행중</button>";
+							} else if(c.cBctNo == 'C3'){
+					addHtml +=	"<button id='finish'>완료</button>";			
+							} else if(c.cBctNo == 'C4'){
+					addHtml +=	"<button id='feedback'>피드백</button>";			
+							} else if(c.cBctNo == 'C5'){
+					addHtml +=	"<button id='postpone'>보류</button>";			
+							}
+					addHtml += "</div>";
+					addHtml += "<div class='list-box-top-right'>";
+					addHtml += "<div class='box-top-createDate'>" + c.bModifyDate + "</div>";
+					addHtml += "<div class='box-top-writer'>" + c.bWriter + "</div>";
+					addHtml += "</div>";
+					addHtml += "</div>";
+					
+					addHtml += "<div class='collabo-list-box-content'>";
+					addHtml += "<div class='list-content-title'>";
+					addHtml += "<div class='list-title'>" + c.bTitle + "</div>";
+					addHtml += "</div>"; 
+							
+					addHtml += "<div class='list-content-add'>";
+					addHtml += "<label style='margin-right:10px;'>시작일자  :  " + c.cStartDate + "</label>";
+					addHtml += "<label style='margin-right:50px;'>마감일자  :  " + c.cEndDate + "</label>";
+					addHtml += "<label> & <span class='list-people' >" + c.cPeople + "</span></label>";
+					addHtml += "</div>";
+					
+					addHtml += "<div class='list-content'>";
+					addHtml += c.bContent;
+					addHtml += "</div>";
+					addHtml += "</div>";
+					
+					addHtml += "<div class='collabo-list-box-bottom'>";
+					addHtml += "<div class='list-box-bottom-margin'>";
+					addHtml += "<div class='box-bottom-btn-status' >";
+					addHtml += "<input type='hidden' id='whatcNo' value ='" + c.cNo + "'>";
+					addHtml += "<input type='hidden' id='whatcNo' value ='" + c.cBNo + "'>";
+					addHtml += "<button class='b_call updateBtn' value='C1'>요청</button>";
+					addHtml += "<button class='b_progress updateBtn' value='C2'>진행중</button>";
+					addHtml += "<button class='b_finish updateBtn' value='C3'>완료</button>";
+					addHtml += "<button class='b_feedback updateBtn' value='C4'>피드백</button>";
+					addHtml += "<button class='b_postpone updateBtn' value='C5'>보류</button>";
+					addHtml += "</div>";
+					
+					addHtml += "<div class='box-bottom-btn-ab'>";
+					addHtml += "<button class='box-bottom-btn-up'>수정하기</button>";
+					addHtml += "</div>";
+					addHtml += "</div>";
+					addHtml += "</div>";
+					addHtml += "</div>";
+					
+					$('.dd').append(addHtml);
+				}
+			}
+		
+		});
 	});
 	
 	
