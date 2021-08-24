@@ -18,9 +18,9 @@
 }
 	
 .login-king{
-	width: 350px;
+	width: 380px;
 	margin:auto;
-	margin-top: 200px;
+	margin-top: 150px;
 }
 
 .login-logo{
@@ -40,9 +40,9 @@
 }
 
 .loginArea{
-	width: 350px;
-	height: 350px;
-	padding: 20px;
+	width: 380px;
+    height: 330px;
+    padding: 20px 30px;
 	margin: auto;
 	border-radius: 7px;
 	box-shadow: 0 0 5px 4px #f2f2f2;
@@ -54,6 +54,12 @@
 	background-color: white;
 	border-bottom: 1px solid grey;
 	cursor: pointer;
+}
+
+.login-service{
+	display: flex;
+	justify-content: space-around;
+	padding: 0px 40px;
 }
 
 #inputmNo{
@@ -87,6 +93,149 @@
 	height: 45px;
 	margin-top: 40px;
 	border-style: none;
-	background-color: blue;
+	background-color: #526ab9;
 	color: white;
+}
+
+/* whereMno */
+.whereMno-king{
+	width: 300px;
+	margin:auto;
+	margin-top: 250px;
+}
+
+.whereMnoArea{
+	width: 300px;
+    height: 200px;
+    padding: 20px;
+	margin: auto;
+	border-radius: 7px;
+	box-shadow: 0 0 5px 4px #f2f2f2;
+	margin-top: 10px;
+	display: block;
+	z-index: 1001;
+	padding: 20px;
+}
+
+
+.whereMno-input{
+	display: flex;
+	flex-direction: column;
+}
+
+.whereMnoText{
+	font-size: 25px;
+	width: 300px;
+	margin:auto;
+	text-align: center;
+	margin-bottom: 30px;
+	color:#4e4e4e;
+}
+
+#inputmName{
+	width: 100%;
+	height: 40px;
+	border-style: none;
+	border-bottom: 1px solid gray;
+	margin: 20px 0 10px 0;
+}
+#inputmPhone{
+	width: 100%;
+	height: 40px;
+	border-style: none;
+	border-bottom: 1px solid gray;
+}
+
+.whereMno-btn{
+	display: flex;	
+	justify-content: flex-end;
+}
+
+#whereMno-btn{
+	margin-top: 15px;
+    border-style: none;
+    border-radius: 5px;
+    background-color: #526ab9;
+    width: 80px;
+    height: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+.mNo-yes{
+	margin:50px 20px;
+	text-align: center;
+}
+
+.mNo-home-btn{
+	margin: 0px 5px 0px 170px;
+    border-style: none;
+    border-radius: 5px;
+    background-color: #526ab9;
+    width: 80px;
+    height: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+/* joinMember */
+.joinM-king{
+	width: 800px;
+	margin:auto;
+	margin-top: 80px;
+}
+
+.joinM-logo{
+	font-size: 25px;
+	width: 800px;
+	margin:auto;
+	margin-bottom: 30px;
+	color:#4e4e4e;
+}
+
+.joinM-insert{
+	width: 800px;
+    height: 500px;
+    padding: 40px 60px;
+	margin: auto;
+	border-radius: 7px;
+	box-shadow: 0 0 5px 4px #f2f2f2;
+	margin-top: 5px;
+}
+
+.inputBorder{
+	border-style: none;
+    width: 400px;
+    height: 31px;
+    border: 1px solid #dedede;
+    margin: 5px 0px;
+    border-radius: 5px;
+}
+
+table{
+	border-collapse: separate;
+}
+
+th{
+	width:150px;
+	text-align: left;
+}
+
+#postcodify_search_button{
+	border-style: none;
+	width:60px;
+	width: 50px;
+    height: 22px;
+    border-radius: 3px;
+}
+
+.join-btn{
+	margin: 25px 0px 0px 600px;
+    border-style: none;
+    border-radius: 5px;
+    background-color: #526ab9;
+    width: 80px;
+    height: 30px;
+    color: white;
+    cursor: pointer;
 }

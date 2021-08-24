@@ -16,11 +16,13 @@ public class Collabo {
 	private String bContent;
 	private Date bModifyDate;
 	private String bWriter;
+	private String fbStatus;
 	
 	public Collabo() {}
 
 	public Collabo(int cNo, int cBNo, int cMNo, Date cStartDate, Date cEndDate, String cPeople, String cFirst,
-			String cBctNo, String cBctStatus, String bTitle, String bContent, Date bModifyDate, String bWriter) {
+			String cBctNo, String cBctStatus, String bTitle, String bContent, Date bModifyDate, String bWriter,
+			String fbStatus) {
 		super();
 		this.cNo = cNo;
 		this.cBNo = cBNo;
@@ -35,6 +37,7 @@ public class Collabo {
 		this.bContent = bContent;
 		this.bModifyDate = bModifyDate;
 		this.bWriter = bWriter;
+		this.fbStatus = fbStatus;
 	}
 
 	public int getcNo() {
@@ -141,14 +144,21 @@ public class Collabo {
 		this.bWriter = bWriter;
 	}
 
+	public String getFbStatus() {
+		return fbStatus;
+	}
+
+	public void setFbStatus(String fbStatus) {
+		this.fbStatus = fbStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Collabo [cNo=" + cNo + ", cBNo=" + cBNo + ", cMNo=" + cMNo + ", cStartDate=" + cStartDate
 				+ ", cEndDate=" + cEndDate + ", cPeople=" + cPeople + ", cFirst=" + cFirst + ", cBctNo=" + cBctNo
 				+ ", cBctStatus=" + cBctStatus + ", bTitle=" + bTitle + ", bContent=" + bContent + ", bModifyDate="
-				+ bModifyDate + ", bWriter=" + bWriter + "]";
+				+ bModifyDate + ", bWriter=" + bWriter + ", fbStatus=" + fbStatus + "]";
 	}
 
-	
-	
+		
 }

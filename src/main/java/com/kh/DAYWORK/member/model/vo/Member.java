@@ -15,8 +15,8 @@ public class Member {
 	private Date mHireDate;
 	private String mStatus;
 	private int mAdmin;
-	private String jCode;
-	private String dCode;
+	private String jName;
+	private String dName;
 
 	public Member() {}
 	
@@ -27,7 +27,7 @@ public class Member {
 	}
 
 	public Member(int mNo, String mPwd, String mName, String mGender, Date mBirthDay, String mPhone, String mEmail,
-			String mAddress, Date mEntDate, Date mHireDate, String mStatus, int mAdmin, String jCode, String dCode) {
+			String mAddress, Date mEntDate, Date mHireDate, String mStatus, int mAdmin, String jName, String dName) {
 		super();
 		this.mNo = mNo;
 		this.mPwd = mPwd;
@@ -41,8 +41,8 @@ public class Member {
 		this.mHireDate = mHireDate;
 		this.mStatus = mStatus;
 		this.mAdmin = mAdmin;
-		this.jCode = jCode;
-		this.dCode = dCode;
+		this.jName = jName;
+		this.dName = dName;
 	}
 
 	public int getmNo() {
@@ -141,29 +141,30 @@ public class Member {
 		this.mAdmin = mAdmin;
 	}
 
-	public String getjCode() {
-		return jCode;
+	public String getjName() {
+		return jName;
 	}
 
-	public void setjCode(String jCode) {
-		this.jCode = jCode;
+	public void setjName(String jName) {
+		this.jName = jName;
 	}
 
-	public String getdCode() {
-		return dCode;
+	public String getdName() {
+		return dName;
 	}
 
-	public void setdCode(String dCode) {
-		this.dCode = dCode;
+	public void setdName(String dName) {
+		this.dName = dName;
 	}
 
 	@Override
 	public String toString() {
 		return "Member [mNo=" + mNo + ", mPwd=" + mPwd + ", mName=" + mName + ", mGender=" + mGender + ", mBirthDay="
 				+ mBirthDay + ", mPhone=" + mPhone + ", mEmail=" + mEmail + ", mAddress=" + mAddress + ", mEntDate="
-				+ mEntDate + ", mHireDate=" + mHireDate + ", mStatus=" + mStatus + ", mAdmin=" + mAdmin + ", jCode="
-				+ jCode + ", dCode=" + dCode + "]";
+				+ mEntDate + ", mHireDate=" + mHireDate + ", mStatus=" + mStatus + ", mAdmin=" + mAdmin + ", jName="
+				+ jName + ", dName=" + dName + "]";
 	}
+
 	
 	
 }

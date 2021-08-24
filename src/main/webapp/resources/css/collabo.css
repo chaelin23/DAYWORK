@@ -312,10 +312,13 @@
 }
 .box-bottom-btn-update{
 	font-size: 0px;
-	
 }
 
-#box-bottom-btn-a, #box-bottom-btn-b{
+.box-bottom-fdbk{
+	font-size: 0px;
+}
+
+#box-bottom-btn-a, #box-bottom-btn-b, .box-bottom-btn-up, .box-bottom-fdbk, .box-bottom-btn-end{
 	border-color: darkgrey;
 	width: 100px;
 	height: 30px;
@@ -331,7 +334,9 @@
 	background-color: grey;
 }
 
-.box-bottom-btn-b:hover{
+.box-bottom-btn-b:hover,
+.box-bottom-btn-up:hover,
+.box-bottom-btn-end:hover{
 	cursor: pointer;
 	background-color: black;
 	color: white;
@@ -422,14 +427,159 @@
 }
 
 /*------------ feedback-zone ----------*/
+.feedback-background{
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    transition: .3s;
+    background: rgba(0, 0, 0, 0.06);
+    z-index: 1001;
+    display: none;
+}
+
+.feedback-background.active{
+	opacity:1;
+	display:block;
+}
+
+.feedback-main{
+	width: 600px;
+	height: 500px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-end;
+	position:fixed;
+	top:20%;
+	left:40%;
+	transfrom: translate(-80%, -50%);
+	background: #fff;
+	display:none;
+	z-index:1002;
+	border-radius: 5px;
+	overflow: auto;
+}
+
+.feedback-main.active{
+	display: block;
+}
 .feedback-zone{
 	margin-left: 20px;
 }
+
+.feedback-notice{
+	display:flex;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	box-shadow: 0px 2px 5px 4px #f2f2f2;
+    height: 50px;
+   	font-size: 20px;
+   	align-content: space-around;
+    align-items: center;
+    justify-content: space-around;
+    font-weight: bold;
+}
 .feedback-view{
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	padding: 30px 0px 40px 15px;
+	overflow: auto;
+    height: 320px;
 }
 
 .feedback-write{
 	margin-bottom: 20px;
+}
+
+.your-feedback{
+	display: flex;
+	flex-direction: row;
+	padding: 5px;
+}
+
+.your-feedback-message{
+	display: flex;
+	flex-direction: column;
+	margin-left: 4px;
+	font-size: 12px;
+	align-items: baseline
+}
+
+.my-feedback-message{
+	display: flex;
+	flex-direction: column;
+	margin-right: 4px;
+	align-items: flex-end;
+	font-size: 12px;
+}
+
+.message-who{
+	display: flex;
+	flex-direction: row;
+	font-size: 12px;	
+}
+
+.view-name{
+	font-weight: bold;
+	margin: 0px 5px;
+}
+
+.your-message-content{
+	background: #b4d0ed80;
+    width: auto;
+    height: auto;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.my-message-content{
+	background: #edd6b480;
+    width: auto;
+    height: auto;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.my-feedback{
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 10px
+}
+
+.message-date{
+	font-size: 10px;
+}
+
+.input-fContent{
+	border: 1px solid #bcbbbb;
+    border-radius: 5px;
+    width: 450px;
+    height: 30px;
+    margin: 0px 5px 0px 20px;
+}
+
+.feedback-btn{
+	border-radius: 5px;
+    border-style: none;
+    height: 35px;
+    width: 80px;
+    font-size: 13px;
+    background-color: #7ba1da;
+    color: white;
+	cursor: pointer;    
+}
+
+.box-bottom-btn-ab{
+	display: flex;
+	flex-direction: row;
+}
+.feedback-yn{
+	color: red;
+	font-weight: bold;
+	font-size: 10px;
 }

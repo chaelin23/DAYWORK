@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +25,7 @@ import com.kh.DAYWORK.board.model.vo.Board;
 import com.kh.DAYWORK.collabo.exception.CollaboException;
 import com.kh.DAYWORK.collabo.model.service.CollaboService;
 import com.kh.DAYWORK.collabo.model.vo.Collabo;
+import com.kh.DAYWORK.collabo.model.vo.Feedback;
 import com.kh.DAYWORK.member.model.vo.Member;
 
 @Controller
@@ -88,6 +89,7 @@ public class CollaboController {
 		
 		ArrayList<Collabo> cList = cService.selectListC(mName);
 		
+		
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson  = gb.create();
 		
@@ -137,14 +139,13 @@ public class CollaboController {
 	@RequestMapping("selectCollaboCate.co")
 	@ResponseBody
 	public void selectCollaboCate(@ModelAttribute Collabo co, HttpServletResponse response) {
-		System.out.println(co.getcBctNo());
-		System.out.println(co.getcMNo());
+		response.setContentType("application/json; charset=UTF-8");
 		ArrayList<Collabo> cList = cService.selectCollaboCate(co);
 		
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson  = gb.create();
 		
-		System.out.println(cList);
+		
 		
 		try {
 			gson.toJson(cList, response.getWriter());
@@ -154,4 +155,57 @@ public class CollaboController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping("insertFeedback.co")
+	@ResponseBody
+	public void insertFeedback(@ModelAttribute Feedback fb, HttpServletResponse response, HttpSession session) {
+		response.setContentType("application/json; charset=UTF-8");
+		Member m = (Member)session.getAttribute("loginUser");
+		
+		fb.setfMNo(m.getmNo());
+		fb.setjName(m.getjCode());
+		fb.setdName(m.getdCode());
+		
+		
+		int result = cService.insertFeedback(fb);
+		int fCNo = fb.getfCNo();
+		
+		if(result > 0) {
+			ArrayList<Feedback>fList = cService.selectFeedback(fCNo);
+			GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+			Gson gson  = gb.create();
+			try {
+				gson.toJson(fList, response.getWriter());
+			} catch (JsonIOException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			throw new CollaboException("피드백 등록에 실패하였습니다.");
+		}
+	}
+	
+	@RequestMapping("selectFeedback.co")
+	@ResponseBody
+	public void selectFeedback(@ModelAttribute Feedback fb, HttpServletResponse response, HttpSession session) {
+		response.setContentType("application/json; charset=UTF-8");
+		
+		int fCNo = fb.getfCNo();
+		
+		ArrayList<Feedback>fList = cService.selectFeedback(fCNo);
+		
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson  = gb.create();
+		
+		try {
+			gson.toJson(fList, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

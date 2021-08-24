@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.DAYWORK.board.model.vo.Board;
 import com.kh.DAYWORK.collabo.model.vo.Collabo;
+import com.kh.DAYWORK.collabo.model.vo.Feedback;
 
 @Repository("cDAO")
 public class CollaboDAO {
@@ -44,8 +45,27 @@ public class CollaboDAO {
 		return (ArrayList)sqlSession.selectList("collabo-mapper.selectCateCBctNo", cBctNo);
 	}
 
-	public ArrayList<Collabo> selectCateCMNo(SqlSessionTemplate sqlSession, int cMNo) {
+	public ArrayList<Collabo> selectCateCMNo(SqlSessionTemplate sqlSession, String cMNo) {
 		return (ArrayList)sqlSession.selectList("collabo-mapper.selectCateCMNo", cMNo);
 	}
+	
+	public int updateFBStatus(SqlSessionTemplate sqlSession, Feedback fb) {
+		return sqlSession.update("collabo-mapper.updateFBStatus", fb);
+	}
+
+	public int insertFeedback(SqlSessionTemplate sqlSession, Feedback fb) {
+		return sqlSession.insert("collabo-mapper.insertFeedback", fb);
+	}
+
+	public ArrayList<Feedback> selectFeedback(SqlSessionTemplate sqlSession, int fCNo) {
+		ArrayList<Feedback> fList = (ArrayList)sqlSession.selectList("collabo-mapper.selectFeedback", fCNo);
+		return fList;
+	}
+
+	public Collabo selcetCollabo(SqlSessionTemplate sqlSession, int fCNo) {
+		return sqlSession.selectOne("collabo-mapper.selectCollabo", fCNo);
+	}
+
+	
 
 }

@@ -124,27 +124,15 @@
 												<button class="b_postpone updateBtn" value="C5">보류</button>
 											</div>
 											<div class="box-bottom-btn-ab">
+												<c:if test="${c.fbStatus == 'Y' }">
+													<div class="feedback-yn">N</div>
+												</c:if>
+													<button class="box-bottom-fdbk">피드백</button>
 												<c:if test="${c.bWriter == loginUser.mName }">
 													<button class="box-bottom-btn-up">수정하기</button>
 												</c:if>
 											</div>
 										</div>
-									</div>
-								</div>
-								<div class='feedback-zone'>
-									<div class='feedback-view'>
-										<div class='view-gori'>ㄴ</div>
-										<div class='view-image'></div>
-										<div class='view-dept'>개발1팀</div>
-										<div class='view-name'>강건강</div>
-										<div class='view-job'>팀원</div>
-										<div class='view-cotent'>내용 좋습니다.</div>
-										<div class='view-date'>2021/08/20</div>
-										<!-- yyyy-MM-dd HH:mm -->
-									</div>
-									<div class='feedback-write'>
-										<input type='text' name='d'>
-										<button class='feedback-btn'>등록하기</button>
 									</div>
 								</div>
 						</c:forEach>
@@ -154,6 +142,31 @@
 		</div>
 	</div>
 	<a href="#${cNoBox}" id="cNoBox" style="display:none;"></a>
+	
+	<!-- feedback modal -->
+	<div class='ee'>
+	<div class='feedback-zone'>
+		<div class='feedback-background'></div>
+		<div class='feedback-main'>
+			<div class='feedback-notice'>
+				피드백을 확인하세요
+			</div>
+			<div class='feedback-view'>
+<!-- 				<div class='view-gori'>ㄴ</div> -->
+<!-- 				<div class='view-image'></div> -->
+<!-- 				<div class='view-dept'></div> -->
+<!-- 				<div class='view-name'></div> -->
+<!-- 				<div class='view-job'></div> -->
+<!-- 				<div class='view-cotent'></div> -->
+<!-- 				<div class='view-date'></div> -->
+			</div>
+			<div class='feedback-write'>
+<!-- 				<input type='text' name='fContent'> -->
+<!-- 				<button class='feedback-btn'>등록하기</button> -->
+			</div>
+		</div>
+	</div>
+	</div>
 </body>
 
 <script>
@@ -261,7 +274,14 @@
 						addHtml += "</div>";
 						
 						addHtml += "<div class='box-bottom-btn-ab'>";
-						addHtml += "<button class='box-bottom-btn-up'>수정하기</button>";
+						
+						if(c.fbStatus == 'Y'){
+							addHtml += "<div class='feedback-yn'>N</div>";
+						}
+						addHtml += "<button class='box-bottom-fdbk'>피드백</button>";
+						if(c.bWriter == '${loginUser.mName}'){
+							addHtml += "<button class='box-bottom-btn-up'>수정하기</button>";
+						}
 						addHtml += "</div>";
 						addHtml += "</div>";
 						addHtml += "</div>";
@@ -448,20 +468,20 @@
 		var cBctNo = null;
 		if(btn != 'C1' && btn != 'C2' && btn != 'C3' && btn != 'C4' && btn != 'C5'){
 			cMNo = btn;
-			cBctNo = 'null';
+			cBctNo = null;
 		} else{
-			cMNo = 0;
 			cBctNo = btn;
+			cMNo = 0;
 		}
 		
-		console.log(cMNo);
-		console.log(cBctNo);
+		console.log(btn);
 	
 		$.ajax({
 			url:'selectCollaboCate.co',
 			data:{cMNo:cMNo,
 				  cBctNo:cBctNo},
 			success: function(data){
+				console.log(data);
 				$('.dd').html('');
 		
 			for(var i=0; i< data.length; i++){
@@ -519,7 +539,13 @@
 					addHtml += "</div>";
 					
 					addHtml += "<div class='box-bottom-btn-ab'>";
-					addHtml += "<button class='box-bottom-btn-up'>수정하기</button>";
+					if(c.fbStatus == 'Y'){
+						addHtml += "<div class='feedback-yn'>N</div>";
+					}
+					addHtml += "<button class='box-bottom-fdbk'>피드백</button>";
+					if(c.bWriter == '${loginUser.mName}'){
+						addHtml += "<button class='box-bottom-btn-up'>수정하기</button>";
+					}
 					addHtml += "</div>";
 					addHtml += "</div>";
 					addHtml += "</div>";
@@ -529,6 +555,140 @@
 				}
 			}
 		
+		});
+	});
+	
+	$('.feedback-background').click(function() {
+		$('.feedback-background').removeClass('active');
+		$('.feedback-main').removeClass('active');
+	});
+	
+	$(document).on('click', '.box-bottom-fdbk', function(){
+		 $('.feedback-background').addClass('active');
+         $('.feedback-main').addClass('active');
+        	
+         var fCNo = $(this).parent().parent().children().eq(0).children().eq(0).val();
+         
+		 console.log(fCNo);
+		 
+	     $.ajax({
+	    	url:'selectFeedback.co',
+	    	data:{fCNo:fCNo},
+	    	success: function(data){
+	    	
+	    		$('.feedback-view').html('');
+	    		$('.feedback-write').html('');
+	    		
+					for(var i=0; i<data.length; i++){
+						var f = data[i];
+						var addHtml = "";
+					
+						if(f.fWriter != '${loginUser.mName}'){
+						addHtml += "<div class='your-feedback'>";
+								addHtml += "<div class='feedback-profile'>";
+									addHtml += "<div class='view-image'>＠</div>"; 
+								addHtml += "</div>";
+								addHtml += "<div class='your-feedback-message'>";
+								addHtml += "<div class='message-who'>";
+									addHtml += "<div class='view-dept'>"+ f.dName +"</div>";
+									addHtml += "<div class='view-name'>"+ f.fWriter +"</div>";
+									addHtml += "<div class='view-job'>"+ f.jName +"</div>";
+								addHtml += "</div>";
+								addHtml += "<span class='your-message-content'>";
+									addHtml += "<span class='view-cotent'>"+ f.fContent +"</span>";
+								addHtml += "</span>";
+								addHtml += "<div class='message-date'>";
+									addHtml += "<div class='view-date'>"+ f.fCreateDate +"</div>";
+								addHtml += "</div>";
+						addHtml += "</div>";
+						} else {
+							addHtml += "<div class='my-feedback'>";
+								addHtml += "<div class='my-feedback-message'>";
+									addHtml += "<span class='my-message-content'>";
+										addHtml += "<span class='view-cotent'>"+ f.fContent +"</span>";
+									addHtml += "</span>";
+									addHtml += "<div class='message-date'>";
+										addHtml += "<div class='view-date'>"+ f.fCreateDate +"</div>";
+									addHtml += "</div>";
+								addHtml += "</div>";
+							addHtml += "</div>";
+						}
+						$('.feedback-view').append(addHtml);
+					}
+				
+					var addHtml2 = "";
+					
+					addHtml2 += "<input type='hidden' value='"+fCNo+"'>";
+					addHtml2 += "<input class='input-fContent' type='text' name='fContent'>";
+					addHtml2 += "<button class='feedback-btn'>등록</button>";
+					
+					$('.feedback-write').append(addHtml2);
+	    		}
+	     });
+	});
+	
+	$(document).on('click', '.feedback-btn', function(){
+	
+		var fCNo = $(this).parent().children().eq(0).val();
+		var fContent = $(this).parent().children().eq(1).val();
+		
+		console.log(fCNo);
+		console.log(fContent);
+		
+		$.ajax({
+			url: 'insertFeedback.co',
+			data: {fCNo : fCNo,
+				   fContent : fContent},
+			success : function(data){
+
+				$('.feedback-view').html('');
+	    		$('.feedback-write').html('');
+	    		
+					for(var i=0; i<data.length; i++){
+						var f = data[i];
+						var addHtml = "";
+					
+						if(f.fWriter != '${loginUser.mName}'){
+						addHtml += "<div class='your-feedback'>";
+								addHtml += "<div class='feedback-profile'>";
+									addHtml += "<div class='view-image'>＠</div>"; 
+								addHtml += "</div>";
+								addHtml += "<div class='your-feedback-message'>";
+								addHtml += "<div class='message-who'>";
+									addHtml += "<div class='view-dept'>"+ f.dName +"</div>";
+									addHtml += "<div class='view-name'>"+ f.fWriter +"</div>";
+									addHtml += "<div class='view-job'>"+ f.jName +"</div>";
+								addHtml += "</div>";
+								addHtml += "<span class='your-message-content'>";
+									addHtml += "<span class='view-cotent'>"+ f.fContent +"</span>";
+								addHtml += "</span>";
+								addHtml += "<div class='message-date'>";
+									addHtml += "<div class='view-date'>"+ f.fCreateDate +"</div>";
+								addHtml += "</div>";
+						addHtml += "</div>";
+						} else {
+							addHtml += "<div class='my-feedback'>";
+								addHtml += "<div class='my-feedback-message'>";
+									addHtml += "<span class='my-message-content'>";
+										addHtml += "<span class='view-cotent'>"+ f.fContent +"</span>";
+									addHtml += "</span>";
+									addHtml += "<div class='message-date'>";
+										addHtml += "<div class='view-date'>"+ f.fCreateDate +"</div>";
+									addHtml += "</div>";
+								addHtml += "</div>";
+							addHtml += "</div>";
+						}
+						$('.feedback-view').append(addHtml);
+					}
+				
+					var addHtml2 = "";
+					
+					addHtml2 += "<input type='hidden' value='"+fCNo+"'>";
+					addHtml2 += "<input class='input-fContent' type='text' name='fContent'>";
+					addHtml2 += "<button class='feedback-btn'>등록</button>";
+					
+					$('.feedback-write').append(addHtml2);
+	    		}
 		});
 	});
 	

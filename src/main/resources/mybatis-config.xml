@@ -10,6 +10,7 @@
 		<typeAlias type="com.kh.DAYWORK.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.DAYWORK.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.kh.DAYWORK.collabo.model.vo.Collabo" alias="Collabo"/>
+		<typeAlias type="com.kh.DAYWORK.collabo.model.vo.Feedback" alias="Feedback"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/address-mapper.xml"/>

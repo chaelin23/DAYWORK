@@ -14,12 +14,12 @@
 	
 	<insert id="insertCollabo">
 		insert into collabo values
-		(co_seq.nextval, #{cBNo}, #{cMNo}, #{cStartDate}, #{cEndDate}, #{cPeople}, default, #{cBctNo})
+		(co_seq.nextval, #{cBNo}, #{cMNo}, #{cStartDate}, #{cEndDate}, #{cPeople}, default, #{cBctNo}, default)
 	</insert>
 	
 	<select id="selectListC" resultMap="collaboResultSet">
 		select c_no, c_b_no, c_m_no, c_start_date, c_end_date, c_people, c_first, cbct_no, cbct_status,
-		       b_title, b_content, b_modify_date, m_name
+		       b_title, b_content, b_modify_date, m_name, FB_STATUS
     		from board
 	    		join collabo on(b_no = c_b_no)
 	    		join collabo_cate using(cbct_no)
@@ -43,6 +43,7 @@
 		<result column="B_CONTENT" property="bContent"/>
 		<result column="B_MODIFY_DATE" property="bModifyDate"/>
 		<result column="M_NAME" property="bWriter"/>
+		<result column="FB_STATUS" property="fbStatus"/>
 	</resultMap>
 	
 	<select id="selectListB" resultMap="boardCResultSet">
@@ -90,7 +91,7 @@
 	
 	<select id="selectCateCBctNo" resultMap="collaboResultSet">
 			select c_no, c_b_no, c_m_no, c_start_date, c_end_date, c_people, c_first, cbct_no, cbct_status,
-		       b_title, b_content, b_modify_date, m_name
+		       b_title, b_content, b_modify_date, m_name, fb_status
     		from board
 	    		join collabo on(b_no = c_b_no)
 	    		join collabo_cate using(cbct_no)
@@ -102,7 +103,7 @@
 	
 	<select id="selectCateCMNo" resultMap="collaboResultSet">
 			select c_no, c_b_no, c_m_no, c_start_date, c_end_date, c_people, c_first, cbct_no, cbct_status,
-		       b_title, b_content, b_modify_date, m_name
+		       b_title, b_content, b_modify_date, m_name, fb_status
     		from board
 	    		join collabo on(b_no = c_b_no)
 	    		join collabo_cate using(cbct_no)
@@ -110,5 +111,46 @@
 	    	where b_status='Y'
 	    		and c_m_no = #{cMNo}
 	    	order by c_no desc
+	</select>
+	
+	<update id="updateFBStatus">
+		update collabo
+			set fb_status ='Y' 
+			where C_no = #{fCNo}
+	</update>
+	
+	<insert id="insertFeedback">
+		insert into feedback 
+		values (fb_seq.nextval, #{fCNo}, #{fMNo}, #{fContent}, sysdate, sysdate, default)
+	</insert>
+	
+	<resultMap type="Feedback" id="FeedbackResultSet">
+		<id column="F_NO" property="fNo"/>
+		<result column="F_C_NO" property="fCNo" />
+		<result column="F_M_NO" property="fMNo" />
+		<result column="M_NAME" property="fWriter" />
+		<result column="F_CONTENT" property="fContent" />
+		<result column="F_CREATE_DATE" property="fCreateDate" />
+		<result column="F_MODIFY_DATE" property="fModifyDate" />
+		<result column="F_STATUS" property="fStatus" />
+		<result column="J_NAME" property="jName" />
+		<result column="D_NAME" property="dName" />
+	</resultMap>
+	
+	<select id="selectFeedback" resultMap="FeedbackResultSet">
+		select f_no, f_c_no, f_m_no, f_content, f_create_date, f_modify_date, f_status, m_name, j_name, d_name
+    	from feedback
+        	join member on(m_no = f_m_no)
+        	join job using(j_code)
+        	join department using(d_code)
+        where f_c_no = #{fCNo}
+        and f_status='Y'
+        order by f_no asc
+	</select>
+	
+	<select id="selectCollabo" resultMap="collaboResultSet">
+		select * from collabo 
+		where c_no = #{fCNo}
+		
 	</select>
 </mapper>

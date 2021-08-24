@@ -18,25 +18,27 @@
 			<div class="main-myInfo">
 				<div class="main-profile">
 					<div class="main-profile-photo"></div>
+					<div class="main-profile-name">${ loginUser.dCode }</div>
 					<div class="main-profile-name">${ loginUser.mName }</div>
-					<div class="main-profile-position">팀원</div>
+					<div class="main-profile-position">${loginUser.jCode }</div>
 				</div>
 				<div class="main-line">
 					<hr style="border:1px color= silver;" width="80%">
 				</div>
 				<div class="main-active">
-					<div class="main-active-one">
-						<div class="main-active-one-text">내가 쓴 글</div>
-						<div class="main-active-one-num">3개</div>
-					</div>
-					<div class="main-active-two" id="active-two">
-						<div class="main-active-two-text">임시 보관함</div>
-						<div class="main-active-two-num">5개</div>
-					</div>
-					<div class="main-active-three">
-						<div class="main-active-three-text">휴지통</div>
-						<div class="main-active-three-num">18개</div>
-					</div>
+					<div class="main-mypage">내 정보 수정</div>
+<!-- 					<div class="main-active-one"> -->
+<!-- 						<div class="main-active-one-text">내가 쓴 글</div> -->
+<!-- 						<div class="main-active-one-num">3개</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="main-active-two" id="active-two"> -->
+<!-- 						<div class="main-active-two-text">임시 보관함</div> -->
+<!-- 						<div class="main-active-two-num">5개</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="main-active-three"> -->
+<!-- 						<div class="main-active-three-text">휴지통</div> -->
+<!-- 						<div class="main-active-three-num">18개</div> -->
+<!-- 					</div> -->
 				</div>
 			</div>
 			<!-- 출퇴근 버튼 -->
