@@ -32,4 +32,22 @@ public class MemberService {
 		return mDAO.selectMno(sqlSession, m);
 	}
 
+
+	public Member selectMember(int selectMno) {
+		return mDAO.selectMember(sqlSession, selectMno);
+	}
+
+
+//	public void insertProfile(Member m) {
+//		int result = mDAO.insertProfile(sqlSession, m);
+//		if(result > 0) {
+//			updateMember(m);
+//		}
+//	}
+
+
+	public int updateMember(Member m) {
+		return mDAO.updateMember(sqlSession, m);
+	}
+
 }

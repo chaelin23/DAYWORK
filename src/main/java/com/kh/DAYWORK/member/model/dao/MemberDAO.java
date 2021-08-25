@@ -20,4 +20,23 @@ public class MemberDAO {
 		return sqlSession.selectOne("member-mapper.selectMno", m);
 	}
 
+	public Member selectMember(SqlSessionTemplate sqlSession, int selectMno) {
+		return sqlSession.selectOne("member-mapper.selectMember", selectMno);
+	}
+
+	public int insertProfile(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.insert("member-mapper.insertProfile", m);
+	}
+
+	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
+//		int result = 0;
+//		int result2 = 0;
+		return sqlSession.update("member-mapper.updateMember", m);
+//		if(result > 0) {
+//			result2 = sqlSession.update("member-mapper.updateProfile", m);
+//		}
+//		
+//		return result + result2;
+	}
+
 }

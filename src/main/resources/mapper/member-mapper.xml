@@ -30,7 +30,11 @@
 		<result column="M_STATUS" property="mStatus"/>
 		<result column="M_ADMIN" property="mAdmin"/>
 		<result column="J_CODE" property="jCode"/>
+		<result column="J_NAME" property="jName"/>
 		<result column="D_CODE" property="dCode"/>
+		<result column="D_NAME" property="dName"/>
+		<result column="M_ORIGINPROFILE" property="mOriginProfile"/>
+		<result column="M_RENAMEPROFILE" property="mRenameProfile"/>
 	</resultMap>
 	
 	<select id="selectMno" resultMap="memberResultSet">
@@ -39,4 +43,25 @@
 		where m_name= #{mName}
 		and m_phone = #{mPhone}
 	</select>
+	
+	<select id="selectMember" resultMap="memberResultSet">
+		selcet * 
+		from member
+		where m_no = #{selectMno}
+	</select>
+	
+<!-- 	<insert id="insertProfile"> -->
+<!-- 		insert into image -->
+<!-- 		values (i_seq.nextval, #{m.iOrigin}, #{m.iChange}, null, default, #{mNo})	 -->
+<!-- 	</insert> -->
+	
+	<update id="updateMember">
+		update member
+		set M_PHONE = #{mPhone}, m_email = #{mEmail}, m_address=#{mAddress}, m_originProfile=#{mOriginProfile}, m_renameProfile=#{mRenameProfile}
+		where m_no = #{mNo}
+	</update>
+	
+	<update id="updateProfile">
+	
+	</update>
 </mapper>
