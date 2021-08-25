@@ -271,3 +271,38 @@ th{
     color: white;
     cursor: pointer;
 }
+
+.myProfileImage{
+	width: 100%;
+	height: 50px;
+	cursor: pointer;
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+}
+.myProfileImage-size{
+	width: 50px;
+	height: 50px;
+	margin-right: 12px;
+}
+.myProfileImage-text1{
+	display:block;
+	color: lightgrey;
+	font-size:10px;
+}
+
+.myProfileImage-text1.active{
+	display: none;
+}
+
+.myProfileImage-text2{
+	display: none;
+	color: red;
+	font-size:10px;
+	font-style: italic;
+}
+
+.myProfileImage-text2.active{
+	display: block;
+}

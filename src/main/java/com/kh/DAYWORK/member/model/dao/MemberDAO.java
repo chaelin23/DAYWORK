@@ -1,9 +1,13 @@
 package com.kh.DAYWORK.member.model.dao;
 
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.DAYWORK.member.model.vo.Member;
+import com.kh.DAYWORK.member.model.vo.MemberPageInfo;
 
 @Repository("mDAO")
 public class MemberDAO {
@@ -29,14 +33,24 @@ public class MemberDAO {
 	}
 
 	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
-//		int result = 0;
-//		int result2 = 0;
 		return sqlSession.update("member-mapper.updateMember", m);
-//		if(result > 0) {
-//			result2 = sqlSession.update("member-mapper.updateProfile", m);
-//		}
-//		
-//		return result + result2;
 	}
+
+	public int updateMemberProfile(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("member-mapper.updateMemberProfile", m);
+	}
+	
+	// 관리자페이지
+	public int getListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("member-mapper.getListCount");
+	}
+	
+	
+	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession, MemberPageInfo mpi) {
+		int offset = mpi.getBoardLimit() * (mpi.getCurrentPage() -1);
+		RowBounds rowBounds = new RowBounds(offset, mpi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("member-mapper.selectMemberList",null, rowBounds);
+	}
+
 
 }

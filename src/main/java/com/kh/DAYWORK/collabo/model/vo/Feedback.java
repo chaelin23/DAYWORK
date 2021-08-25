@@ -13,11 +13,12 @@ public class Feedback {
 	private String fStatus;
 	private String jName;
 	private String dName;
+	private String mRenameProfile;
 	
 	public Feedback() {}
 
 	public Feedback(int fNo, int fCNo, int fMNo, String fWriter, String fContent, Date fCreateDate, Date fModifyDate,
-			String fStatus, String jName, String dName) {
+			String fStatus, String jName, String dName, String mRenameProfile) {
 		super();
 		this.fNo = fNo;
 		this.fCNo = fCNo;
@@ -29,6 +30,7 @@ public class Feedback {
 		this.fStatus = fStatus;
 		this.jName = jName;
 		this.dName = dName;
+		this.mRenameProfile = mRenameProfile;
 	}
 
 	public int getfNo() {
@@ -111,14 +113,21 @@ public class Feedback {
 		this.dName = dName;
 	}
 
+	public String getmRenameProfile() {
+		return mRenameProfile;
+	}
+
+	public void setmRenameProfile(String mRenameProfile) {
+		this.mRenameProfile = mRenameProfile;
+	}
+
 	@Override
 	public String toString() {
 		return "Feedback [fNo=" + fNo + ", fCNo=" + fCNo + ", fMNo=" + fMNo + ", fWriter=" + fWriter + ", fContent="
 				+ fContent + ", fCreateDate=" + fCreateDate + ", fModifyDate=" + fModifyDate + ", fStatus=" + fStatus
-				+ ", jName=" + jName + ", dName=" + dName + "]";
+				+ ", jName=" + jName + ", dName=" + dName + ", mRenameProfile=" + mRenameProfile + "]";
 	}
 
 	
-
 	
 }

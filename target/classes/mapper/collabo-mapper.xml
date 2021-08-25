@@ -135,10 +135,11 @@
 		<result column="F_STATUS" property="fStatus" />
 		<result column="J_NAME" property="jName" />
 		<result column="D_NAME" property="dName" />
+		<result column="M_RENAMEPROFILE" property="mRenameProfile" />
 	</resultMap>
 	
 	<select id="selectFeedback" resultMap="FeedbackResultSet">
-		select f_no, f_c_no, f_m_no, f_content, f_create_date, f_modify_date, f_status, m_name, j_name, d_name
+		select f_no, f_c_no, f_m_no, f_content, f_create_date, f_modify_date, f_status, m_name, j_name, d_name, M_RENAMEPROFILE
     	from feedback
         	join member on(m_no = f_m_no)
         	join job using(j_code)

@@ -20,14 +20,18 @@
 			<div class="mypage-logo">마이페이지</div>
 			<div class='mypage-update'>
 				<form action="update.me" method="post" id="joinForm" enctype="Multipart/form-data">
+						<div class="myProfileImage">
+							<img class="myProfileImage-size" src="resources/mProfileFiles/${ m.mRenameProfile }">
+							<div class="myProfileImage-text1">이미지를 누르면 첨부파일로 수정이 가능합니다.</div>
+							<div class="myProfileImage-text2">이미지 변경 후 아래 수정하기 버튼으로 수정 가능합니다!</div>
+						</div>
+						<div class="profiles">
+							<input type="file" class="profileImg" name="uploadFile" value="${m.mOriginProfile }" onchange="LoadImg(this)">
+						</div>
 					<table>
 						<tr>
 							<th>사번</th>
-							<td><input class='readmNo' name="mPwd" value="${m.mNo }" readonly></td>
-						</tr>
-						<tr>
-							<th>프로필 이미지</th>
-							<td><input type="file"  name="uploadFile"></td>
+							<td><input class='readmNo' name="mNo" value="${m.mNo }" readonly></td>
 						</tr>
 						<tr>
 							<th>이름</th>
@@ -99,5 +103,34 @@
 			</div>	
 		</div>
 	</div>
+	
+	<script>
+		function validate(){
+			alert("내 정보 수정이 완료되었습니다.");
+		}
+		
+		$(function() {
+        	$('.profiles').hide();
+        	
+        	$('.myProfileImage').click(function(){
+        		$('.profileImg').click();
+        		$('.myProfileImage-text1').addClass('active');
+        		$('.myProfileImage-text2').addClass('active');
+        	});
+		});
+		
+		 function LoadImg(value) {
+        	if(value.files && value.files[0]) {
+        		var reader = new FileReader();
+        		
+        		reader.onload = function(e) {
+        			$('.myProfileImage-size').attr('src', e.target.result);
+               	}
+        	}
+	        	reader.readAsDataURL(value.files[0]);
+		 }
+		
+		
+	</script>
 </body>
 </html>

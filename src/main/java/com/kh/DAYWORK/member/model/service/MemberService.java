@@ -1,11 +1,14 @@
 package com.kh.DAYWORK.member.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.DAYWORK.member.model.dao.MemberDAO;
 import com.kh.DAYWORK.member.model.vo.Member;
+import com.kh.DAYWORK.member.model.vo.MemberPageInfo;
 
 @Service("mService")
 public class MemberService {
@@ -49,5 +52,23 @@ public class MemberService {
 	public int updateMember(Member m) {
 		return mDAO.updateMember(sqlSession, m);
 	}
+
+
+	public int updateMemberProfile(Member m) {
+		return mDAO.updateMemberProfile(sqlSession, m);
+	}
+	
+	
+	// 관리자페이지
+
+	public int getListCount() {
+		return mDAO.getListCount(sqlSession);
+	}
+	
+	public ArrayList<Member> selectMemberList(MemberPageInfo mpi) {
+		return mDAO.selectMemberList(sqlSession, mpi);
+	}
+
+
 
 }

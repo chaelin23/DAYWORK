@@ -45,8 +45,10 @@
 	</select>
 	
 	<select id="selectMember" resultMap="memberResultSet">
-		selcet * 
+		select * 
 		from member
+			join Job using(j_code)
+        	join department using(d_code)
 		where m_no = #{selectMno}
 	</select>
 	
@@ -57,11 +59,26 @@
 	
 	<update id="updateMember">
 		update member
-		set M_PHONE = #{mPhone}, m_email = #{mEmail}, m_address=#{mAddress}, m_originProfile=#{mOriginProfile}, m_renameProfile=#{mRenameProfile}
-		where m_no = #{mNo}
+			set m_phone = #{mPhone}, m_email = #{mEmail}, m_address=#{mAddress}, m_originProfile=#{mOriginProfile},m_renameProfile=#{mRenameProfile}
+			where m_no = #{mNo}
 	</update>
 	
-	<update id="updateProfile">
-	
+	<update id="updateMemberProfile">
+		update member
+			set m_phone = #{mPhone}, m_email = #{mEmail}, m_address=#{mAddress}
+			where m_no = #{mNo}
 	</update>
+	
+	<!-- ******************* 관리자페이지  ****************** -->
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from member
+	</select>
+	
+	<select id="selectMemberList" resultMap="memberResultSet">
+		select * 
+		from member
+			join Job using(j_code)
+        	join department using(d_code)
+	</select>
 </mapper>

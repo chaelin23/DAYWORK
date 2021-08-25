@@ -17,16 +17,19 @@
 			<!-- 나의 정보 -->
 			<div class="main-myInfo">
 				<div class="main-profile">
-					<div class="main-profile-photo"></div>
-					<div class="main-profile-name">${ loginUser.dName }</div>
-					<div class="main-profile-name">${ loginUser.mName }</div>
-					<div class="main-profile-position">${loginUser.jName }</div>
+					<div class="main-profile-photo"><img src="resources/mProfileFiles/${ loginUser.mRenameProfile }"></div>
+					<div class="main-profile-margin">
+						<div class="main-profile-dept">${ loginUser.dName }</div>
+						<div class="main-profile-name">${ loginUser.mName }</div>
+						<div class="main-profile-position">${loginUser.jName }</div>
+					</div>
 				</div>
 				<div class="main-line">
 					<hr style="border:1px color= silver;" width="80%">
 				</div>
 				<div class="main-active">
 					<div class="main-mypage" onclick="location.href='goMypage.me'">내 정보 수정</div>
+					<div class="main-mypage" onclick="location.href='goAdmin.me'">관리자페이지</div>
 <!-- 					<div class="main-active-one"> -->
 <!-- 						<div class="main-active-one-text">내가 쓴 글</div> -->
 <!-- 						<div class="main-active-one-num">3개</div> -->

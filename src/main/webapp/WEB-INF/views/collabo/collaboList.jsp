@@ -586,7 +586,7 @@
 						if(f.fWriter != '${loginUser.mName}'){
 						addHtml += "<div class='your-feedback'>";
 								addHtml += "<div class='feedback-profile'>";
-									addHtml += "<div class='view-image'>＠</div>"; 
+								addHtml += "<img class='view-image' src='resources/mProfileFiles/"+f.mRenameProfile+"'>"; 
 								addHtml += "</div>";
 								addHtml += "<div class='your-feedback-message'>";
 								addHtml += "<div class='message-who'>";
@@ -651,7 +651,7 @@
 						if(f.fWriter != '${loginUser.mName}'){
 						addHtml += "<div class='your-feedback'>";
 								addHtml += "<div class='feedback-profile'>";
-									addHtml += "<div class='view-image'>＠</div>"; 
+								addHtml += "<img class='view-image' src='resources/mProfileFiles/"+f.mRenameProfile+"'>"; 
 								addHtml += "</div>";
 								addHtml += "<div class='your-feedback-message'>";
 								addHtml += "<div class='message-who'>";

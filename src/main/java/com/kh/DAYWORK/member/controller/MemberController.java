@@ -1,9 +1,9 @@
 package com.kh.DAYWORK.member.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.DAYWORK.member.model.exception.MemberException;
 import com.kh.DAYWORK.member.model.service.MemberService;
 import com.kh.DAYWORK.member.model.vo.Member;
+import com.kh.DAYWORK.member.model.vo.MemberPageInfo;
+import com.kh.DAYWORK.member.model.vo.MemberPagination;
 
 @SessionAttributes("loginUser") 
 @Controller
@@ -114,58 +116,71 @@ public class MemberController {
 	
 	@RequestMapping("goMypage.me")
 	public ModelAndView goMypage(ModelAndView mv, HttpSession session) {
-		Member m = (Member)session.getAttribute("loginUser");
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		mv.addObject("m", m);
+		mv.addObject("m", loginUser);
 		mv.setViewName("myPage");
 		return mv;
 	}
 	
 	@RequestMapping("update.me")
-	public String updateMember(@ModelAttribute Member m, @RequestParam("uploadFile") MultipartFile uploadFile, HttpServletRequest request,
-								HttpSession session, Model model) {
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		int selectMno = loginUser.getmNo();
-		String renameFileName = null;
+	public String updateMember(@ModelAttribute Member m,  
+							   @RequestParam("post") String post,
+							   @RequestParam("address1") String address1,
+							   @RequestParam("address2") String address2,
+							   @RequestParam("uploadFile") MultipartFile uploadFile, 
+							   HttpServletRequest request,
+							   HttpSession session, Model model) throws MemberException {
+		int result = 0;
 		
-		if(uploadFile != null && uploadFile.isEmpty()) {
-			
-			if(m.getmRenameProfile() != null) { // 이전 파일 존재한다면 삭제해줄 것
+		m.setmAddress(post + "/" + address1 + "/" + address2);
+		int selectMno = m.getmNo();
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		if(uploadFile.getOriginalFilename() != "") {
+			if(loginUser.getmRenameProfile() != null) { // 파일 있었는데 바꿀 때
 				deleteFile(request, m);
-			} else if(m.getmRenameProfile() == null) {
-				renameFileName = saveFile(uploadFile, request);
+			}  
+			String renameFileName = saveFile(uploadFile, request);
+			if(renameFileName != null) {
+				m.setmOriginProfile(uploadFile.getOriginalFilename());
+				m.setmRenameProfile(renameFileName);
 			}
-			m.setmOriginProfile(uploadFile.getOriginalFilename());
-			m.setmRenameProfile(renameFileName);
+			result = mService.updateMember(m);
+		} else if(uploadFile.getOriginalFilename() == ""){// 파일 아예 없을 때
+			result = mService.updateMemberProfile(m);
+		}
+			
+		if(result > 0) {
+			m = mService.selectMember(selectMno);
+			model.addAttribute("loginUser", m);
+			return "redirect:goMypage.me";
+		}else {
+			throw new MemberException("변경실패");
 		}
 		
-		int result = mService.updateMember(m);
-//		Member selectMember = mService.selectMember(selectMno);
-//		model.addAttribute("m", selectMember);
-		return "redirect:goMypage.me";
 	}
 	
-	public String saveFile(MultipartFile file, HttpServletRequest request) {
+	public String saveFile(MultipartFile file, HttpServletRequest request) { 
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\muploadFiles";
+		String savePath = root + "\\mProfileFiles"; 
 		
 		File folder = new File(savePath);
 		if(!folder.exists()) {
-			folder.mkdirs();
+			folder.mkdirs(); 
 		}
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		String originFileName = file.getOriginalFilename();
 		String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "."
-				+ originFileName.substring(originFileName.lastIndexOf(".")+1);
+									+ originFileName.substring(originFileName.lastIndexOf(".") +1); 
 		
 		String renamePath = folder + "\\" + renameFileName;
 		
 		try {
 			file.transferTo(new File(renamePath));
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
+			System.out.println("파일 전송 에러");
 			e.printStackTrace();
 		}
 		
@@ -174,12 +189,36 @@ public class MemberController {
 	
 	public void deleteFile(HttpServletRequest request, Member m) {
 		String root = request.getSession().getServletContext().getRealPath("resources"); //폴더접근
-		String savePath = root + "\\buploadFiles";
+		String savePath = root + "\\mProfileFiles";
 		
 		File f = new File(savePath + "\\" + m.getmRenameProfile());
-		if(f.exists()) { // 파일 존재하면
-			f.delete(); // 지워
+		if(f.exists()) { 
+			f.delete(); 
 		}
+	}
+	
+	// 관리자 페이지
+	
+	@RequestMapping("goAdmin.me")
+	public ModelAndView goAdmin(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) throws MemberException {
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		
+		int listCount = mService.getListCount();
+		MemberPageInfo mpi = MemberPagination.getPageInfo(currentPage, listCount);
+		
+		ArrayList<Member>mList = mService.selectMemberList(mpi);
+		
+		if(mList != null) {
+			mv.addObject("mList", mList).addObject("mpi",mpi);
+			mv.setViewName("adminPage");
+		} else {
+			throw new MemberException("사원 조회에 실패하였습니다.");
+		}
+		
+		return mv;
 	}
 	
 }
