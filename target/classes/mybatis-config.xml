@@ -8,6 +8,7 @@
 
 	<typeAliases>
 		<typeAlias type="com.kh.DAYWORK.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.DAYWORK.calendar.model.vo.Calendar" alias="Calendar"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/address-mapper.xml"/>
