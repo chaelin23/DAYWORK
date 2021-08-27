@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.DAYWORK.board.model.vo.Board;
 import com.kh.DAYWORK.collabo.model.vo.Collabo;
 import com.kh.DAYWORK.collabo.model.vo.Feedback;
+import com.kh.DAYWORK.member.model.vo.Member;
 
 @Repository("cDAO")
 public class CollaboDAO {
@@ -64,6 +65,10 @@ public class CollaboDAO {
 
 	public Collabo selcetCollabo(SqlSessionTemplate sqlSession, int fCNo) {
 		return sqlSession.selectOne("collabo-mapper.selectCollabo", fCNo);
+	}
+
+	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("collabo-mapper.selectMemberList");
 	}
 
 	

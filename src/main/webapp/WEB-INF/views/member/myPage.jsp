@@ -21,7 +21,12 @@
 			<div class='mypage-update'>
 				<form action="update.me" method="post" id="joinForm" enctype="Multipart/form-data">
 						<div class="myProfileImage">
+							<c:if test="${m.mRenameProfile == null}">
+								<img class="myProfileImage-size" src="resources/image/기본이미지.jpg">
+							</c:if>
+							<c:if test="${m.mRenameProfile != null}">
 							<img class="myProfileImage-size" src="resources/mProfileFiles/${ m.mRenameProfile }">
+							</c:if>
 							<div class="myProfileImage-text1">이미지를 누르면 첨부파일로 수정이 가능합니다.</div>
 							<div class="myProfileImage-text2">이미지 변경 후 아래 수정하기 버튼으로 수정 가능합니다!</div>
 						</div>

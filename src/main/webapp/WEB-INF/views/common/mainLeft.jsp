@@ -17,7 +17,14 @@
 			<!-- 나의 정보 -->
 			<div class="main-myInfo">
 				<div class="main-profile">
-					<div class="main-profile-photo"><img src="resources/mProfileFiles/${ loginUser.mRenameProfile }"></div>
+					<div class="main-profile-photo">
+						<c:if test="${loginUser.mRenameProfile == null }">
+							<img class="myProfileImage-size" src="resources/image/기본이미지.jpg">
+						</c:if>
+						<c:if test="${loginUser.mRenameProfile != null }">
+						<img src="resources/mProfileFiles/${ loginUser.mRenameProfile }">
+						</c:if>
+					</div>
 					<div class="main-profile-margin">
 						<div class="main-profile-dept">${ loginUser.dName }</div>
 						<div class="main-profile-name">${ loginUser.mName }</div>

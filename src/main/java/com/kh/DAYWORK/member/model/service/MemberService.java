@@ -70,5 +70,15 @@ public class MemberService {
 	}
 
 
+	public int updateBtnN(int mNo) {
+		return mDAO.updateBtnN(sqlSession, mNo);
+	}
+
+
+	public int updateBtnY(int mNo) {
+		return mDAO.updateBtnY(sqlSession, mNo);
+	}
+
+
 
 }

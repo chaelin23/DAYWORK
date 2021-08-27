@@ -24,14 +24,14 @@
 			</c:if>
 			<c:if test="${ !empty member }">
 				<div class='mNo-yes'>
-					<c:if test="${ member.mAdmin == 0}">
-					  	${ member.mName }님의 사번은 [${ member.mNo }] 입니다.
+					<c:if test="${ member.mAdmin == 2 && member.mStatus == 'Y'}">
+						${ member.mName }님의 사번은 담당자 확인이 필요합니다.
 					</c:if>
-					<c:if test="${ member.mAdmin == 1}">
+					<c:if test="${ member.mAdmin == 1 && member.mStatus == 'Y'}">
 						${ member.mName }님의 사번은 [${ member.mNo }] 입니다.
 					</c:if>
-					<c:if test="${ member.mAdmin == 2}">
-						${ member.mName }님의 사번은 담당자 확인이 필요합니다.
+					<c:if test="${ member.mStatus == 'N'}">
+					  	${ member.mNo }님은 탈퇴한 정보입니다.
 					</c:if>
 				</div>
 					<button class='mNo-home-btn' onclick="location.href='home.do'">홈으로</button> 		

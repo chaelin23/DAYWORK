@@ -140,6 +140,7 @@ public class CollaboController {
 	@ResponseBody
 	public void selectCollaboCate(@ModelAttribute Collabo co, HttpServletResponse response) {
 		response.setContentType("application/json; charset=UTF-8");
+		
 		ArrayList<Collabo> cList = cService.selectCollaboCate(co);
 		
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
@@ -205,7 +206,25 @@ public class CollaboController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping("selcetMemberList.co")
+	@ResponseBody
+	public void selectMemberList(HttpServletResponse response) {
+		response.setContentType("application/json; charset=UTF-8");
 		
+		ArrayList<Member>mList = cService.selectMemberList();
+		
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson  = gb.create();
+		
+		try {
+			gson.toJson(mList, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

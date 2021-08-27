@@ -10,6 +10,7 @@ import com.kh.DAYWORK.board.model.vo.Board;
 import com.kh.DAYWORK.collabo.model.dao.CollaboDAO;
 import com.kh.DAYWORK.collabo.model.vo.Collabo;
 import com.kh.DAYWORK.collabo.model.vo.Feedback;
+import com.kh.DAYWORK.member.model.vo.Member;
 
 @Service("cService")
 public class CollaboService {
@@ -51,9 +52,10 @@ public class CollaboService {
 		String cBctNo = co.getcBctNo();
 		String cMNo = co.getcMNo() + "";
 		
-		if(!cMNo.equals("") && cBctNo.equals("")) {
+		
+		if(cBctNo == cMNo) {
 			cList = cDAO.selectCateCMNo(sqlSession, cMNo);
-		} else if(cMNo.equals("0")){
+		} else if(cBctNo != cMNo){
 			cList = cDAO.selectCateCBctNo(sqlSession, cBctNo);
 		}
 		
@@ -77,6 +79,10 @@ public class CollaboService {
 
 	public ArrayList<Feedback> selectFeedback(int fCNo) {
 		return cDAO.selectFeedback(sqlSession, fCNo);
+	}
+
+	public ArrayList<Member> selectMemberList() {
+		return cDAO.selectMemberList(sqlSession);
 	}
 
 

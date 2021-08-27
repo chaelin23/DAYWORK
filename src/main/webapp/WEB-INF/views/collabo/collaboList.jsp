@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/index.css">
 <link rel="stylesheet" href="resources/css/collabo.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -32,7 +33,7 @@
 							<div class="create-content-add">
 								<label>시작일자  :  <input class="new-date-s" type="date" name="cStartDate" value="${dat }"> </label>
 								<label>마감일자  :  <input class="new-date-e" type="date" name="cEndDate"> </label>
-								<label> & <input class="new-people" type="text" placeholder="참여자를 선택하세요" name="cPeople"></label>
+								<label><i class="fas fa-user-check"></i><input class="new-people" type="text" placeholder="참여자를 선택하세요" name="cPeople"></label>
 							</div>
 							<div class="create-content-content">
 								<textarea class="new-content" rows="10" cols="96" placeholder="글을 작성하세요" name="bContent"></textarea>
@@ -57,6 +58,8 @@
 				</div>
 				
 				<div class="collabo-workList-cate">
+						<input type='hidden' value='${ loginUser.mNo }'>
+						<input type='hidden' value='${ loginUser.mName }'>
 						<button class="cateBtn" name = 'cMNo' value='${ loginUser.mNo }'>내가 쓴 글</button>
 						<button class="cateBtn" name = 'cBctNo' value='C1'>요청</button>
 						<button class="cateBtn" name = 'cBctNo' value='C2'>진행중</button>
@@ -107,7 +110,9 @@
 										<div class="list-content-add">
 												<label style="margin-right:10px;">시작일자  :  ${ c.cStartDate } </label>
 												<label style="margin-right:50px;">마감일자  :  ${ c.cEndDate } </label>
-												<label> & <span class="list-people" >${ c.cPeople }</span></label>
+												<label>
+													<i class="fas fa-user-check"></i>
+												<span class="list-people" >${ c.cPeople }</span></label>
 										</div>
 										<div class="list-content">
 											${c.bContent }
@@ -167,6 +172,10 @@
 		</div>
 	</div>
 	</div>
+	
+<!-- 	<div class="selectMemberList"> -->
+<!-- 		<div class="selectMemberList-ajax"></div> -->
+<!-- 	</div> -->
 </body>
 
 <script>
@@ -253,7 +262,7 @@
 						addHtml += "<div class='list-content-add'>";
 						addHtml += "<label style='margin-right:10px;'>시작일자  :  " + c.cStartDate + "</label>";
 						addHtml += "<label style='margin-right:50px;'>마감일자  :  " + c.cEndDate + "</label>";
-						addHtml += "<label> & <span class='list-people' >" + c.cPeople + "</span></label>";
+						addHtml += "<label><i class='fas fa-user-check'></i><span class='list-people' >" + c.cPeople + "</span></label>";
 						addHtml += "</div>";
 						
 						addHtml += "<div class='list-content'>";
@@ -370,7 +379,7 @@
 							addHtml += "<div class='list-content-add'>";
 							addHtml += "<label><input class='new2-date-s' type='date' name='cStartDate' value='" + c.cStartDate + "'></label>";
 							addHtml += "<label><input class='new2-date-e' type='date' name='cEndDate' value='" + c.cEndDate + "'></label>";
-							addHtml += "<label> & <input class='new2-people' type='text' name='cPeople' value='"+ c.cPeople + "'></label>";
+							addHtml += "<label><i class='fas fa-user-check'></i><input class='new2-people' type='text' name='cPeople' value='"+ c.cPeople + "'></label>";
 							addHtml += "</div>";
 							
 							addHtml += "<div class='list-content'>";
@@ -437,10 +446,10 @@
 		var bTitle = $(this).parent().parent().parent().parent().children().eq(1).children().children().children().val();
 		var cStartDate = $(this).parent().parent().parent().parent().children().eq(1).children().eq(1).children().eq(0).children().val();
 		var cEndDate = $(this).parent().parent().parent().parent().children().eq(1).children().eq(1).children().eq(1).children().val();
-		var cPeople = $(this).parent().parent().parent().parent().children().eq(1).children().eq(1).children().eq(2).children().val();
+		var cPeople = $(this).parent().parent().parent().parent().children().eq(1).children().eq(1).children().eq(2).children().eq(1).val();
 		var bContent = $(this).parent().parent().parent().parent().children().eq(1).children().eq(2).children().val();
 		var cBctNo = $(this).parent().parent().parent().children().eq(0).children().find('input:radio:checked').val();
-		
+		console.log(cPeople);
 		
 		$.ajax({
 			url:'updateCollabo.co',
@@ -464,22 +473,26 @@
 	
 	$(document).on('click', '.cateBtn', function(){
 		var btn =  $(this).val();
-		var cMNo = null;
-		var cBctNo = null;
-		if(btn != 'C1' && btn != 'C2' && btn != 'C3' && btn != 'C4' && btn != 'C5'){
-			cMNo = btn;
-			cBctNo = null;
-		} else{
-			cBctNo = btn;
-			cMNo = 0;
-		}
+		var cMNo = $(this).parent().children().eq(0).val();
+		var mName = $(this).parent().children().eq(1).val();
+		var cBctNo = btn;
+// 		if(btn != 'C1' && btn != 'C2' && btn != 'C3' && btn != 'C4' && btn != 'C5'){
+// 			cMNo = btn;
+// 			cBctNo = null;
+// 		} else{
+// 			cBctNo = btn;
+// 			cMNo = 0;
+// 		}
 		
-		console.log(btn);
+		console.log(cMNo);
+		console.log(cBctNo)
+		console.log(mName);
 	
 		$.ajax({
 			url:'selectCollaboCate.co',
 			data:{cMNo:cMNo,
-				  cBctNo:cBctNo},
+				  cBctNo:cBctNo,
+				  mName:mName},
 			success: function(data){
 				console.log(data);
 				$('.dd').html('');
@@ -692,6 +705,31 @@
 		});
 	});
 	
+	$(document).on('keydown', '.new-people', function(){
+		$('.selectMemberList').addClass('active');
+		
+		$.ajax({
+			url:'selcetMemberList.co',
+			success:function(data){
+				console.log(data);
+				
+				$('.selectMeberList-ajax').html('');
+				
+				for(var i=0; i<data.length; i++){
+					var m = data[i];
+					addHtml = '';
+					
+					addHtml += "<div>"+m.dName+"</div>";
+					addHtml += "<div>"+m.mName+"</div>";
+					addHtml += "<input type='hidden' value='"+m.mNo+"'>";
+					addHtml += "<div>"+m.jName+"</div>";
+				$('.selectMeberList-ajax').append(addHtml);
+					}
+				
+					
+				}
+		})
+	});
 	
 </script>
 </html>

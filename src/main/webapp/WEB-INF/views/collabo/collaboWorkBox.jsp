@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/index.css">
 <link rel="stylesheet" href="resources/css/collabo.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -39,11 +40,11 @@
 									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="${ c.cNo }">
 										<input type="hidden" value="${c.cNo }">
 										<div class="collabo-workBox-box-a">
-											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b"><i class="far fa-calendar-check"></i></div>
 											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
 										</div>
 										<div class="collabo-workBox-box-a">
-											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b"><i class="fas fa-users"></i></div>
 											<div class="collabo-workBox-box-b">${ c.cPeople }</div>
 										</div>
 										<div class="collabo-workBox-box-a">
@@ -62,11 +63,11 @@
 									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="${ c.cNo }">
 										<input type="hidden" value="${c.cNo }">
 										<div class="collabo-workBox-box-a">
-											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b"><i class="far fa-calendar-check"></i></div>
 											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
 										</div>
 										<div class="collabo-workBox-box-a">
-											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b"><i class="fas fa-users"></i></div>
 											<div class="collabo-workBox-box-b">${ c.cPeople }</div>
 										</div>
 										<div class="collabo-workBox-box-a">
@@ -85,11 +86,11 @@
 									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="${ c.cNo }">
 										<input type="hidden" value="${c.cNo }">
 										<div class="collabo-workBox-box-a">
-											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b"><i class="far fa-calendar-check"></i></div>
 											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
 										</div>
 										<div class="collabo-workBox-box-a">
-											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b"><i class="fas fa-users"></i></div>
 											<div class="collabo-workBox-box-b">${ c.cPeople }</div>
 										</div>
 										<div class="collabo-workBox-box-a">
@@ -108,11 +109,11 @@
 									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="${ c.cNo }">
 										<input type="hidden" value="${c.cNo }">
 										<div class="collabo-workBox-box-a">
-											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b"><i class="far fa-calendar-check"></i></div>
 											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
 										</div>
 										<div class="collabo-workBox-box-a">
-											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b"><i class="fas fa-users"></i></div>
 											<div class="collabo-workBox-box-b">${ c.cPeople }</div>
 										</div>
 										<div class="collabo-workBox-box-a">
@@ -131,11 +132,11 @@
 									<div class="collabo-workBox-box" draggable=true ondragstart="dragStart(Event)" id="${ c.cNo }">
 										<input type="hidden" value="${c.cNo }">
 										<div class="collabo-workBox-box-a">
-											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b"><i class="far fa-calendar-check"></i></div>
 											<div class="collabo-workBox-box-b">${ c.bTitle }</div>
 										</div>
 										<div class="collabo-workBox-box-a">
-											<div class="collabo-workBox-box-b">#</div>
+											<div class="collabo-workBox-box-b"><i class="fas fa-users"></i></div>
 											<div class="collabo-workBox-box-b">${ c.cPeople }</div>
 										</div>
 										<div class="collabo-workBox-box-a">

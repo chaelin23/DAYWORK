@@ -152,6 +152,19 @@
 	<select id="selectCollabo" resultMap="collaboResultSet">
 		select * from collabo 
 		where c_no = #{fCNo}
-		
 	</select>
+	
+	<select id="selectMemberList" resultMap="memerResultSet">
+		select m_no, m_name, d_name, j_name
+			from member
+			    left join Job using(j_code)
+    			left join department using(d_code) 
+	</select>
+	
+	<resultMap type="Member" id="memerResultSet">
+		<id column="M_NO" property="mNo"/>
+		<result column="M_NAME" property="mName" />
+		<result column="D_NAME" property="dName" />
+		<result column="J_NAME" property="jName" />
+	</resultMap>
 </mapper>

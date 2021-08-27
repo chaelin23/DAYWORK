@@ -94,6 +94,8 @@
 	border-radius: 7px;
 	width:100px;
 	margin-bottom:10px;
+	cursor:pointer;
+	color:#4d4b4b;
 }
 
 .collabo-workBox-box-column{
@@ -105,6 +107,7 @@
 .collabo-workBox-box-a{
 	display: flex;
 	flex-direction: row;
+	margin: 3px 0px;
 }
 
 
@@ -127,7 +130,7 @@
 	border-bottom: 1px solid darkgrey;
 	height: 45px;
     line-height: 45px;
-    background-color: #cce8f4;
+    background-color: #eeeeee85;
 }
 
 .create-box-top-margin{
@@ -404,6 +407,10 @@
 	margin:20px 0px;
 }
 
+.fa-calendar-check:before, .fa-users:before, .fa-user-check:before{
+	margin-right:2px;
+}
+
 /*------------ selectCate ------------*/
 .collabo-workList-cate{
 	margin-bottom: 5px;
@@ -587,4 +594,27 @@
 	color: red;
 	font-weight: bold;
 	font-size: 10px;
+}
+
+.view-image{
+	width: 40px;
+	height: 40px;
+}
+
+/* selectMemberList */
+.selectMemberList{
+	width: 250px;
+    height: 100px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 4px 4px #ebebeb;
+    position: absolute;
+    top: 40%;
+    left: 87%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    overflow: auto;
+}
+
+..selectMemberList active{
+	display: block;
 }

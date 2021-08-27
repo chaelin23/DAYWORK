@@ -3,14 +3,14 @@
 <mapper namespace="member-mapper">
 	<insert id="insertMembers">
 		insert into member values
-		(mem_seq.nextval, #{mPwd}, #{mName}, #{mGender}, #{mBirthDay}, #{mPhone}, #{mEmail}, #{mAddress}, sysdate, null, default, default, null, null)
+		(mem_seq.nextval, #{mPwd}, #{mName}, #{mGender}, #{mBirthDay}, #{mPhone}, #{mEmail}, #{mAddress}, null, null, 'Y', default, null, null, null, null)
 	</insert>
 	
 	<select id="loginMember" resultMap="memberResultSet">
 		select * 
 			from member
-				join Job using(j_code)
-        		join department using(d_code)
+				left join Job using(j_code)
+        		left join department using(d_code)
 			where M_NO = #{mNo}  
 				and m_status ='Y'
 				and m_admin in(1,0)
@@ -47,8 +47,8 @@
 	<select id="selectMember" resultMap="memberResultSet">
 		select * 
 		from member
-			join Job using(j_code)
-        	join department using(d_code)
+			left join Job using(j_code)
+        	left join department using(d_code)
 		where m_no = #{selectMno}
 	</select>
 	
@@ -78,7 +78,20 @@
 	<select id="selectMemberList" resultMap="memberResultSet">
 		select * 
 		from member
-			join Job using(j_code)
-        	join department using(d_code)
+			left join Job using(j_code)
+        	left join department using(d_code)
+       	order by m_no desc
 	</select>
+	
+	<update id="updateBtnY">
+		update member
+			set M_ENT_DATE =sysdate, M_Admin='1'
+		where m_no = #{mNo}
+	</update>
+	
+	<update id="updateBtnN">
+		update member
+			set M_HIRE_DATE =sysdate, M_STATUS='N'
+		where m_no = #{mNo}
+	</update>
 </mapper>

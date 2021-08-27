@@ -306,3 +306,161 @@ th{
 .myProfileImage-text2.active{
 	display: block;
 }
+
+/* adminPage */
+
+
+/* .admin-list-btns{ */
+/* 	display: flex; */
+/* 	flex-direction: row; */
+/* 	margin-bottom: 20px; */
+/* 	justify-content: space-between; */
+/* } */
+
+.admin-top-text{
+	font-size:20px;
+	margin-bottom: 20px;
+}
+
+.admin-search{
+	border-radius: 4px;
+    width: 155px;
+    border-style: none;
+    border: 1px solid #00000038;
+    height: 25px;
+    font-size: 12px;
+}
+
+.admin-submit{
+	margin-right: 20px;
+    border: none;
+    background-color: #dedede;
+    width: 150px;
+    height: 25px;
+    color: white;
+    cursor: pointer;
+    margin: 0px 0px 10px 587px;
+}
+}
+.admin-list-content{
+	display: flex;
+	flex-direction: column;
+}
+
+.list-th{
+	display: flex;
+	flex-direction: row;
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+
+.list-line{
+	border-bottom: 1px solid black;
+	margin-bottom: 10px;
+}
+
+.list-td{
+	display: flex;
+	flex-direction: row;
+	font-size: 13px;
+	color: #403f3f;
+}
+
+.th1{
+	width: 30px;
+	text-align: center;
+}
+
+.td1{
+	width: 30px;
+	height: 40px;
+	text-align: center;
+}
+
+.th2, .td2{
+	width: 80px;
+	text-align: center;
+}
+
+.th3, .td3{
+	width: 80px;
+	text-align: center;
+}
+
+.th4, .td4{
+	width: 140px;
+	text-align: center;
+}
+
+.th5, .td5{
+	width: 100px;
+	text-align: center;
+}
+.th6, .td6{
+	width: 120px;
+	text-align: center;
+}
+.th7, .td7{
+	width: 120px;
+	text-align: center;
+}
+
+.th8, .td8{
+	width: 70px;
+	text-align: center;
+}
+
+.td8{
+	color:red;	
+}
+select[name=dCode]{
+	width: 100px;
+	height:20px;
+	border-style: none;
+    box-shadow: 0 0 2px 0px #8d8c8c;
+    border-radius: 2px;
+    text-align: center;
+    color: #403f3f;
+}
+
+select[name=jCode]{
+	width: 80px;
+	height:20px;
+	border-style: none;
+    box-shadow: 0 0 2px 0px #8d8c8c;
+    border-radius: 2px;
+    text-align: center;
+    color: #403f3f;
+}
+
+.welcome{
+	width: 40px;
+    height: 20px;
+    border-radius: 2px;
+    border-style: none;
+    box-shadow: 0px 0px 0px 1.5px #dedede;
+    background-color: white;
+    color: #0a3bdf;
+    cursor: pointer;
+}
+
+.goodbye{
+	width: 40px;
+    height: 20px;
+    border-radius: 2px;
+    border-style: none;
+    background-color: #dc1919;
+    color: white;
+    cursor: pointer;
+}
+
+.fa-search:before {
+    content: "\f002";
+    cursor: pointer;
+    position: absolute;
+	top: 24%;
+	left: 51%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+}
+

@@ -52,5 +52,13 @@ public class MemberDAO {
 		return (ArrayList)sqlSession.selectList("member-mapper.selectMemberList",null, rowBounds);
 	}
 
+	public int updateBtnN(SqlSessionTemplate sqlSession, int mNo) {
+		return sqlSession.update("member-mapper.updateBtnN", mNo);
+	}
+
+	public int updateBtnY(SqlSessionTemplate sqlSession, int mNo) {
+		return sqlSession.update("member-mapper.updateBtnY", mNo);
+	}
+
 
 }

@@ -221,4 +221,34 @@ public class MemberController {
 		return mv;
 	}
 	
+	@RequestMapping("updateMember.me")
+	public String updateMember(@ModelAttribute Member m ) {
+		return null;
+	}
+	
+	// 퇴사처리
+	@RequestMapping("updateBtnN.me")
+	public String updateBtnN(@RequestParam("mNo")int mNo) throws MemberException {
+		int result = mService.updateBtnN(mNo);
+		
+		if(result>0) {
+			return "redirect:goAdmin.me";
+		} else {
+			throw new MemberException("퇴사 처리에 실패하였습니다.");
+		}
+	}
+	
+	//입사처리
+	@RequestMapping("updateBtnY.me")
+	public String updateBtnY(@RequestParam("mNo")int mNo) throws MemberException {
+		int result = mService.updateBtnY(mNo);
+		
+		if(result>0) {
+			return "redirect:goAdmin.me";
+		} else {
+			throw new MemberException("퇴사 처리에 실패하였습니다.");
+		}
+	}
+	
+
 }
