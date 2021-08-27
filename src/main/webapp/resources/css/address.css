@@ -38,7 +38,7 @@
 	height: 120px;
 	background: url('../image/man.png');
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: cover; 
 }
 
 .photo-button {

@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: leech
+=======
+Built-By: Woody
+>>>>>>> 6bd55ffdf41b574335ce6978612538090f140811
 Build-Jdk: 1.8.0_282
 Created-By: Maven Integration for Eclipse
 

@@ -28,6 +28,17 @@
 							<button onclick="location.href='wherePwd.me'" class="login-service-btn">비밀번호찾기</button>
 					</div>
 			</c:if>
+<<<<<<< HEAD
+			<c:if test="${ !empty sessionScope.loginUser }">
+					<c:out value="${ loginUser.mName }님 환영합니다."/> <!-- c:out 활용 -->
+					<c:url var="myinfo" value="myinfo.me"/>
+					<c:url var="logout" value="logout.me"/>
+					<c:url var="address" value="address.ad"/>
+					<button onclick="location.href='${myinfo}'">정보보기</button>
+					<button onclick="location.href='${logout}'">로그아웃</button>
+					<button onclick="location.href='${address}'">주소록</button>
+			</c:if>
+=======
 <%-- 			<c:if test="${ !empty sessionScope.loginUser }"> --%>
 <%-- 					<c:out value="${ loginUser.mName }님 환영합니다."/> <!-- c:out 활용 --> --%>
 <%-- 					<c:url var="myinfo" value="myinfo.me"/> --%>
@@ -35,6 +46,7 @@
 <%-- 					<button onclick="location.href='${myinfo}'">정보보기</button> --%>
 <%-- 					<button onclick="location.href='${logout}'">로그아웃</button> --%>
 <%-- 			</c:if> --%>
+>>>>>>> 1d0b05d8d53f04df94af863b03631c1c3500b5c3
 		</div>
 	</div>
 	<script>
