@@ -69,7 +69,7 @@
 										<option value="J5" <c:if test="${m.jCode eq 'J5'}">selected</c:if>>팀장</option>
 										<option value="J6" <c:if test="${m.jCode eq 'J6'}">selected</c:if>>이사</option>
 										<option value="J7" <c:if test="${m.jCode eq 'J7'}">selected</c:if>>상무</option>
-										<option value="J8" <c:if test="${m.jCode eq 'J8'}">selected</c:if>>전무</option>
+										<option value="J8" <c:if test="${m.jCode eq 'J8'}">selected</c:if>>사장</option>
 									</select>
 								</div>
 								<c:if test="${m.mEntDate == null }">

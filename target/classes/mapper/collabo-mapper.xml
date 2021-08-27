@@ -3,7 +3,7 @@
 <mapper namespace="collabo-mapper">
 	<insert id="insertBoardC">
 		insert into board values
-		(BO_seq.nextval, #{bDept}, #{bTitle}, #{bContent}, SYSDATE, SYSDATE, 0, 3, default, #{bMNo}, null, null)
+		(BO_seq.nextval, #{bDept}, #{bTitle}, #{bContent}, SYSDATE, SYSDATE, 0, 3, default, #{bMNo})
 	</insert>
 	
 	<select id="selectBNo" resultType="_int">
@@ -69,8 +69,6 @@
 		<result column="B_STATUS" property="bStatus" />
 		<result column="B_M_NO" property="bMNo" />
 		<result column="M_NAME" property="mName" />
-		<result column="ORIGINAL_FILENAME" property="originalFileName" />
-		<result column="RENAME_FILENAME" property="renameFileName" />
 	</resultMap>
 	
 	<update id="updateBtn">

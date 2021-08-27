@@ -8,11 +8,19 @@
 
 	<typeAliases>
 		<typeAlias type="com.kh.DAYWORK.member.model.vo.Member" alias="Member"/>
-		<typeAlias type="com.kh.DAYWORK.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.kh.DAYWORK.collabo.model.vo.Collabo" alias="Collabo"/>
 		<typeAlias type="com.kh.DAYWORK.collabo.model.vo.Feedback" alias="Feedback"/>
 		<typeAlias type="com.kh.DAYWORK.calendar.model.vo.Calendar" alias="Calendar"/>
 		<typeAlias type="com.kh.DAYWORK.calendar.model.vo.Commute" alias="Commute"/>
+		<typeAlias type="com.kh.DAYWORK.address.model.vo.Address" alias="Address"/>
+		<typeAlias alias="Board" type="com.kh.DAYWORK.board.model.vo.Board"/>
+		<typeAlias alias="BMsgFile" type="com.kh.DAYWORK.common.BMsgFile"/>
+		<typeAlias alias="Message" type="com.kh.DAYWORK.message.model.vo.Message"/>
+		<typeAlias alias="ChatMessage" type="com.kh.DAYWORK.chat.model.vo.ChatMessage"/>
+		<typeAlias alias="ChatRoom" type="com.kh.DAYWORK.chat.model.vo.ChatRoom"/>
+		<typeAlias alias="Approval" type="com.kh.DAYWORK.approval.model.vo.Approval"/>
+		<typeAlias alias="ApprovalForm" type="com.kh.DAYWORK.approval.model.vo.ApprovalForm"/>
+		
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/address-mapper.xml"/>
@@ -22,7 +30,8 @@
 		<mapper resource="mapper/collabo-mapper.xml"/>
 		<mapper resource="mapper/common-mapper.xml"/>
 		<mapper resource="mapper/member-mapper.xml"/>
-		<mapper resource="mapper/notice-mapper.xml"/>
+		<mapper resource="mapper/message-mapper.xml"/>
+		<mapper resource="mapper/board-mapper.xml"/>
 		<mapper resource="mapper/servlet-mapper.xml"/>
 		<mapper resource="mapper/survey-mapper.xml"/>
 	</mappers>
