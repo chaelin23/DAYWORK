@@ -61,6 +61,8 @@ public class MemberController {
 	@RequestMapping("login.me")
 	public String loginMember(@ModelAttribute Member m, Model model) throws MemberException {
 		Member loginUser = mService.loginMember(m);
+		System.out.println(loginUser);
+		System.out.println(m);
 		boolean match = bcrypt.matches(m.getmPwd(), loginUser.getmPwd());
 		
 		if(match) {
