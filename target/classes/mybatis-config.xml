@@ -8,7 +8,15 @@
 
 	<typeAliases>
 		<typeAlias type="com.kh.DAYWORK.member.model.vo.Member" alias="Member"/>
+<<<<<<< HEAD
 		<typeAlias type="com.kh.DAYWORK.address.model.vo.Address" alias="Address"/>
+=======
+		<typeAlias type="com.kh.DAYWORK.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.DAYWORK.collabo.model.vo.Collabo" alias="Collabo"/>
+		<typeAlias type="com.kh.DAYWORK.collabo.model.vo.Feedback" alias="Feedback"/>
+		<typeAlias type="com.kh.DAYWORK.calendar.model.vo.Calendar" alias="Calendar"/>
+		<typeAlias type="com.kh.DAYWORK.calendar.model.vo.Commute" alias="Commute"/>
+>>>>>>> 1d0b05d8d53f04df94af863b03631c1c3500b5c3
 	</typeAliases>
 	
 	<mappers>

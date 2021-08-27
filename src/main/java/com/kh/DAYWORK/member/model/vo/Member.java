@@ -16,6 +16,7 @@ public class Member {
 	private String mStatus;
 	private int mAdmin;
 	private String jCode;
+	private String jName;
 	private String dCode;
 	private String originalFileName;
 	private String renameFileName;
@@ -50,8 +51,15 @@ public class Member {
 		this.renameFileName = renameFileName;
 	}
 
+	private String dName;
+	private String mOriginProfile;
+	private String mRenameProfile;
+
+	public Member() {}
+
 	public Member(int mNo, String mPwd, String mName, String mGender, Date mBirthDay, String mPhone, String mEmail,
-			String mAddress, Date mEntDate, Date mHireDate, String mStatus, int mAdmin, String jCode, String dCode) {
+			String mAddress, Date mEntDate, Date mHireDate, String mStatus, int mAdmin, String jCode, String jName,
+			String dCode, String dName, String mOriginProfile, String mRenameProfile) {
 		super();
 		this.mNo = mNo;
 		this.mPwd = mPwd;
@@ -66,7 +74,11 @@ public class Member {
 		this.mStatus = mStatus;
 		this.mAdmin = mAdmin;
 		this.jCode = jCode;
+		this.jName = jName;
 		this.dCode = dCode;
+		this.dName = dName;
+		this.mOriginProfile = mOriginProfile;
+		this.mRenameProfile = mRenameProfile;
 	}
 
 	public int getmNo() {
@@ -173,6 +185,14 @@ public class Member {
 		this.jCode = jCode;
 	}
 
+	public String getjName() {
+		return jName;
+	}
+
+	public void setjName(String jName) {
+		this.jName = jName;
+	}
+
 	public String getdCode() {
 		return dCode;
 	}
@@ -196,6 +216,30 @@ public class Member {
 	public void setRenameFileName(String renameFileName) {
 		this.renameFileName = renameFileName;
 	}
+		
+	public String getdName() {
+		return dName;
+	}
+
+	public void setdName(String dName) {
+		this.dName = dName;
+	}
+
+	public String getmOriginProfile() {
+		return mOriginProfile;
+	}
+
+	public void setmOriginProfile(String mOriginProfile) {
+		this.mOriginProfile = mOriginProfile;
+	}
+
+	public String getmRenameProfile() {
+		return mRenameProfile;
+	}
+
+	public void setmRenameProfile(String mRenameProfile) {
+		this.mRenameProfile = mRenameProfile;
+	}
 
 	@Override
 	public String toString() {
@@ -204,7 +248,11 @@ public class Member {
 				+ mEntDate + ", mHireDate=" + mHireDate + ", mStatus=" + mStatus + ", mAdmin=" + mAdmin + ", jCode="
 				+ jCode + ", dCode=" + dCode + ", originalFileName=" + originalFileName + ", renameFileName="
 				+ renameFileName + "]";
+				+ jCode + ", jName=" + jName + ", dCode=" + dCode + ", dName=" + dName + ", mOriginProfile="
+				+ mOriginProfile + ", mRenameProfile=" + mRenameProfile + "]";
+
 	}
+
 	
 	
 }
