@@ -29,16 +29,26 @@
 					</div>
 			</c:if>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 			<c:if test="${ !empty sessionScope.loginUser }">
 					<c:out value="${ loginUser.mName }님 환영합니다."/> <!-- c:out 활용 -->
 					<c:url var="myinfo" value="myinfo.me"/>
 					<c:url var="logout" value="logout.me"/>
+<<<<<<< HEAD
+					<c:url var="appList" value="goList.ap"/>
+					<button onclick="location.href='${myinfo}'">정보보기</button>
+					<button onclick="location.href='${logout}'">로그아웃</button>
+					<button onclick="location.href='${appList}'">결재리스트이동</button>
+=======
 					<c:url var="address" value="address.ad"/>
 					<button onclick="location.href='${myinfo}'">정보보기</button>
 					<button onclick="location.href='${logout}'">로그아웃</button>
 					<button onclick="location.href='${address}'">주소록</button>
+>>>>>>> 93950019e39f5999461c7853c68a59c44558f1a8
 			</c:if>
 =======
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
 <%-- 			<c:if test="${ !empty sessionScope.loginUser }"> --%>
 <%-- 					<c:out value="${ loginUser.mName }님 환영합니다."/> <!-- c:out 활용 --> --%>
 <%-- 					<c:url var="myinfo" value="myinfo.me"/> --%>
@@ -46,7 +56,10 @@
 <%-- 					<button onclick="location.href='${myinfo}'">정보보기</button> --%>
 <%-- 					<button onclick="location.href='${logout}'">로그아웃</button> --%>
 <%-- 			</c:if> --%>
+<<<<<<< HEAD
+=======
 >>>>>>> 1d0b05d8d53f04df94af863b03631c1c3500b5c3
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
 		</div>
 	</div>
 	<script>

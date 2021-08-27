@@ -14,13 +14,20 @@ public class Board {
 	private String bStatus;
 	private int bMNo;
 	private String mName;
+<<<<<<< HEAD
+=======
 	private String originalFileName;
 	private String renameFileName;
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
 	
 	public Board() {}
 
 	public Board(int bNo, String bDept, String bTitle, String bContent, Date bCreateDate, Date bModifyDate, int bCount,
+<<<<<<< HEAD
+			String bType, String bStatus, int bMNo, String mName) {
+=======
 			String bType, String bStatus, int bMNo, String mName, String originalFileName, String renameFileName) {
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
 		super();
 		this.bNo = bNo;
 		this.bDept = bDept;
@@ -33,8 +40,11 @@ public class Board {
 		this.bStatus = bStatus;
 		this.bMNo = bMNo;
 		this.mName = mName;
+<<<<<<< HEAD
+=======
 		this.originalFileName = originalFileName;
 		this.renameFileName = renameFileName;
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
 	}
 
 	public int getbNo() {
@@ -85,6 +95,25 @@ public class Board {
 		this.bModifyDate = bModifyDate;
 	}
 
+<<<<<<< HEAD
+	public String getbStatus() {
+		return bStatus;
+	}
+
+	public void setbStatus(String bStatus) {
+		this.bStatus = bStatus;
+	}
+
+	public String getmName() {
+		return mName;
+	}
+
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
+
+=======
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
 	public int getbCount() {
 		return bCount;
 	}
@@ -101,6 +130,8 @@ public class Board {
 		this.bType = bType;
 	}
 
+<<<<<<< HEAD
+=======
 	public String getbStatus() {
 		return bStatus;
 	}
@@ -109,6 +140,7 @@ public class Board {
 		this.bStatus = bStatus;
 	}
 
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
 	public int getbMNo() {
 		return bMNo;
 	}
@@ -116,6 +148,8 @@ public class Board {
 	public void setbMNo(int bMNo) {
 		this.bMNo = bMNo;
 	}
+<<<<<<< HEAD
+=======
 
 	public String getmName() {
 		return mName;
@@ -140,14 +174,21 @@ public class Board {
 	public void setRenameFileName(String renameFileName) {
 		this.renameFileName = renameFileName;
 	}
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
 
 	@Override
 	public String toString() {
 		return "Board [bNo=" + bNo + ", bDept=" + bDept + ", bTitle=" + bTitle + ", bContent=" + bContent
 				+ ", bCreateDate=" + bCreateDate + ", bModifyDate=" + bModifyDate + ", bCount=" + bCount + ", bType="
+<<<<<<< HEAD
+				+ bType + ", bStatus=" + bStatus + ", bMNo=" + bMNo + ", mName=" + mName + "]";
+	}
+	
+=======
 				+ bType + ", bStatus=" + bStatus + ", bMNo=" + bMNo + ", mName=" + mName + ", originalFileName="
 				+ originalFileName + ", renameFileName=" + renameFileName + "]";
 	}
 	
 	
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
 }

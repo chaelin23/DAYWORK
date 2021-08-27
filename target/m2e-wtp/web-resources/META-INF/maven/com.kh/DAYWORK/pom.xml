@@ -208,6 +208,15 @@
 		    <version>2.8.5</version>
 		</dependency>
 		
+<<<<<<< HEAD
+		<!-- WebSocket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
+=======
 
 		<!-- cos.jar -->
 		<!-- https://mvnrepository.com/artifact/servlets.com/cos -->
@@ -228,6 +237,7 @@
 			
 
 		
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
 	</dependencies>
     <build>
         <plugins>

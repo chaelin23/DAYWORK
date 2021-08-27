@@ -78,10 +78,16 @@ public class MemberController {
 			model.addAttribute("loginUser", loginUser);
 		} else {
 			throw new MemberException("로그인에 실패했습니다.");
+<<<<<<< HEAD
+		}		
+		return "redirect:home.do";
+	}
+=======
 		}
 		
 		return "../calendar/workManagement";
 	}	
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
 	
 	@RequestMapping("/logout.me")
 	public String logout(SessionStatus session) {

@@ -1,5 +1,25 @@
+<<<<<<< HEAD
 Manifest-Version: 1.0
+Built-By: yoonmobul
+Build-Jdk: 16.0.1
+Created-By: Maven Integration for Eclipse
+
+=======
+Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: leech
+=======
+<<<<<<< HEAD
+Built-By: user
+=======
+<<<<<<< HEAD
+Built-By: leech
+=======
+Built-By: Woody
+>>>>>>> 6bd55ffdf41b574335ce6978612538090f140811
+>>>>>>> 93950019e39f5999461c7853c68a59c44558f1a8
+>>>>>>> 782b0ab5445bbd769d1f6ccd3e884c298623cbae
 Build-Jdk: 1.8.0_282
 Created-By: Maven Integration for Eclipse
 
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a

@@ -18,9 +18,15 @@
 }
 	
 .login-king{
+<<<<<<< HEAD
+	width: 350px;
+	margin:auto;
+	margin-top: 200px;
+=======
 	width: 380px;
 	margin:auto;
 	margin-top: 150px;
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
 }
 
 .login-logo{
@@ -40,9 +46,15 @@
 }
 
 .loginArea{
+<<<<<<< HEAD
+	width: 350px;
+	height: 350px;
+	padding: 20px;
+=======
 	width: 380px;
     height: 330px;
     padding: 20px 30px;
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
 	margin: auto;
 	border-radius: 7px;
 	box-shadow: 0 0 5px 4px #f2f2f2;
@@ -53,6 +65,45 @@
 	border-style: none;
 	background-color: white;
 	border-bottom: 1px solid grey;
+<<<<<<< HEAD
+	cursor: pointer;
+}
+
+#inputmNo{
+	width: 100%;
+	height: 40px;
+	border-style: none;
+	border-bottom: 1px solid gray;
+	margin: 20px 0 10px 0;
+}
+#inputmPwd{
+	width: 100%;
+	height: 40px;
+	border-style: none;
+	border-bottom: 1px solid gray;
+}
+.login-line{
+	text-align: center;
+	margin: 20px 0;
+	position: relative;
+}
+.login-line-or{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	width: 50px;
+}
+.login-btn.active{
+	width: 100%;
+	height: 45px;
+	margin-top: 40px;
+	border-style: none;
+	background-color: blue;
+	color: white;
+}
+=======
 	cursor: pointer;
 }
 
@@ -464,3 +515,4 @@ select[name=jCode]{
 	background-color: white;
 }
 
+>>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
