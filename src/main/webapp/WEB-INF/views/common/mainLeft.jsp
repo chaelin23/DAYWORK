@@ -42,6 +42,7 @@
 			<!-- 출퇴근 버튼 -->
 			<div class="main-commute">
 				<div class="commute-button">
+
 					<c:if test="${ !empty comTime }">
 						<button class="commute" id="start" disabled>출근</button>
 						<button class="commute" id="end" onclick="location.href='workEnd.ca'">퇴근</button>
@@ -51,7 +52,7 @@
 						<button class="commute" id="end" disabled>퇴근</button>
 					</c:if>
 					
-					
+
 				</div>
 					<div class="commute-progressbar">
 					<progress class="commute-real"></progress>
