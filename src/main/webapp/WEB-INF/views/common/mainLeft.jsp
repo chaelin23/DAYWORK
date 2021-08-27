@@ -41,7 +41,7 @@
 			<!-- 출퇴근 버튼 -->
 			<div class="main-commute">
 				<div class="commute-button">
-					<button class="commute" id="start">출근</button>
+					<button class="commute" id="start" onclick="location.href='workStart.ca'">출근</button>
 					<button class="commute" id="end">퇴근</button>
 				</div>
 					<div class="commute-progressbar">
