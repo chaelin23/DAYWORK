@@ -16,10 +16,7 @@ public class Member {
 	private String mStatus;
 	private int mAdmin;
 	private String jCode;
-	private String jName;
 	private String dCode;
-	private String originalFileName;
-	private String renameFileName;
 
 	public Member() {}
 	
@@ -28,10 +25,9 @@ public class Member {
 		this.mNo = mNo;
 		this.mPwd = mPwd;
 	}
-	
+
 	public Member(int mNo, String mPwd, String mName, String mGender, Date mBirthDay, String mPhone, String mEmail,
-			String mAddress, Date mEntDate, Date mHireDate, String mStatus, int mAdmin, String jCode, String dCode,
-			String originalFileName, String renameFileName) {
+			String mAddress, Date mEntDate, Date mHireDate, String mStatus, int mAdmin, String jCode, String dCode) {
 		super();
 		this.mNo = mNo;
 		this.mPwd = mPwd;
@@ -47,38 +43,6 @@ public class Member {
 		this.mAdmin = mAdmin;
 		this.jCode = jCode;
 		this.dCode = dCode;
-		this.originalFileName = originalFileName;
-		this.renameFileName = renameFileName;
-	}
-
-	private String dName;
-	private String mOriginProfile;
-	private String mRenameProfile;
-
-	public Member() {}
-
-	public Member(int mNo, String mPwd, String mName, String mGender, Date mBirthDay, String mPhone, String mEmail,
-			String mAddress, Date mEntDate, Date mHireDate, String mStatus, int mAdmin, String jCode, String jName,
-			String dCode, String dName, String mOriginProfile, String mRenameProfile) {
-		super();
-		this.mNo = mNo;
-		this.mPwd = mPwd;
-		this.mName = mName;
-		this.mGender = mGender;
-		this.mBirthDay = mBirthDay;
-		this.mPhone = mPhone;
-		this.mEmail = mEmail;
-		this.mAddress = mAddress;
-		this.mEntDate = mEntDate;
-		this.mHireDate = mHireDate;
-		this.mStatus = mStatus;
-		this.mAdmin = mAdmin;
-		this.jCode = jCode;
-		this.jName = jName;
-		this.dCode = dCode;
-		this.dName = dName;
-		this.mOriginProfile = mOriginProfile;
-		this.mRenameProfile = mRenameProfile;
 	}
 
 	public int getmNo() {
@@ -185,14 +149,6 @@ public class Member {
 		this.jCode = jCode;
 	}
 
-	public String getjName() {
-		return jName;
-	}
-
-	public void setjName(String jName) {
-		this.jName = jName;
-	}
-
 	public String getdCode() {
 		return dCode;
 	}
@@ -201,58 +157,13 @@ public class Member {
 		this.dCode = dCode;
 	}
 
-	public String getOriginalFileName() {
-		return originalFileName;
-	}
-
-	public void setOriginalFileName(String originalFileName) {
-		this.originalFileName = originalFileName;
-	}
-
-	public String getRenameFileName() {
-		return renameFileName;
-	}
-
-	public void setRenameFileName(String renameFileName) {
-		this.renameFileName = renameFileName;
-	}
-		
-	public String getdName() {
-		return dName;
-	}
-
-	public void setdName(String dName) {
-		this.dName = dName;
-	}
-
-	public String getmOriginProfile() {
-		return mOriginProfile;
-	}
-
-	public void setmOriginProfile(String mOriginProfile) {
-		this.mOriginProfile = mOriginProfile;
-	}
-
-	public String getmRenameProfile() {
-		return mRenameProfile;
-	}
-
-	public void setmRenameProfile(String mRenameProfile) {
-		this.mRenameProfile = mRenameProfile;
-	}
-
 	@Override
 	public String toString() {
 		return "Member [mNo=" + mNo + ", mPwd=" + mPwd + ", mName=" + mName + ", mGender=" + mGender + ", mBirthDay="
 				+ mBirthDay + ", mPhone=" + mPhone + ", mEmail=" + mEmail + ", mAddress=" + mAddress + ", mEntDate="
 				+ mEntDate + ", mHireDate=" + mHireDate + ", mStatus=" + mStatus + ", mAdmin=" + mAdmin + ", jCode="
-				+ jCode + ", dCode=" + dCode + ", originalFileName=" + originalFileName + ", renameFileName="
-				+ renameFileName + "]";
-				+ jCode + ", jName=" + jName + ", dCode=" + dCode + ", dName=" + dName + ", mOriginProfile="
-				+ mOriginProfile + ", mRenameProfile=" + mRenameProfile + "]";
-
+				+ jCode + ", dCode=" + dCode + "]";
 	}
-
 	
 	
 }

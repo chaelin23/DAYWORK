@@ -8,30 +8,9 @@
 
 	<typeAliases>
 		<typeAlias type="com.kh.DAYWORK.member.model.vo.Member" alias="Member"/>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-		<typeAlias type="com.kh.DAYWORK.board.model.vo.Board" alias="Board"/>
-		<typeAlias type="com.kh.DAYWORK.common.BMsgFile" alias="BMsgFile"/>
-		<typeAlias type="com.kh.DAYWORK.message.model.vo.Message" alias="Message"/>
-		<typeAlias type="com.kh.DAYWORK.chat.model.vo.ChatMessage" alias="ChatMessage"/>
-		<typeAlias type="com.kh.DAYWORK.chat.model.vo.ChatRoom" alias="ChatRoom"/>
-=======
-		<typeAlias type="com.kh.DAYWORK.approval.model.vo.ApprovalForm" alias="ApprovalForm"/>
-		<typeAlias type="com.kh.DAYWORK.approval.model.vo.Approval" alias="Approval"/>
->>>>>>> 782b0ab5445bbd769d1f6ccd3e884c298623cbae
-		<typeAlias type="com.kh.DAYWORK.address.model.vo.Address" alias="Address"/>
-		<typeAlias type="com.kh.DAYWORK.board.model.vo.Board" alias="Board"/>
-		<typeAlias type="com.kh.DAYWORK.collabo.model.vo.Collabo" alias="Collabo"/>
-		<typeAlias type="com.kh.DAYWORK.collabo.model.vo.Feedback" alias="Feedback"/>
 		<typeAlias type="com.kh.DAYWORK.calendar.model.vo.Calendar" alias="Calendar"/>
 		<typeAlias type="com.kh.DAYWORK.calendar.model.vo.Commute" alias="Commute"/>
-<<<<<<< HEAD
-=======
->>>>>>> 3559d9fa76a6a791d82a19fa75c998503e76f69a
->>>>>>> 782b0ab5445bbd769d1f6ccd3e884c298623cbae
 	</typeAliases>
-	
 	<mappers>
 		<mapper resource="mapper/address-mapper.xml"/>
 		<mapper resource="mapper/approval-mapper.xml"/>
@@ -40,8 +19,7 @@
 		<mapper resource="mapper/collabo-mapper.xml"/>
 		<mapper resource="mapper/common-mapper.xml"/>
 		<mapper resource="mapper/member-mapper.xml"/>
-		<mapper resource="mapper/message-mapper.xml"/>
-		<mapper resource="mapper/board-mapper.xml"/>
+		<mapper resource="mapper/notice-mapper.xml"/>
 		<mapper resource="mapper/servlet-mapper.xml"/>
 		<mapper resource="mapper/survey-mapper.xml"/>
 	</mappers>

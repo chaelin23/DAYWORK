@@ -3,17 +3,15 @@
 <mapper namespace="member-mapper">
 	<insert id="insertMembers">
 		insert into member values
-		(mem_seq.nextval, #{mPwd}, #{mName}, #{mGender}, #{mBirthDay}, #{mPhone}, #{mEmail}, #{mAddress}, null, null, 'Y', default, null, null, null, null)
+		(mem_seq.nextval, #{mPwd}, #{mName}, #{mGender}, #{mBirthDay}, #{mPhone}, #{mEmail}, #{mAddress}, sysdate, null, default, default, null, null)
 	</insert>
 	
 	<select id="loginMember" resultMap="memberResultSet">
 		select * 
-			from member
-				left join Job using(j_code)
-        		left join department using(d_code)
-			where M_NO = #{mNo}  
-				and m_status ='Y'
-				and m_admin in(1,0)
+		from member
+		where M_NO = #{mNo}  
+		and m_status ='Y'
+		and m_admin in(1,0)
 	</select>
 	
 	<resultMap type="Member" id="memberResultSet">
@@ -30,11 +28,7 @@
 		<result column="M_STATUS" property="mStatus"/>
 		<result column="M_ADMIN" property="mAdmin"/>
 		<result column="J_CODE" property="jCode"/>
-		<result column="J_NAME" property="jName"/>
 		<result column="D_CODE" property="dCode"/>
-		<result column="D_NAME" property="dName"/>
-		<result column="M_ORIGINPROFILE" property="mOriginProfile"/>
-		<result column="M_RENAMEPROFILE" property="mRenameProfile"/>
 	</resultMap>
 	
 	<select id="selectMno" resultMap="memberResultSet">
@@ -43,55 +37,4 @@
 		where m_name= #{mName}
 		and m_phone = #{mPhone}
 	</select>
-	
-	<select id="selectMember" resultMap="memberResultSet">
-		select * 
-		from member
-			left join Job using(j_code)
-        	left join department using(d_code)
-		where m_no = #{selectMno}
-	</select>
-	
-<!-- 	<insert id="insertProfile"> -->
-<!-- 		insert into image -->
-<!-- 		values (i_seq.nextval, #{m.iOrigin}, #{m.iChange}, null, default, #{mNo})	 -->
-<!-- 	</insert> -->
-	
-	<update id="updateMember">
-		update member
-			set m_phone = #{mPhone}, m_email = #{mEmail}, m_address=#{mAddress}, m_originProfile=#{mOriginProfile},m_renameProfile=#{mRenameProfile}
-			where m_no = #{mNo}
-	</update>
-	
-	<update id="updateMemberProfile">
-		update member
-			set m_phone = #{mPhone}, m_email = #{mEmail}, m_address=#{mAddress}
-			where m_no = #{mNo}
-	</update>
-	
-	<!-- ******************* 관리자페이지  ****************** -->
-	<select id="getListCount" resultType="_int">
-		select count(*)
-		from member
-	</select>
-	
-	<select id="selectMemberList" resultMap="memberResultSet">
-		select * 
-		from member
-			left join Job using(j_code)
-        	left join department using(d_code)
-       	order by m_no desc
-	</select>
-	
-	<update id="updateBtnY">
-		update member
-			set M_ENT_DATE =sysdate, M_Admin='1'
-		where m_no = #{mNo}
-	</update>
-	
-	<update id="updateBtnN">
-		update member
-			set M_HIRE_DATE =sysdate, M_STATUS='N'
-		where m_no = #{mNo}
-	</update>
 </mapper>
