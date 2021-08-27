@@ -7,12 +7,20 @@
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/member-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/calendar-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/common-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/notice-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/collabo-context.xml</config>
+		<config>src/main/resources/root-context.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/survey-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/spring-security.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/chat-context.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/address-context.xml</config>
-		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/approval-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/board-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
