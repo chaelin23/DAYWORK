@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.DAYWORK.calendar.model.vo.Calendar;
 import com.kh.DAYWORK.calendar.model.vo.Commute;
 
-@Repository("cDAO")
+@Repository("calDAO")
 public class CalendarDAO {
 
 	public int insertCal(SqlSessionTemplate sqlSession, Calendar cal) {

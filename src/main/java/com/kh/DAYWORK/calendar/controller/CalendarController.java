@@ -30,7 +30,7 @@ import com.kh.DAYWORK.member.model.vo.Member;
 public class CalendarController {
 	
 	@Autowired
-	private CalendarService cService;
+	private CalendarService calService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcrypt;
@@ -48,7 +48,7 @@ public class CalendarController {
 		
 		System.out.println(cal);
 		
-		int result = cService.insertCal(cal);
+		int result = calService.insertCal(cal);
 		
 		if(result > 0) {
 			return "redirect:calendar.ca";
@@ -67,7 +67,7 @@ public class CalendarController {
 		cal.setmNo(m.getmNo());
 		cal.setdCode(m.getdCode());
 		
-		ArrayList<Calendar> cList = cService.selectCal(cal);
+		ArrayList<Calendar> cList = calService.selectCal(cal);
 		
 		JSONArray jArr = new JSONArray();
 		
@@ -93,7 +93,7 @@ public class CalendarController {
 	@RequestMapping("updateCal.ca")
 	public String updateCal(@ModelAttribute Calendar cal) {
 		
-		int result = cService.updateCal(cal);
+		int result = calService.updateCal(cal);
 		
 		if(result > 0) {
 			return "redirect:calendar.ca";
@@ -105,7 +105,7 @@ public class CalendarController {
 	@RequestMapping("deleteCal.ca")
 	public String deleteCal(@RequestParam("calNo") int calNo) {
 		
-		int result = cService.deleteCal(calNo);
+		int result = calService.deleteCal(calNo);
 		
 		if(result > 0) {
 			return "redirect:calendar.ca";
@@ -123,10 +123,10 @@ public class CalendarController {
 	public String workStart(HttpServletRequest request, Model model) {
 		int mNo = ((Member)request.getSession().getAttribute("loginUser")).getmNo();		
 		
-		int result = cService.workStart(mNo);
+		int result = calService.workStart(mNo);
 				
 		if(result > 0) {
-			HashMap<String, String> comTime = cService.selectTime(mNo);		
+			HashMap<String, String> comTime = calService.selectTime(mNo);		
 			
 			model.addAttribute("comTime", comTime);
 			
@@ -142,10 +142,10 @@ public class CalendarController {
 		HttpSession hs = request.getSession();
 		String comNo = (String)((HashMap)hs.getAttribute("comTime")).get("COMNO");	
 		int mNo = ((Member)hs.getAttribute("loginUser")).getmNo();		
-		int result = cService.updateCom(Integer.parseInt(comNo));
+		int result = calService.updateCom(Integer.parseInt(comNo));
 		
 		if(result > 0) {
-			HashMap<String, String> comTime = cService.selectTime(mNo);		
+			HashMap<String, String> comTime = calService.selectTime(mNo);		
 			
 			model.addAttribute("comTime", comTime);
 			

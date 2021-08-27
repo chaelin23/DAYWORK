@@ -79,11 +79,7 @@ public class MemberController {
 		}
 		
 		return "../calendar/workManagement";
-	}
-	
-	public void returnLoginUser() {
-		
-	}
+	}	
 	
 	@RequestMapping("/logout.me")
 	public String logout(SessionStatus session) {
