@@ -10,7 +10,14 @@
 		<typeAlias type="com.kh.DAYWORK.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.DAYWORK.approval.model.vo.ApprovalForm" alias="ApprovalForm"/>
 		<typeAlias type="com.kh.DAYWORK.approval.model.vo.Approval" alias="Approval"/>
+		<typeAlias type="com.kh.DAYWORK.address.model.vo.Address" alias="Address"/>
+		<typeAlias type="com.kh.DAYWORK.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.DAYWORK.collabo.model.vo.Collabo" alias="Collabo"/>
+		<typeAlias type="com.kh.DAYWORK.collabo.model.vo.Feedback" alias="Feedback"/>
+		<typeAlias type="com.kh.DAYWORK.calendar.model.vo.Calendar" alias="Calendar"/>
+		<typeAlias type="com.kh.DAYWORK.calendar.model.vo.Commute" alias="Commute"/>
 	</typeAliases>
+	
 	<mappers>
 		<mapper resource="mapper/address-mapper.xml"/>
 		<mapper resource="mapper/approval-mapper.xml"/>
