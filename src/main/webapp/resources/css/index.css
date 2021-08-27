@@ -110,7 +110,8 @@
 	.commute-button{
 		display: flex;
 		flex-direction: row;
-		justify-content: space-around
+		justify-content: space-around;
+		
 	}
 	
 	.commute{
@@ -118,17 +119,17 @@
 		height:30px;
 		border:none;
 		border-radius: 2px;
-	}
-	
+	}	
+		
 	#start{
 		background-color: cornflowerblue;
 		margin-right: 5px;
 	}
 	
 	#end{
-		background-color: lightgray;
+		background-color: lightgray;		
 	}
-	
+		
 	.commute-progressbar{
 		display: flex;
 		flex-direction:column;
