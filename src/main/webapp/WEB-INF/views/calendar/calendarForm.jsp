@@ -9,48 +9,7 @@
 <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
 <link rel="stylesheet" type="text/css" href="resources/calendarTool/tui-calendar.css">
 <link rel="stylesheet" type="text/css" href="resources/calendarTool/bootstrap.min.css">
-
-<style>
-	#calendar {
-	    position: absolute;
-	    left: 10px;
-	    right: 10px;
-	    bottom: 10px;
-	    top: 100px;    
-	}
-
-	.main-right {position:relative;}  
-	
-  	.moveBtn{font-weight: bold; font-size: 15pt; border-style: none; background: none; margin:10px;}
- 
-	#todayBtn{font-weight: bold; background: none; border: 2px solid lightgrey;}
-	
-	#renderRange{font-size: 15pt;}
-	
-	#todayBtn:hover, .moveBtn:hover{cursor: pointer;}
-	
-	.tui-datepicker-input{margin: 0.7em;}
-	
-	.cal_input{margin: 0.7em; padding: 0.3em;}
-	
-	#calContent, #calUpdateContent{width:80%;}
-	
-	#calCate, #calUpdateCate{width:50%;}
-	
-	#menu-navi {float: right;}	
-	
- 	#menu-navi, #cateNavi {display: inline-block;}
- 	
- 	#cateNavi{font-size: 10pt; margin: 0.3em;}
-	
-	.color {
-		width: 0.5em; 
-		height:0.5em; 
-		display: inline-block; 
-		border: 1px solid;
-		
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="resources/calendarTool/calendar.css">
 </head>
 <body>
 	<div class="main-king">
@@ -75,6 +34,8 @@
 			<div id="calendar"></div>
 		</div>
 	</div>
+
+
 
 
 
@@ -147,6 +108,7 @@
 	    </div>
 	  </div>
 	</div>
+
 
 
 
@@ -268,7 +230,7 @@
 					
 				}				
 				
-				cal.createSchedules(ScheduleList)
+				cal.createSchedules(ScheduleList);
 				
 			},
 			error: function(data) {

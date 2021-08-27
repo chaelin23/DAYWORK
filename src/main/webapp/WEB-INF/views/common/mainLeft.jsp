@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,15 +42,29 @@
 			<!-- 출퇴근 버튼 -->
 			<div class="main-commute">
 				<div class="commute-button">
-					<button class="commute" id="start">출근</button>
-					<button class="commute" id="end">퇴근</button>
+					<c:if test="${ !empty comTime }">
+						<button class="commute" id="start" disabled>출근</button>
+						<button class="commute" id="end" onclick="location.href='workEnd.ca'">퇴근</button>
+					</c:if>
+					<c:if test="${ empty comTime }">
+						<button class="commute" id="start" onclick="location.href='workStart.ca'">출근</button>
+						<button class="commute" id="end" disabled>퇴근</button>
+					</c:if>
+					
+					
 				</div>
 					<div class="commute-progressbar">
 					<progress class="commute-real"></progress>
 				</div>
 				<div class="commute-text">
-					<div class="commute-text-start" style="margin-left:10px;">9:00</div>
-					<div class="commute-text-end" style="margin-right:10px;">18:00</div>
+					<c:if test="${ !empty comTime }">
+						<div class="commute-text-start" style="margin-left:10px;">${ comTime.get("COMSTART") }</div>
+						<div class="commute-text-end" style="margin-right:10px;">${ comTime.get("COMEND") }</div>
+					</c:if>
+					<c:if test="${ empty comTime }">
+						<div class="commute-text-start" style="margin-left:10px;">--:--</div>
+						<div class="commute-text-end" style="margin-right:10px;">--:--</div>
+					</c:if>
 				</div>
 			</div>
 			<!-- 카테고리 박스 -->
@@ -79,7 +94,7 @@
 					<div class="cate-collabo-p" onclick="location.href='workBox.co'">업무공유</div>
 				</div>			
 				<div class="cate day">
-					<div class="cate-day-p">근태관리</div>
+					<div class="cate-day-p" onclick="location.href='workManage.ca'">근태관리</div>
 				</div>				
 			</div>
 			<!-- 채팅 조직도 박스 -->
@@ -110,6 +125,7 @@
 		approvalP.addEventListener('click', function() {
             approvalBox.classList.toggle('active');
     	});
+		
 	
 	
 </script>

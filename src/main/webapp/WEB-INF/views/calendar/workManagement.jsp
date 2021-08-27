@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" />
 <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
 <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body><div class="main-king">
+<body>
+<div class="main-king">
 <%@ include file="../common/mainLeft.jsp"%>
 	<!-- 오른쪽 내용 박스 -->
 	<div class="main-right">
@@ -31,74 +33,113 @@
 			<th>비고</th>
 		</tr>
 		
-		<tr>
-			<td>7.19</td>
-			<td>9:00</td>
-			<td>19:00</td>
-			<td>10h 00m</td>
-			<td>2h 00m</td>
-			<td></td>
-		</tr>
-		
-		<tr>
-			<td>7.20</td>
-			<td>-</td>
-			<td>-</td>
-			<td>8h 00m</td>
-			<td>00h 00m</td>
-			<td>연차</td>
-		</tr>
-		
-		<tr>
-			<td>7.21</td>
-			<td>8:00</td>
-			<td>15:00</td>
-			<td>7h 00m</td>
-			<td>00h 00m</td>
-			<td></td>
-		</tr>
-		
-		<tr>
-			<td>7.22</td>
-			<td>8:00</td>
-			<td>15:00</td>
-			<td>7h 00m</td>
-			<td>00h 00m</td>
-			<td></td>
-		</tr>
-		
-		<tr>
-			<td>7.23</td>
-			<td>-</td>
-			<td>-</td>
-			<td>00h 00m</td>
-			<td>00h 00m</td>
-			<td></td>
-		</tr>
-		
-		<tr>
-			<td>7.24</td>
-			<td>-</td>
-			<td>-</td>
-			<td>00h 00m</td>
-			<td>00h 00m</td>
-			<td></td>
-		</tr>
-		
-		<tr>
-			<td>7.25</td>
-			<td>-</td>
-			<td>-</td>
-			<td>00h 00m</td>
-			<td>00h 00m</td>
-			<td></td>
-		</tr>	
+		<tbody id="workTime-table-body">
+<!-- 			<tr> -->
+<!-- 				<td>7.19</td> -->
+<!-- 				<td>9:00</td> -->
+<!-- 				<td>19:00</td> -->
+<!-- 				<td>10h 00m</td> -->
+<!-- 				<td>2h 00m</td> -->
+<!-- 				<td></td> -->
+<!-- 			</tr> -->
+			
+<!-- 			<tr> -->
+<!-- 				<td>7.20</td> -->
+<!-- 				<td>-</td> -->
+<!-- 				<td>-</td> -->
+<!-- 				<td>8h 00m</td> -->
+<!-- 				<td>00h 00m</td> -->
+<!-- 				<td>연차</td> -->
+<!-- 			</tr> -->
+			
+<!-- 			<tr> -->
+<!-- 				<td>7.21</td> -->
+<!-- 				<td>8:00</td> -->
+<!-- 				<td>15:00</td> -->
+<!-- 				<td>7h 00m</td> -->
+<!-- 				<td>00h 00m</td> -->
+<!-- 				<td></td> -->
+<!-- 			</tr> -->
+			
+<!-- 			<tr> -->
+<!-- 				<td>7.22</td> -->
+<!-- 				<td>8:00</td> -->
+<!-- 				<td>15:00</td> -->
+<!-- 				<td>7h 00m</td> -->
+<!-- 				<td>00h 00m</td> -->
+<!-- 				<td></td> -->
+<!-- 			</tr> -->
+			
+<!-- 			<tr> -->
+<!-- 				<td>7.23</td> -->
+<!-- 				<td>-</td> -->
+<!-- 				<td>-</td> -->
+<!-- 				<td>00h 00m</td> -->
+<!-- 				<td>00h 00m</td> -->
+<!-- 				<td></td> -->
+<!-- 			</tr> -->
+			
+<!-- 			<tr> -->
+<!-- 				<td>7.24</td> -->
+<!-- 				<td>-</td> -->
+<!-- 				<td>-</td> -->
+<!-- 				<td>00h 00m</td> -->
+<!-- 				<td>00h 00m</td> -->
+<!-- 				<td></td> -->
+<!-- 			</tr> -->
+			
+<!-- 			<tr> -->
+<!-- 				<td>7.25</td> -->
+<!-- 				<td>-</td> -->
+<!-- 				<td>-</td> -->
+<!-- 				<td>00h 00m</td> -->
+<!-- 				<td>00h 00m</td> -->
+<!-- 				<td></td> -->
+<!-- 			</tr> -->
+		</tbody>	
 	</table>
 	<div id="chart"></div>		
 	</div>
 </div>
 
 <script>
+
+	function setTable() {
+		var date = new Date();
+				
+		$tableBody = $('#workTime-table-body');
+		$tableBody.html('');
+		
+		var $tr;
+		var $date;
+		var $start;
+		var $end;
+		var $sumTime;
+		var $overTime;
+		var $etc;
+		
+		for(var i = 0; i < 7; i++) {
+			$tr = $('<tr>');
+			$date = $('<td>').text((String)(date.getMonth()+1) + "." + (String)(date.getDate()-date.getDay()+i));
+// 			$start =$('<td>');
+// 			$end =$('<td>');
+// 			$sumTime =$('<td>');
+// 			$overTime =$('<td>');
+// 			$etc =$('<td>');
+			
+			$tr.append($date);
+// 			$tr.append($start);
+// 			$tr.append($end);
+// 			$tr.append($sumTime);
+// 			$tr.append($overTime);
+// 			$tr.append($etc);
+			$tableBody.append($tr);
+		}
+		
+	}
+	
+	setTable();
+	
 
 	var chart = toastui.Chart;
 	var el = document.getElementById('chart');
@@ -130,7 +171,7 @@
 			type: 'normal'
 			}
 		},
-		chart: {width:850, height:400}
+		chart: {width:850, height:350}
 	};
 	
 	var chart = chart.columnChart({el, data, options});	

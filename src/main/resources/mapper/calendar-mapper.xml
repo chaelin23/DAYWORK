@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="calendar-mapper">
-
+	
+	
+	
+	<!-- Calendar 관련-->
 	<insert id="insertCal">
 		insert into calendar
 		values (cal_seq.nextval, #{calCate}, to_date(#{calStart}, 'YYYY-MM-DD HH24:MI'), to_date(#{calEnd}, 'YYYY-MM-DD HH24:MI'), 
@@ -38,4 +41,35 @@
 	<update id="deleteCal" parameterType="_int">
 		update calendar set cal_status='N' where cal_no=#{calNo}
 	</update>
+	
+	
+	
+	
+	
+	<!-- Commute 관련-->
+	<insert id="workStart">
+		insert into commute
+		values(com_seq.nextval, sysdate, sysdate + 9/24, default, default, #{mNo})
+	</insert>
+	
+	<select id="selectTime" resultType="hashmap">
+		select * from (select to_char(com_no) comNo, to_char(com_start, 'HH24:MI') comStart, to_char(com_end, 'HH24:MI') comEnd 
+						from commute 
+						where m_no=#{mNo} and com_status='Y' 
+						order by com_no desc) 
+		where rownum=1
+	</select>
+	
+	<update id="updateCom">
+		update commute set com_end=sysdate where com_no=#{comNo}
+	</update>
+	
+	<resultMap type="Commute" id="commuteResultSet">
+		<id column="COM_NO" property="comNo"/>
+		<result column="COM_START" property="comStart"/>
+		<result column="COM_END" property="comEnd"/>
+		<result column="COM_VAC" property="comVac"/>
+		<result column="COM_STATUS" property="comStatus"/>
+		<result column="M_NO" property="mNo"/>
+	</resultMap>
 </mapper>

@@ -1,11 +1,13 @@
 package com.kh.DAYWORK.calendar.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.DAYWORK.calendar.model.vo.Calendar;
+import com.kh.DAYWORK.calendar.model.vo.Commute;
 
 @Repository("cDAO")
 public class CalendarDAO {
@@ -24,6 +26,18 @@ public class CalendarDAO {
 
 	public int deleteCal(SqlSessionTemplate sqlSession, int calNo) {
 		return sqlSession.update("calendar-mapper.deleteCal", calNo);
+	}
+
+	public int workStart(SqlSessionTemplate sqlSession, int mNo) {
+		return sqlSession.insert("calendar-mapper.workStart", mNo);
+	}
+
+	public HashMap<String, String> selectCom(SqlSessionTemplate sqlSession, int mNo) {
+		return sqlSession.selectOne("calendar-mapper.selectTime", mNo);
+	}
+
+	public int updateCom(SqlSessionTemplate sqlSession, int comNo) {
+		return sqlSession.update("calendar-mapper.updateCom", comNo);
 	}
 
 }
