@@ -154,7 +154,7 @@
 	</servlet-mapping>
 	
 	<!-- board 관련 -->
-	<servlet>
+	<!-- <servlet>
 		<servlet-name>boardServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
@@ -165,7 +165,7 @@
 	<servlet-mapping>
 		<servlet-name>boardServlet</servlet-name> 
 		<url-pattern>*.bo</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 	
 	<!-- survey 관련 -->
 	<servlet>
