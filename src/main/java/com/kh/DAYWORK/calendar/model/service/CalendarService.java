@@ -11,42 +11,42 @@ import com.kh.DAYWORK.calendar.model.dao.CalendarDAO;
 import com.kh.DAYWORK.calendar.model.vo.Calendar;
 import com.kh.DAYWORK.calendar.model.vo.Commute;
 
-@Service("cService")
+@Service("calService")
 public class CalendarService {
 	
 	@Autowired
-	private CalendarDAO cDAO;
+	private CalendarDAO calDAO;
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
 	public int insertCal(Calendar cal) {
 
-		return cDAO.insertCal(sqlSession, cal);
+		return calDAO.insertCal(sqlSession, cal);
 		
 	}
 
 	public ArrayList<Calendar> selectCal(Calendar cal) {
-		return cDAO.selectCal(sqlSession, cal);
+		return calDAO.selectCal(sqlSession, cal);
 	}
 
 	public int updateCal(Calendar cal) {
-		return cDAO.updateCal(sqlSession, cal);
+		return calDAO.updateCal(sqlSession, cal);
 	}
 
 	public int deleteCal(int calNo) {
-		return cDAO.deleteCal(sqlSession, calNo);
+		return calDAO.deleteCal(sqlSession, calNo);
 	}
 
 	public int workStart(int mNo) {
-		return cDAO.workStart(sqlSession, mNo);
+		return calDAO.workStart(sqlSession, mNo);
 	}
 
 	public HashMap<String, String> selectTime(int mNo) {
-		return cDAO.selectCom(sqlSession, mNo);
+		return calDAO.selectCom(sqlSession, mNo);
 	}
 
 	public int updateCom(int comNo) {
-		return cDAO.updateCom(sqlSession, comNo);
+		return calDAO.updateCom(sqlSession, comNo);
 	}
 }
