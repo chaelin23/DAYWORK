@@ -71,7 +71,7 @@
 				<div class="cate approval">
 					<div class="cate-approval-p">전자결재</div>
 					<div class="cate-approval-c">
-						<div class="approval-c-1">ㄴ결재양식목록</div>
+						<div class="approval-c-1" onclick="location.href='goList.ap'">ㄴ결재양식목록</div>
 						<div class="approval-c-1">ㄴ결재현황</div>
 					</div>
 				</div>		

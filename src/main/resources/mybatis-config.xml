@@ -8,6 +8,8 @@
 
 	<typeAliases>
 		<typeAlias type="com.kh.DAYWORK.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.DAYWORK.approval.model.vo.ApprovalForm" alias="ApprovalForm"/>
+		<typeAlias type="com.kh.DAYWORK.approval.model.vo.Approval" alias="Approval"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/address-mapper.xml"/>

@@ -41,8 +41,10 @@
 					<c:out value="${ loginUser.mName }님 환영합니다."/> <!-- c:out 활용 -->
 					<c:url var="myinfo" value="myinfo.me"/>
 					<c:url var="logout" value="logout.me"/>
+					<c:url var="appList" value="goList.ap"/>
 					<button onclick="location.href='${myinfo}'">정보보기</button>
 					<button onclick="location.href='${logout}'">로그아웃</button>
+					<button onclick="location.href='${appList}'">결재리스트이동</button>
 			</c:if>
 		</div>
 	</div>
