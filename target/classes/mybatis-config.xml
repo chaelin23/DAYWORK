@@ -8,6 +8,11 @@
 
 	<typeAliases>
 		<typeAlias type="com.kh.DAYWORK.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.DAYWORK.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.DAYWORK.common.BMsgFile" alias="BMsgFile"/>
+		<typeAlias type="com.kh.DAYWORK.message.model.vo.Message" alias="Message"/>
+		<typeAlias type="com.kh.DAYWORK.chat.model.vo.ChatMessage" alias="ChatMessage"/>
+		<typeAlias type="com.kh.DAYWORK.chat.model.vo.ChatRoom" alias="ChatRoom"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/address-mapper.xml"/>
@@ -17,7 +22,8 @@
 		<mapper resource="mapper/collabo-mapper.xml"/>
 		<mapper resource="mapper/common-mapper.xml"/>
 		<mapper resource="mapper/member-mapper.xml"/>
-		<mapper resource="mapper/notice-mapper.xml"/>
+		<mapper resource="mapper/message-mapper.xml"/>
+		<mapper resource="mapper/board-mapper.xml"/>
 		<mapper resource="mapper/servlet-mapper.xml"/>
 		<mapper resource="mapper/survey-mapper.xml"/>
 	</mappers>

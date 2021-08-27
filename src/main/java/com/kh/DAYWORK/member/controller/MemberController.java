@@ -67,8 +67,7 @@ public class MemberController {
 			model.addAttribute("loginUser", loginUser);
 		} else {
 			throw new MemberException("로그인에 실패했습니다.");
-		}
-		
+		}		
 		return "redirect:home.do";
 	}
 	
