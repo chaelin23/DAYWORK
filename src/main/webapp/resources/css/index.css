@@ -1,3 +1,4 @@
+@charset "UTF-8";
 
 	@font-face {
 	    font-family: 'Pretendard-Regular';
@@ -7,6 +8,13 @@
 	}
 
 	html {font-family: 'Pretendard-Regular'; }
+	
+/* 	* { */
+/* 		padding: 0; */
+/* 		margin: 0; */
+/* 		box-sizing: border-box; */
+/* 	    font-family: 'NanumBarunGothic'; */
+/* 	} */
 
 	.main-king{
 		width:1300px;
@@ -37,7 +45,7 @@
 	.logo{
 		min-width: 120px;
 		height: 100px;
-		background: url("../image/데이워크로고2.png");
+		background: no-repeat center url("../image/데이워크로고2.png");
 		cursor: pointer;
 		margin-bottom:10px;
 	}
@@ -143,13 +151,20 @@
 	}
 	
 	.cate{
-		margin-bottom: 55px;
+		margin-bottom: 37px;
 	}
 	
-	.cate-notice-p:hover, .cate-they-p:hover, .cate-approval-p:hover{
-		position: relative;
-		cursor: pointer;
+/* 	.cate-notice-p:hover, .cate-they-p:hover, .cate-approval-p:hover{ */
+/* 		position: relative; */
+/* 		cursor: pointer; */
 		
+/* 	} */
+	.cate-notice-p, .cate-they-p, .cate-approval-p{
+/* 		position: relative; */
+		cursor: pointer;
+	}
+	.notice, .they, .approval{
+		position: relative;
 	}
 	
 	.cate-notice-c, .cate-they-c, .cate-approval-c{
@@ -163,23 +178,25 @@
 	}
 	
 	.cate-notice-c.active {
-		top: 410px;
+		top: 20px;
 		opacity: 1;
 	}
 	
 	.cate-they-c.active {
-		top: 480px;
+		top: 20px;
 		opacity: 1;
 	}
 	
 	.cate-approval-c.active {
-		top: 550px;
+		top: 20px;
 		opacity: 1;
 	}
+	
 	
 	.cate-collabo-p{
 		cursor:pointer;
 	}
+	
 	.cate-day-p{
 		cursor:pointer;
 	}
@@ -190,11 +207,12 @@
 		align-items: flex-end;
 		justify-content: space-evenly;
 		font-size:12px;
+		position: relative;
 	}
 	
 	.main-chat-text{
-		width:78%;
-		height: 15px;
+		width:64%;
+		height: 17px;
 	}
 	
 	.main-chat-button{

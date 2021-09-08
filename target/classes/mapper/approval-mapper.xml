@@ -1,4 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="approval-mapper">
+
+	<select id="selectApForm" resultMap="approvalFormResultSet">
+	select *
+	from approval_form
+	where af_title = #{title}
+	</select>
+
+	<resultMap type="ApprovalForm" id="approvalFormResultSet">
+			<id column ="AF_NO" property="afNo"/>
+			<result column="AF_CATE" property="afCate"/>
+			<result column="AF_LINE" property="afLine"/>
+			<result column="AF_AP_NO" property="afApNo"/>
+			<result column="AF_TITLE" property="afTitle"/>
+			<result column="AF_CONTENT" property="afContent"/>
+			<result column="AF_DATE" property="afDate"/>
+			<result column="AF_ETC" property="afEtc"/>
+			<result column="WRITER" property="writer"/>
+	</resultMap>
+	
+	
+	<insert id="insertAp">
+		insert
+	
+	
+	</insert>
+	
+	
 </mapper>

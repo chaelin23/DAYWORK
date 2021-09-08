@@ -62,27 +62,25 @@
 	padding: 25px 20px 10px 20px;
 	}
 	
-	td{
-	padding: 25px 20px 10px 20px;
+		td{
+	padding: 0px 0px 0px 0px;
 	}
 	
 	
 	
 	td{
-	padding: 8px 16px;
+/* 	padding: 8px 16px; */
     line-height: 1.6;
-    border-bottom: 1px solid #eee;
+/*     border-bottom: 1px solid #eee; */
     vertical-align: top;
 	}
 	
 	.type_normal th .title_sort {
-    
     position: relative;
     height: 32px;
     line-height: 33px;
     display: inline-block;
 	}
-	
 	
 	.writeBtn{
 		border: none;
@@ -103,11 +101,10 @@
     position: fixed;
     top: 0;
     left: 0;
-    opacity: 0.4;
-    filter: alpha(opacity = 40);
-    background: #000;
+    background-color: rgba( 255, 255, 255, 0.5 );
     z-index: 98;
-}
+	}
+	
 	.go_popup{
 	position:absolute;
 	width: 400px;
@@ -269,6 +266,15 @@
 	padding: 25px 20px 10px 20px;
 	}
 	
+	.div-main-right{
+	width: 65%;
+    height: 85%;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 40px;
+    
+}
+	
 	
 	/* ------------ approvalModal1--------------*/
 	.ap-person-table{
@@ -300,21 +306,28 @@
 	}
 	
 	.ap-select1{
-	border: 1px solid #666666;
+	border: none;
 	box-sizing: border-box;
 	height:40px;
 	
 	}
 	
 	.th1{
-	padding : 10px 69px 0px 0px;
+	padding : 10px 10px 0px 0px;
 	
 	}
 	
 	.th2{
-	padding: 10px 86px 10px 20px;
+	padding: 25px 70px 10px 20px;
 	
 	}
+
+	.select-team{
+	border:none;
+		
+	}
+	
+	
 	
 	
 	
@@ -365,7 +378,7 @@
 	}
 	
 	.board-body{
-		font-size:12px;
+		font-size:13px;
 		margin-bottom:70px;
 	}
 	
