@@ -1,12 +1,14 @@
 package com.kh.DAYWORK.member.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +23,19 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.kh.DAYWORK.calendar.controller.CalendarController;
+import com.kh.DAYWORK.calendar.model.exception.CalendarException;
 import com.kh.DAYWORK.member.model.exception.MemberException;
 import com.kh.DAYWORK.member.model.service.MemberService;
+import com.kh.DAYWORK.member.model.vo.Commute;
 import com.kh.DAYWORK.member.model.vo.Member;
 import com.kh.DAYWORK.member.model.vo.MemberPageInfo;
 import com.kh.DAYWORK.member.model.vo.MemberPagination;
 
-@SessionAttributes("loginUser") 
+@SessionAttributes({"loginUser", "comTime"}) 
 @Controller
 public class MemberController {
 	
@@ -35,7 +43,7 @@ public class MemberController {
 	private MemberService mService;
 	
 	@Autowired
-	private BCryptPasswordEncoder bcrypt;
+	private BCryptPasswordEncoder bcrypt;	
 	
 	@RequestMapping("joinMember.me")
 	public String goJoinMember() {
@@ -74,6 +82,10 @@ public class MemberController {
 		
 		if(match) {
 			model.addAttribute("loginUser", loginUser);
+			
+			Commute comTime = mService.selectTime(loginUser.getmNo());			
+			model.addAttribute("comTime", comTime);
+		
 		} else {
 			throw new MemberException("로그인에 실패했습니다.");
 		}
@@ -248,6 +260,68 @@ public class MemberController {
 		} else {
 			throw new MemberException("퇴사 처리에 실패하였습니다.");
 		}
+	}
+	
+	
+	
+	
+	
+	// workManagement 관련
+	@RequestMapping("workManage.me")
+	public String workManage() {
+		return "workManagement";
+	}	
+	
+	@RequestMapping("workStart.me")
+	public String workStart(HttpServletRequest request, Model model) {
+		int mNo = ((Member)request.getSession().getAttribute("loginUser")).getmNo();
+		
+		int result = mService.workStart(mNo);
+		
+		if(result > 0) {
+			Commute comTime = mService.selectTime(mNo);
+			
+			model.addAttribute("comTime", comTime);
+			
+			return "redirect:workManage.me";
+		} else {
+			throw new CalendarException("출근 등록에 실패하였습니다.");
+		}
+	}	
+	
+	@RequestMapping("workEnd.me")
+	public String workEnd(HttpServletRequest request, Model model) {
+		int mNo = ((Member)request.getSession().getAttribute("loginUser")).getmNo();
+		int comNo = mService.selectTime(mNo).getComNo();
+		
+		int result = mService.updateCom(comNo);
+		
+		if(result > 0) {
+			Commute comTime = mService.selectTime(mNo);
+			
+			model.addAttribute("comTime", comTime);
+			
+			return "redirect:workManage.me";
+		} else {
+			throw new CalendarException("퇴근 등록에 실패하였습니다.");
+		}
+	}
+	
+	@RequestMapping("selectComList.me")
+	public void selectComList(@RequestParam("mNo") int mNo, HttpServletResponse response) {
+		response.setContentType("application/json; charset=UTF-8");
+		
+		ArrayList<Commute> list = mService.selectComList(mNo);
+		Gson gson = new GsonBuilder().create();
+		
+		try {
+			gson.toJson(list, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 

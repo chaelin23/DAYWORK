@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.DAYWORK.member.model.vo.Commute;
 import com.kh.DAYWORK.member.model.vo.Member;
 import com.kh.DAYWORK.member.model.vo.MemberPageInfo;
 
@@ -58,6 +59,22 @@ public class MemberDAO {
 
 	public int updateBtnY(SqlSessionTemplate sqlSession, int mNo) {
 		return sqlSession.update("member-mapper.updateBtnY", mNo);
+	}
+	
+	public int workStart(SqlSessionTemplate sqlSession, int mNo) {
+		return sqlSession.insert("member-mapper.workStart", mNo);
+	}
+
+	public int updateCom(SqlSessionTemplate sqlSession, int comNo) {
+		return sqlSession.update("member-mapper.updateCom", comNo);
+	}
+
+	public ArrayList<Commute> selectComList(SqlSessionTemplate sqlSession, int mNo) {
+		return (ArrayList)sqlSession.selectList("member-mapper.selectComList", mNo);
+	}
+
+	public Commute selectTime(SqlSessionTemplate sqlSession, int mNo) {
+		return sqlSession.selectOne("member-mapper.selectTime", mNo);
 	}
 
 

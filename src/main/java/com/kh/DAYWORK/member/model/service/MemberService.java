@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.DAYWORK.member.model.dao.MemberDAO;
+import com.kh.DAYWORK.member.model.vo.Commute;
 import com.kh.DAYWORK.member.model.vo.Member;
 import com.kh.DAYWORK.member.model.vo.MemberPageInfo;
 
@@ -77,6 +78,22 @@ public class MemberService {
 
 	public int updateBtnY(int mNo) {
 		return mDAO.updateBtnY(sqlSession, mNo);
+	}
+	
+	public int workStart(int mNo) {
+		return mDAO.workStart(sqlSession, mNo);
+	}
+
+	public int updateCom(int comNo) {
+		return mDAO.updateCom(sqlSession, comNo);
+	}
+
+	public ArrayList<Commute> selectComList(int mNo) {
+		return mDAO.selectComList(sqlSession, mNo);
+	}
+
+	public Commute selectTime(int mNo) {
+		return mDAO.selectTime(sqlSession, mNo);
 	}
 
 
