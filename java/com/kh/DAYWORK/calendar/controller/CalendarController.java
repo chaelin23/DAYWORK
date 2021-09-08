@@ -2,23 +2,19 @@ package com.kh.DAYWORK.calendar.controller;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import com.kh.DAYWORK.calendar.model.exception.CalendarException;
 import com.kh.DAYWORK.calendar.model.service.CalendarService;
@@ -26,7 +22,6 @@ import com.kh.DAYWORK.calendar.model.vo.Calendar;
 import com.kh.DAYWORK.member.model.vo.Member;
 
 @Controller
-@SessionAttributes("comTime")
 public class CalendarController {
 	
 	@Autowired
@@ -66,6 +61,7 @@ public class CalendarController {
 		
 		cal.setmNo(m.getmNo());
 		cal.setdCode(m.getdCode());
+		cal.setjCode(m.getjCode());
 		
 		ArrayList<Calendar> cList = calService.selectCal(cal);
 		
@@ -83,6 +79,7 @@ public class CalendarController {
 			job.put("calStatus", c.getCalStatus());
 			job.put("mNo", c.getmNo());
 			job.put("dCode", c.getdCode());
+			job.put("jCode", c.getjCode());
 			
 			jArr.add(job);
 		}
@@ -114,48 +111,71 @@ public class CalendarController {
 		}
 	}
 	
-	@RequestMapping("workManage.ca")
-	public String workManage() {
-		return "workManagement";
+	
+	public Calendar setCalendar(Calendar cal, String cate, HttpServletRequest request) {
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		String userJcode = loginUser.getjCode();
+		
+		String jName = calService.selectJname(userJcode);
+		String calJcode = null;
+		
+		cal.setmNo(loginUser.getmNo());
+		cal.setdCode(loginUser.getdCode());
+		cal.setCalContent("(대기) " + loginUser.getmName() + " " + jName + " " + cate + " : " + cal.getCalContent());
+		
+		switch(userJcode) {
+		case "J3": calJcode = "J4"; break;
+		case "J4": calJcode = "J5"; break;
+		case "J5": calJcode = "J5"; break;
+		default : calJcode = "J3"; break;
+		}
+		
+		cal.setjCode(calJcode);
+		
+		return cal;
 	}
 	
-	@RequestMapping("workStart.ca")
-	public String workStart(HttpServletRequest request, Model model) {
-		int mNo = ((Member)request.getSession().getAttribute("loginUser")).getmNo();		
-		
-		int result = calService.workStart(mNo);
+	@RequestMapping("insertVac.ca")
+	public String insertVac(@ModelAttribute Calendar cal, @RequestParam("vacCate") String vacCate, HttpServletRequest request) {
 				
+		cal = setCalendar(cal, vacCate, request);
+		
+		int result = calService.insertVac(cal);
+		
 		if(result > 0) {
-			HashMap<String, String> comTime = calService.selectTime(mNo);		
-			
-			model.addAttribute("comTime", comTime);
-			
 			return "redirect:calendar.ca";
-			
 		} else {
-			throw new CalendarException("출근 등록에 실패하였습니다.");
+			throw new CalendarException("휴가 신청에 실패하였습니다.");
+		}
+		
+	}
+	
+	@RequestMapping("acceptVac.ca")
+	public String acceptVac(@ModelAttribute Calendar cal) {
+		int result = calService.acceptVac(cal);
+		
+		if(result > 1) {
+			return "redirect:calendar.ca";
+		} else {
+			throw new CalendarException("휴가 결재에 실패하였습니다.");
 		}
 	}
 	
-	@RequestMapping("workEnd.ca")
-	public String workEnd(HttpServletRequest request, Model model) {
-		HttpSession hs = request.getSession();
-		String comNo = (String)((HashMap)hs.getAttribute("comTime")).get("COMNO");	
-		int mNo = ((Member)hs.getAttribute("loginUser")).getmNo();		
-		int result = calService.updateCom(Integer.parseInt(comNo));
+	@RequestMapping("updateVac.ca")
+	public String updateVac(@ModelAttribute Calendar cal, @RequestParam("vacCate") String vacCate, HttpServletRequest reqeust) {
+		
+		cal = setCalendar(cal, vacCate, reqeust);
+		
+		int result = calService.updateVac(cal);
 		
 		if(result > 0) {
-			HashMap<String, String> comTime = calService.selectTime(mNo);		
-			
-			model.addAttribute("comTime", comTime);
-			
 			return "redirect:calendar.ca";
-			
 		} else {
-			throw new CalendarException("퇴근 등록에 실패하였습니다.");
+			throw new CalendarException("휴가 수정에 실패하였습니다.");
 		}
-		
 	}
+	
+	
 
 }
 
