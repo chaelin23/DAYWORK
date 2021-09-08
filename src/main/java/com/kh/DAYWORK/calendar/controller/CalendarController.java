@@ -48,7 +48,7 @@ public class CalendarController {
 		if(result > 0) {
 			return "redirect:calendar.ca";
 		} else {
-			throw new CalendarException("�씪�젙 異붽��뿉 �떎�뙣�븯���뒿�땲�떎.");
+			throw new CalendarException("일정 추가에 실패하였습니다.");
 		}
 	}
 	
@@ -95,7 +95,7 @@ public class CalendarController {
 		if(result > 0) {
 			return "redirect:calendar.ca";
 		} else {
-			throw new CalendarException("�씪�젙 �닔�젙�뿉 �떎�뙣�븯���뒿�땲�떎.");
+			throw new CalendarException("일정 수정에 실패하였습니다.");
 		}
 	}
 	
@@ -107,7 +107,7 @@ public class CalendarController {
 		if(result > 0) {
 			return "redirect:calendar.ca";
 		} else {
-			throw new CalendarException("�씪�젙 �궘�젣�뿉 �떎�뙣�븯���뒿�땲�떎.");
+			throw new CalendarException("일정 삭제에 실패하였습니다.");
 		}
 	}
 	
@@ -121,7 +121,7 @@ public class CalendarController {
 		
 		cal.setmNo(loginUser.getmNo());
 		cal.setdCode(loginUser.getdCode());
-		cal.setCalContent("(��湲�) " + loginUser.getmName() + " " + jName + " " + cate + " : " + cal.getCalContent());
+		cal.setCalContent("(대기) " + loginUser.getmName() + " " + jName + " " + cate + " : " + cal.getCalContent());
 		
 		switch(userJcode) {
 		case "J3": calJcode = "J4"; break;
@@ -145,7 +145,7 @@ public class CalendarController {
 		if(result > 0) {
 			return "redirect:calendar.ca";
 		} else {
-			throw new CalendarException("�쑕媛� �떊泥��뿉 �떎�뙣�븯���뒿�땲�떎.");
+			throw new CalendarException("휴가 신청에 실패하였습니다.");
 		}
 		
 	}
@@ -157,7 +157,7 @@ public class CalendarController {
 		if(result > 1) {
 			return "redirect:calendar.ca";
 		} else {
-			throw new CalendarException("�쑕媛� 寃곗옱�뿉 �떎�뙣�븯���뒿�땲�떎.");
+			throw new CalendarException("휴가 결재에 실패하였습니다.");
 		}
 	}
 	
@@ -171,7 +171,7 @@ public class CalendarController {
 		if(result > 0) {
 			return "redirect:calendar.ca";
 		} else {
-			throw new CalendarException("�쑕媛� �닔�젙�뿉 �떎�뙣�븯���뒿�땲�떎.");
+			throw new CalendarException("휴가 수정에 실패하였습니다.");
 		}
 	}
 	
