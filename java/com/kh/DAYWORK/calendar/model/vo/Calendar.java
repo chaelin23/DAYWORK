@@ -1,6 +1,5 @@
 package com.kh.DAYWORK.calendar.model.vo;
 
-import java.sql.Date;
 
 public class Calendar {
 	private int calNo;
@@ -12,13 +11,16 @@ public class Calendar {
 	private String calStatus;
 	private int mNo;
 	private String dCode;
+	private String jCode;
 	
 	public Calendar() {
 		
 	}
 
+	
+
 	public Calendar(int calNo, int calCate, String calStart, String calEnd, String calContent, String calAllDay,
-			String calStatus, int mNo, String dCode) {
+			String calStatus, int mNo, String dCode, String jCode) {
 		super();
 		this.calNo = calNo;
 		this.calCate = calCate;
@@ -29,8 +31,19 @@ public class Calendar {
 		this.calStatus = calStatus;
 		this.mNo = mNo;
 		this.dCode = dCode;
+		this.jCode = jCode;
 	}
 
+	
+
+	public String getjCode() {
+		return jCode;
+	}
+
+	public void setjCode(String jCode) {
+		this.jCode = jCode;
+	}
+	
 	public int getCalNo() {
 		return calNo;
 	}
@@ -104,12 +117,16 @@ public class Calendar {
 		this.dCode = dCode;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Calendar [calNo=" + calNo + ", calCate=" + calCate + ", calStart=" + calStart + ", calEnd=" + calEnd
 				+ ", calContent=" + calContent + ", calAllDay=" + calAllDay + ", calStatus=" + calStatus + ", mNo="
-				+ mNo + ", dCode=" + dCode + "]";
+				+ mNo + ", dCode=" + dCode + ", jCode=" + jCode + "]";
 	}
+
+	
 
 	
 }

@@ -94,4 +94,43 @@
 			set M_HIRE_DATE =sysdate, M_STATUS='N'
 		where m_no = #{mNo}
 	</update>
+	
+	
+	
+	
+	<!-- Commute 관련-->
+	<insert id="workStart">
+		insert into commute
+		values(com_seq.nextval, sysdate, sysdate + 9/24, default, default, #{mNo})
+	</insert>
+	
+	<select id="selectTime" resultMap="commuteResultSet">
+	select * from 
+			(select com_no, to_char(com_start, 'HH24:MI') com_start, to_char(com_end, 'HH24:MI') com_end, com_vac, com_status, m_no
+			 from commute 
+			 where m_no=#{mNo} and com_status='Y' and to_char(com_start, 'YYYYMMDD') = to_char(sysdate, 'YYYYMMDD')
+			 order by com_no desc) 
+		where rownum=1
+	</select>
+	
+	<update id="updateCom">
+		update commute set com_end=sysdate where com_no=#{comNo}
+	</update>
+	
+	<resultMap type="Commute" id="commuteResultSet">
+		<id column="COM_NO" property="comNo"/>
+		<result column="COM_START" property="comStart"/>
+		<result column="COM_END" property="comEnd"/>
+		<result column="COM_VAC" property="comVac"/>
+		<result column="COM_STATUS" property="comStatus"/>
+		<result column="M_NO" property="mNo"/>
+	</resultMap>
+	
+	<select id="selectComList" resultMap="commuteResultSet">
+		select * from (select * 
+						from commute 
+						where m_no=#{mNo} and com_status='Y' 
+						order by com_no desc) 
+		where rownum between 1 and 7
+	</select>
 </mapper>

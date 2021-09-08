@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/index.css">
 <link rel="stylesheet" href="resources/css/chat.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	
@@ -53,32 +54,38 @@
 				</div>
 			</div>
 			<!-- 출퇴근 버튼 -->
-	         <div class="main-commute">
-	            <div class="commute-button">
-	               <c:if test="${ !empty comTime }">
-	                  <button class="commute" id="start" disabled>출근</button>
-	                  <button class="commute" id="end" onclick="location.href='workEnd.ca'">퇴근</button>
-	               </c:if>
-	               <c:if test="${ empty comTime }">
-	                  <button class="commute" id="start" onclick="location.href='workStart.ca'">출근</button>
-	                  <button class="commute" id="end" disabled>퇴근</button>
-	               </c:if>
-	            </div>
-	               <div class="commute-progressbar">
-	               <progress class="commute-real"></progress>
-	            </div>
-	            <div class="commute-text">
-	               <c:if test="${ !empty comTime }">
-	                  <div class="commute-text-start" style="margin-left:10px;">${ comTime.get("COMSTART") }</div>
-	                  <div class="commute-text-end" style="margin-right:10px;">${ comTime.get("COMEND") }</div>
-	               </c:if>
-	               <c:if test="${ empty comTime }">
+	        <div class="main-commute">
+	            
+	            <c:if test="${ !empty comTime }">
+		            <div class="commute-button">
+	            		<button class="commute" id="start" disabled>출근</button>
+	                	<button class="commute" id="end" onclick="location.href='workEnd.me'">퇴근</button>
+	                </div>  
+	                <div class="commute-progressbar">
+	               		<progress class="commute-real" value=0 max=9 id="progressBar"></progress>
+	               	</div>
+	               	
+	               	<div class="commute-text">
+	                	<div class="commute-text-start" style="margin-left:10px;">${ comTime.comStart }</div>
+	               		<div class="commute-text-end" style="margin-right:10px;">${ comTime.comEnd }</div>
+	                </div>  
+	            </c:if>   
+	               
+	            <c:if test="${ empty comTime }">
+	              	<div class="commute-button">
+	               		<button class="commute" id="start" onclick="location.href='workStart.me'">출근</button>
+	               		<button class="commute" id="end" disabled>퇴근</button>
+	               	</div>
+	        		<div class="commute-progressbar">
+	               		<progress class="commute-real" id="progressBar"></progress>
+	            	</div>
+	            	
+	            	<div class="commute-text">
 	                  <div class="commute-text-start" style="margin-left:10px;">--:--</div>
 	                  <div class="commute-text-end" style="margin-right:10px;">--:--</div>
-	               </c:if>
-	            </div>
-	         </div>
-	         
+	        		</div>
+				</c:if>
+			</div>
          
 			<!-- 카테고리 박스 -->
 			<div class="main-category">
@@ -107,7 +114,7 @@
 					<div class="cate-collabo-p" onclick="location.href='workBox.co'">업무공유</div>
 				</div>			
 				<div class="cate day">
-					<div class="cate-day-p">근태관리</div>
+					<div class="cate-day-p" onclick="location.href='workManage.me'">근태관리</div>						
 				</div>				
 				<div class="cate message">
 					<div class="cate-message" onclick="location.href='msgAllList.msg'">메세지</div>
@@ -161,7 +168,41 @@
 		approvalP.addEventListener('click', function() {
             approvalBox.classList.toggle('active');
     	});
-	
+		
+		
+		// 프로그래스바 설정
+		var interval = setInterval(function() {setBar();}, (30 * 60 * 1000));
+		function setBar() {
+			if("${comTime}" != "") {
+				var now = new Date();
+				var nowHour = now.getHours();
+				if(nowHour < 10) {
+					nowHour = "0" + nowHour;
+				}
+				
+				var startHour = "${comTime.comStart}".substring(0, 2);
+				var endHour = "${comTime.comEnd}".substring(0,2);
+				
+				if(startHour != nowHour) {				
+					$('#progressBar').val(nowHour - startHour);
+				} 
+				
+				if(nowHour == endHour) {
+					$('#progressBar').val(9);
+				}
+				
+				if(nowHour > endHour) {
+					$('#progressBar').val(9);
+					clearInterval(interval);
+				}
+			}
+		}
+		
+		$(function(){
+			setBar();			
+			interval;
+		})
+		
 		$('.main-chat-text').on('keyup', function(){
 			var receiver = $(this).val();
 			
