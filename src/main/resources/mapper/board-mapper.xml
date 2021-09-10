@@ -4,6 +4,7 @@
 	<select id="getListCount" resultType="_int">
 		select count(*) from board
 		where b_status='Y'
+		and b_collabo='N'
 	</select>
 	
 	<select id="selectBList" resultMap="boardResultSet">
@@ -11,7 +12,10 @@
 		from (select rownum r, b_no, b_dept, b_title, b_content, b_create_date, 
 			  b_modify_date, b_count, b_type, b_status, b_m_no  
 			  from board
-			  where b_status='Y' order by b_no desc)
+			  where b_status='Y' 
+			  and b_collabo='N'
+			  order by b_no desc
+			  )
 		where r between #{currentPage} + 1 and #{currentPage} + 10
 	</select>
 	
@@ -32,7 +36,7 @@
 	<insert id="insertBoard">
 		insert into board
 		values(bo_seq.nextval, #{bDept}, #{bTitle}, #{bContent}, default, default, default, 
-			   #{bType}, default, #{bMNo})
+			   #{bType}, default, #{bMNo}, default)
 	</insert>
 	
 	<select id="selectBNo" resultType="_int">
@@ -82,14 +86,75 @@
 		delete from b_msg_file where f_rename = #{beforeFile}
 	</delete>
 	
+	<select id="searchBListCount" resultType="_int">
+		select count(*) from board
+		where 
+		<if test="type == '제목'">
+			b_title like '%' || #{search} || '%'
+		</if>
+		<if test="type == '부서'">
+			b_dept like '%' || #{search} || '%'
+		</if>
+		<if test="type == '글 종류'">
+			b_type like '%' || #{search} || '%'
+		</if>
+		and b_status='Y'
+	</select>
 	
+	<select id="searchBList" resultMap="boardResultSet">
+		select *
+		from (select rownum r, b_no, b_dept, b_title, b_content, b_create_date, 
+			  b_modify_date, b_count, b_type, b_status, b_m_no  
+			  from board
+			  where b_status='Y' and b_collabo ='N' and
+			  <if test="type == '제목'">
+			  	b_title like '%' || #{search} || '%'
+			  </if>
+			  <if test="type == '부서'">
+				b_dept like '%' || #{search} || '%'
+			  </if>
+			  <if test="type == '글 종류'">
+				b_type like '%' || #{search} || '%'
+			  </if>
+			  order by b_no desc)
+		where r between #{currentPage} + 1 and #{currentPage} + 10
+	</select>
 	
+	<update id="deleteBoard">
+		update board
+		set b_status = 'N'
+		where b_no = #{bNo}
+	</update>
 	
+	<delete id="deleteFileBNo">
+		delete from b_msg_file
+		where f_b_no = #{bNo}
+	</delete>
 	
+	<insert id="insertReply">
+		insert into reply
+		values(re_seq.nextval, #{rContent}, default, default, default, #{rMNo}, #{rBNo})
+	</insert>
 	
+	<select id="selectRList" resultMap="replyResultSet">
+		SELECT * FROM reply JOIN 
+		(MEMBER JOIN job USING(j_code) JOIN DEPARTMENT USING(d_code)) 
+		on(r_m_no = m_no)
+		where r_b_no = #{rBNo} order by r_no desc
+	</select>
 	
-	
-	
+	<resultMap type="Reply" id="replyResultSet">
+		<id column="R_NO" property="rNo"/>
+		<result column="R_CONTENT" property="rContent"/>
+		<result column="R_CREATE_DATE" property="rCreateDate"/>
+		<result column="R_MODIFY_DATE" property="rModifyDate"/>
+		<result column="R_STATUS" property="rStatus"/>
+		<result column="R_M_NO" property="rMNo"/>
+		<result column="R_B_NO" property="rBNo"/>
+		<result column="M_NAME" property="mName"/>
+		<result column="J_NAME" property="jName"/>
+		<result column="D_NAME" property="dName"/>
+	</resultMap>
 	
 	
 </mapper>

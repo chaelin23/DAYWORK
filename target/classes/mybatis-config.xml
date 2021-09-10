@@ -14,12 +14,14 @@
 		<typeAlias type="com.kh.DAYWORK.member.model.vo.Commute" alias="Commute"/>
 		<typeAlias type="com.kh.DAYWORK.address.model.vo.Address" alias="Address"/>
 		<typeAlias alias="Board" type="com.kh.DAYWORK.board.model.vo.Board"/>
+		<typeAlias alias="Reply" type="com.kh.DAYWORK.board.model.vo.Reply"/>
 		<typeAlias alias="BMsgFile" type="com.kh.DAYWORK.common.BMsgFile"/>
 		<typeAlias alias="Message" type="com.kh.DAYWORK.message.model.vo.Message"/>
 		<typeAlias alias="ChatMessage" type="com.kh.DAYWORK.chat.model.vo.ChatMessage"/>
 		<typeAlias alias="ChatRoom" type="com.kh.DAYWORK.chat.model.vo.ChatRoom"/>
 		<typeAlias alias="Approval" type="com.kh.DAYWORK.approval.model.vo.Approval"/>
 		<typeAlias alias="ApprovalForm" type="com.kh.DAYWORK.approval.model.vo.ApprovalForm"/>
+		<typeAlias alias="ApprovalStatus" type="com.kh.DAYWORK.approval.model.vo.ApprovalStatus"/>
 		
 	</typeAliases>
 	<mappers>

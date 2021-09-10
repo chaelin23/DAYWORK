@@ -3,7 +3,7 @@
 <mapper namespace="collabo-mapper">
 	<insert id="insertBoardC">
 		insert into board values
-		(BO_seq.nextval, #{bDept}, #{bTitle}, #{bContent}, SYSDATE, SYSDATE, 0, 3, default, #{bMNo})
+		(BO_seq.nextval, #{bDept}, #{bTitle}, #{bContent}, SYSDATE, SYSDATE, 0, 3, default, #{bMNo}, 'Y')
 	</insert>
 	
 	<select id="selectBNo" resultType="_int">
@@ -26,6 +26,7 @@
 	    		join member on(b_m_no = m_no)
 	    	where b_status='Y'
 	    		and c_people like #{mName2}
+	    		and b_collabo = 'Y'
 	    	order by c_no desc
 	</select>
 	
@@ -54,6 +55,7 @@
 	    		join collabo_cate using(cbct_no)
 	    		join Member on(b_m_no = m_no)
     		where b_status='Y'
+    			and b_collabo = 'Y'
     		order by b_no desc
 	</select>
 	
@@ -96,6 +98,8 @@
 	    		join member on(b_m_no = m_no)
 	    	where b_status='Y'
 	    		and CBCT_NO = #{cBctNo}
+	    		and c_people like '%' || #{cPeople} || '%'
+	    		and b_collabo = 'Y'
 	    	order by c_no desc
 	</select>
 	
@@ -107,7 +111,9 @@
 	    		join collabo_cate using(cbct_no)
 	    		join member on(b_m_no = m_no)
 	    	where b_status='Y'
+	    		and CBCT_NO in ('C1','C2','C3','C4','C5') 
 	    		and c_m_no = #{cMNo}
+	    		and b_collabo = 'Y'
 	    	order by c_no desc
 	</select>
 	
@@ -152,11 +158,13 @@
 		where c_no = #{fCNo}
 	</select>
 	
-	<select id="selectMemberList" resultMap="memerResultSet">
+	<select id="selectMemberListC" resultMap="memerResultSet">
 		select m_no, m_name, d_name, j_name
 			from member
-			    left join Job using(j_code)
-    			left join department using(d_code) 
+			    join Job using(j_code)
+    			join department using(d_code) 
+    		where m_status='Y'
+    			and m_name like '%' || #{inputString} || '%'
 	</select>
 	
 	<resultMap type="Member" id="memerResultSet">
@@ -165,4 +173,10 @@
 		<result column="D_NAME" property="dName" />
 		<result column="J_NAME" property="jName" />
 	</resultMap>
+	
+	<update id="deleteCollabo">
+		update board
+			set b_status='N'
+			where b_no=#{cBNo}
+	</update>
 </mapper>

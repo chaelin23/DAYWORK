@@ -8,7 +8,7 @@
 	<insert id="insertCal">
 		insert into calendar
 		values (cal_seq.nextval, #{calCate}, to_date(#{calStart}, 'YYYY-MM-DD HH24:MI'), to_date(#{calEnd}, 'YYYY-MM-DD HH24:MI'), 
-				#{calContent}, #{calAllDay}, default, #{mNo}, #{dCode}, null)
+				#{calContent}, #{calAllDay}, default, #{mNo}, #{dCode}, #{jCode})
 	</insert>
 	
 	<select id="selectCal" resultMap="calResultSet">
@@ -44,7 +44,7 @@
 	</update>
 	
 	<select id="selectJname" resultType="string">
-		select j_name from job 
+		select distinct j_name from job 
 		join member using (j_code) where j_code=#{userJcode}
 	</select>
 	

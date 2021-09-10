@@ -69,6 +69,10 @@
 			where m_no = #{mNo}
 	</update>
 	
+	<update id="updatePwd">
+		update member set m_pwd=#{mPwd} where m_no = #{mNo}
+	</update>
+	
 	<!-- ******************* 관리자페이지  ****************** -->
 	<select id="getListCount" resultType="_int">
 		select count(*)
@@ -94,6 +98,29 @@
 			set M_HIRE_DATE =sysdate, M_STATUS='N'
 		where m_no = #{mNo}
 	</update>
+	
+	<update id="updateDeptJob">
+		update member
+			set d_code = #{dCode} , j_code = #{jCode}
+		where m_no= #{mNo}
+	</update>
+	
+	<select id="selectMemberListBasic" resultMap="memberResultSet">
+		select * 
+		from member
+			left join Job using(j_code)
+        	left join department using(d_code)
+       	order by m_no desc
+	</select>
+	
+	<select id="selectInputName" resultMap="memberResultSet">
+		select * 
+		from member
+			left join Job using(j_code)
+        	left join department using(d_code)
+        where m_name like '%' || #{inputName} || '%'
+       	order by m_no desc
+	</select>
 	
 	
 	

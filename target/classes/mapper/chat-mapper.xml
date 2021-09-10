@@ -9,7 +9,7 @@
 	</select>
 
 	<select id="chatMsgList" resultMap="chatMsgResultSet">
-		select c_msg_no, c_msg_writer, c_msg_room_no, c_msg_content, m_name
+		select c_msg_no, c_msg_writer, c_msg_room_no, c_msg_content, m_name, c_msg_date
 		from chatmessage join member on (c_msg_writer = m_no)
 		where c_msg_room_no = #{cRoomNo}
 		order by c_msg_no
@@ -21,6 +21,7 @@
 		<result column="c_msg_content" property="cMsgContent"/>
 		<result column="c_msg_room_no" property="cMsgRoomNo"/>
 		<result column="m_name" property="cMsgWriterName"/>
+		<result column="c_msg_date" property="cMsgDate"/>
 	</resultMap>
 	
 	<insert id="createChatRoom">
@@ -30,7 +31,7 @@
 	
 	<insert id="insertChatMsg">
 		insert into chatmessage
-		values(chat_msg_seq.nextval, #{cMsgWriterNo}, #{cMsgRoomNo}, #{cMsgContent})
+		values(chat_msg_seq.nextval, #{cMsgWriterNo}, #{cMsgRoomNo}, #{cMsgContent}, default)
 	</insert>
 	
 	<select id="getChatRoomList" resultMap="chatRoomResultSet">
@@ -62,6 +63,13 @@
 	
 	<select id="getPName" resultType="string">
 		select m_name from member where m_no = #{participant}
+	</select>
+	
+	<select id="firstMsgList" resultMap="chatMsgResultSet">
+		select c_msg_no, c_msg_writer, c_msg_room_no, c_msg_content, m_name, c_msg_date
+		from chatmessage join member on (c_msg_writer = m_no)
+		where c_msg_room_no = #{cRoomNo} and
+		c_msg_no = (select max(c_msg_no) from chatmessage)
 	</select>
 	
 	

@@ -52,19 +52,20 @@
 		<result column="msg_date" property="msgDate"/>
 		<result column="msg_read" property="msgRead"/>
 		<result column="msg_sec_no" property="msgSecNo"/>
+		<result column="msg_writer_no" property="msgWriterMNo"/>
 	</resultMap>
 	
 	<select id="selectMList" resultMap="memberResultSet">
 		select *
-		from member
+		from member join job using(j_code) join department using(d_code)
 		where m_name like '%' || #{receiver} || '%'
 	</select>
 	
 	<resultMap type="Member" id="memberResultSet">
 		<id column="m_no" property="mNo"/>
 		<result column="m_name" property="mName"/>
-		<result column="j_code" property="jCode"/>
-		<result column="d_code" property="dCode"/>
+		<result column="j_name" property="jName"/>
+		<result column="d_name" property="dName"/>
 	</resultMap>
 	
 	<insert id="insertMsg">
@@ -85,7 +86,7 @@
 	</insert>
 	
 	<select id="selectMsg" resultMap="msgResultSet">
-		select msg_no, msg_title, msg_content, msg_date, msg_sec_no, msg_writer, m_name
+		select msg_no, msg_title, msg_content, msg_date, msg_sec_no, msg_writer, m_name, msg_writer_no
 		from message join member on (msg_receiver_no = m_no)
 			  where msg_status='Y' and msg_sec_no = #{msgSecNo}
 	</select>
