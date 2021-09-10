@@ -47,4 +47,17 @@ public class ChatDAO {
 		return sqlSession.selectOne("chat-mapper.getPName", participant);
 	}
 
+	public ArrayList<ChatMessage> firstMsgList(SqlSessionTemplate sqlSession, ArrayList<Integer> roomNoList) {
+		
+		ArrayList<ChatMessage> msgList = new ArrayList<ChatMessage>();
+		for(Integer i : roomNoList) {
+			ChatMessage msg = sqlSession.selectOne("chat-mapper.firstMsgList", i);
+			if(msg != null) {
+				msgList.add(msg);				
+			}
+		}
+		
+		return msgList;
+	}
+
 }

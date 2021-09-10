@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.kh.DAYWORK.chat.model.service.ChatService;
 import com.kh.DAYWORK.chat.model.vo.ChatMessage;
@@ -67,7 +68,8 @@ public class ChatController {
 		map.put("chatMsgList", chatMsgList);
 		map.put("chatRoom", crList);
 		
-		Gson gson = new Gson();
+		GsonBuilder gb = new GsonBuilder().setDateFormat("hh:mm");
+		Gson gson  = gb.create();
 		response.setContentType("application/json; charset=UTF-8");
 		
 		if(cr1 != null || cr2 != null) {
@@ -120,6 +122,17 @@ public class ChatController {
 		
 		ArrayList<ChatRoom> crList = chatService.getChatRoomList(mNo);
 		
+		ArrayList<Integer> roomNoList = new ArrayList<Integer>();
+		for(ChatRoom cr : crList) {
+			roomNoList.add(cr.getcRoomNo());
+		}
+		
+		ArrayList<ChatMessage> msgList = chatService.firstMsgList(roomNoList);
+		
+		HashMap<String, ArrayList> map = new HashMap<String, ArrayList>();
+		map.put("crList", crList);
+		map.put("msgList", msgList);
+		System.out.println(msgList);
 //		for(int i = 0; i < crList.size(); i++) {
 //			ChatRoom cr1 = crList.get(i);
 //			
@@ -150,12 +163,13 @@ public class ChatController {
 //			crInfo.add(chatInfo);
 //		}
 		
-		Gson gson = new Gson();
+		GsonBuilder gb = new GsonBuilder().setDateFormat("MM-dd hh:mm");
+		Gson gson  = gb.create();
 		response.setContentType("application/json; charset=UTF-8");
 		
 		if(crList != null && crList.size() > 0) {
 			try {
-				gson.toJson(crList, response.getWriter());
+				gson.toJson(map, response.getWriter());
 			} catch (JsonIOException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -242,7 +256,8 @@ public class ChatController {
 		map.put("chatMsgList", chatMsgList);
 		map.put("chatRoom", crList);
 		
-		Gson gson = new Gson();
+		GsonBuilder gb = new GsonBuilder().setDateFormat("hh:mm");
+		Gson gson  = gb.create();
 		response.setContentType("application/json; charset=UTF-8");
 		
 		if(cr1 != null) {

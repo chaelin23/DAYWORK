@@ -1,6 +1,7 @@
 package com.kh.DAYWORK.collabo.model.vo;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class Collabo {
 	private int cNo;
@@ -17,12 +18,15 @@ public class Collabo {
 	private Date bModifyDate;
 	private String bWriter;
 	private String fbStatus;
+	private String[] inputmember;
 	
 	public Collabo() {}
+	
+	
 
 	public Collabo(int cNo, int cBNo, int cMNo, Date cStartDate, Date cEndDate, String cPeople, String cFirst,
 			String cBctNo, String cBctStatus, String bTitle, String bContent, Date bModifyDate, String bWriter,
-			String fbStatus) {
+			String fbStatus, String[] inputmember) {
 		super();
 		this.cNo = cNo;
 		this.cBNo = cBNo;
@@ -38,7 +42,10 @@ public class Collabo {
 		this.bModifyDate = bModifyDate;
 		this.bWriter = bWriter;
 		this.fbStatus = fbStatus;
+		this.inputmember = inputmember;
 	}
+
+
 
 	public int getcNo() {
 		return cNo;
@@ -152,13 +159,25 @@ public class Collabo {
 		this.fbStatus = fbStatus;
 	}
 
+	public String[] getInputmember() {
+		return inputmember;
+	}
+
+	public void setInputmember(String[] inputmember) {
+		this.inputmember = inputmember;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Collabo [cNo=" + cNo + ", cBNo=" + cBNo + ", cMNo=" + cMNo + ", cStartDate=" + cStartDate
 				+ ", cEndDate=" + cEndDate + ", cPeople=" + cPeople + ", cFirst=" + cFirst + ", cBctNo=" + cBctNo
 				+ ", cBctStatus=" + cBctStatus + ", bTitle=" + bTitle + ", bContent=" + bContent + ", bModifyDate="
-				+ bModifyDate + ", bWriter=" + bWriter + ", fbStatus=" + fbStatus + "]";
+				+ bModifyDate + ", bWriter=" + bWriter + ", fbStatus=" + fbStatus + ", inputmember="
+				+ Arrays.toString(inputmember) + "]";
 	}
 
-		
+	
+	
 }

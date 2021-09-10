@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -70,7 +70,13 @@ public class CollaboController {
 	@RequestMapping("insertCollabo.co")
 	@ResponseBody 
 	public String insertCollabo(@ModelAttribute Collabo co,
-								@ModelAttribute Board bo) {
+								@ModelAttribute Board bo,
+								@RequestParam("inputMember[]") List<String> inputMember) {
+		String cPeople = "";
+		for(int i=0; i < inputMember.size(); i++) {
+			cPeople += inputMember.get(i);
+		}
+		co.setcPeople(cPeople);
 		int result = cService.insertCollabo(co, bo);
 		if(result>0) {
 			return"success";
@@ -210,10 +216,10 @@ public class CollaboController {
 	
 	@RequestMapping("selcetMemberList.co")
 	@ResponseBody
-	public void selectMemberList(HttpServletResponse response) {
+	public void selectMemberList(@RequestParam("inputString") String inputString,HttpServletResponse response) {
 		response.setContentType("application/json; charset=UTF-8");
 		
-		ArrayList<Member>mList = cService.selectMemberList();
+		ArrayList<Member>mList = cService.selectMemberListC(inputString);
 		
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson  = gb.create();
@@ -226,5 +232,18 @@ public class CollaboController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping("deleteCollabo.co")
+	@ResponseBody
+	public String deleteCollabo(@RequestParam("cBNo")int cBNo) {
+		int result = cService.deleteCollabo(cBNo);
+		
+		if(result>0) {
+			return "success";
+		} else {
+			throw new CollaboException("게시글 삭제에 실패하였습니다.");
+		}
+	}
+	
 	
 }

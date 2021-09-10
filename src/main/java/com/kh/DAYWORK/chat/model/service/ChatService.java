@@ -70,5 +70,9 @@ public class ChatService {
 	public ChatRoom selectChatRoom(int roomNo) {
 		return chatDAO.selectChatRoom(sqlSession, roomNo);
 	}
+
+	public ArrayList<ChatMessage> firstMsgList(ArrayList<Integer> roomNoList) {
+		return chatDAO.firstMsgList(sqlSession, roomNoList);
+	}
 	
 }

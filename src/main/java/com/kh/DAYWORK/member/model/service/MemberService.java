@@ -21,7 +21,7 @@ public class MemberService {
 	private MemberDAO mDAO;
 	
 	
-	public int insertMember(Member m) {
+public int insertMember(Member m) {
 		
 		return mDAO.insertMember(sqlSession, m);
 	}
@@ -79,7 +79,31 @@ public class MemberService {
 	public int updateBtnY(int mNo) {
 		return mDAO.updateBtnY(sqlSession, mNo);
 	}
+
+
+	public int updateDeptJob(Member m) {
+		return mDAO.updateDeptJob(sqlSession, m);
+	}
+
+
+	public ArrayList<Member> selectMemberList() {
+		return mDAO.selectMemberList(sqlSession);
+	}
+
+
+	public ArrayList<Member> selectInputName(String inputName, MemberPageInfo mpi) {
+		return mDAO.selectInputName(sqlSession, inputName, mpi);
+	}
 	
+	public int updatePwd(Member user) {
+		return mDAO.updatePwd(sqlSession, user);
+	}
+	
+	
+	
+
+	
+	// commute 관련
 	public int workStart(int mNo) {
 		return mDAO.workStart(sqlSession, mNo);
 	}
@@ -95,6 +119,8 @@ public class MemberService {
 	public Commute selectTime(int mNo) {
 		return mDAO.selectTime(sqlSession, mNo);
 	}
+
+
 
 
 

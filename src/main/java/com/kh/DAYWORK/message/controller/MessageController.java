@@ -167,7 +167,12 @@ public class MessageController {
 	}
 	
 	@RequestMapping("goMessageWrite.msg")
-	public String msgWrite() {
+	public String msgWrite(@RequestParam(value="mNo", required=false) int mNo,
+						   @RequestParam(value="mWriter", required=false) String mWriter,
+						   @RequestParam(value="msgTitle", required=false) String msgTitle, Model m) {
+		m.addAttribute("mNo", mNo)
+		 .addAttribute("mWriter", mWriter)
+		 .addAttribute("msgTitle", msgTitle);
 		return "messageWriteForm";
 	}
 	

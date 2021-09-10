@@ -1,6 +1,7 @@
 package com.kh.DAYWORK.board.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.DAYWORK.board.model.dao.BoardDAO;
 import com.kh.DAYWORK.board.model.vo.Board;
+import com.kh.DAYWORK.board.model.vo.Reply;
 import com.kh.DAYWORK.common.BMsgFile;
 
 @Service("bService")
@@ -80,7 +82,51 @@ public class BoardService {
 		bDAO.deleteFile(sqlSession, deleteFiles);
 	}
 
+	public int searchBListCount(HashMap<String, String> map) {
+		return bDAO.searchBListCount(sqlSession, map);
+	}
 
+	public ArrayList<Board> searchBList(HashMap<String, String> map) {
+		return bDAO.serachBList(sqlSession, map);
+	}
+
+	public int deleteBoard(int bNo) {
+		int result = bDAO.deleteBoard(sqlSession, bNo);
+		
+		if(result > 0) {
+			result = bDAO.deleteFileBNo(sqlSession, bNo);
+		}
+		return result;
+	}
+
+	public ArrayList<Reply> insertReply(Reply reply) {
+		
+		int result = bDAO.insertReply(sqlSession, reply);
+		ArrayList<Reply> r = null;
+		
+		if(result > 0) {
+			r = selectRList(reply.getrBNo());
+		}
+		
+		return r;
+	}
+	
+	public ArrayList<Reply> selectRList(int bNo) {
+		return bDAO.selectRList(sqlSession, bNo);
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

@@ -2,11 +2,14 @@ package com.kh.DAYWORK.board.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +30,11 @@ import com.google.gson.JsonIOException;
 import com.kh.DAYWORK.board.model.exception.BoardException;
 import com.kh.DAYWORK.board.model.service.BoardService;
 import com.kh.DAYWORK.board.model.vo.Board;
+import com.kh.DAYWORK.board.model.vo.Reply;
+import com.kh.DAYWORK.chat.model.vo.ChatMessage;
+import com.kh.DAYWORK.chat.model.vo.ChatRoom;
 import com.kh.DAYWORK.common.BMsgFile;
+import com.kh.DAYWORK.member.model.service.MemberService;
 import com.kh.DAYWORK.member.model.vo.Member;
 
 @Controller
@@ -35,6 +42,8 @@ public class BoardController {
 
 	@Autowired
 	private BoardService bService;
+	@Autowired
+	private MemberService mService;
 	
 
 	@RequestMapping("boardList.bo")
@@ -62,8 +71,36 @@ public class BoardController {
 			endPage = maxPage;
 		}
 		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = Calendar.getInstance();
+		
+		calendar.add(calendar.DATE, -7);
+		String year = calendar.get(Calendar.YEAR) + "";
+		String month = calendar.get(Calendar.MONTH) + 1 + "";
+		String day = calendar.get(Calendar.DATE) + "";
+		String today = year + "-" + month + "-" + day;
+		
+		ArrayList<Board> bList2 = new ArrayList<Board>(); 
+		for(Board b : bList) {
+			Date boardDate = b.getbCreateDate();			
+			String boardDay = dateFormat.format(boardDate);
+			int result = 1;
+			try {
+				Date boardDate2 = dateFormat.parse(boardDay);
+				Date date = dateFormat.parse(today);
+				
+				result = boardDate2.compareTo(date);
+				if(result == 0) result = 1;
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			b.setBoardNew(result);
+			bList2.add(b);
+		}
+        
 		if(bList != null) {
-			m.addAttribute("bList", bList)
+			m.addAttribute("bList2", bList2)
 			.addAttribute("maxPage", maxPage)
 			.addAttribute("startPage", startPage)
 			.addAttribute("endPage", endPage)
@@ -159,15 +196,28 @@ public class BoardController {
 	}
 	
 	@RequestMapping("bdetail.bo")
-	public String selectBoard(@RequestParam("bNo") int bNo, @RequestParam("currentPage") int currentPage, Model m) {
+	public String selectBoard(@RequestParam("bNo") int bNo, @RequestParam("currentPage") int currentPage, Model m, HttpServletResponse response) {
 		Board b = bService.selectBoard(bNo, true);
 		ArrayList<BMsgFile> files = bService.selectFile(bNo);
+		ArrayList<Reply> r = bService.selectRList(bNo);
+		
+		GsonBuilder gb = new GsonBuilder().setDateFormat("MM-dd");
+		Gson gson  = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
 		
 		if(b != null) {
-			m.addAttribute("b", b);
-			m.addAttribute("files", files);
-			m.addAttribute("currentPage", currentPage);
-			return "boardDetail";
+			int mNo = b.getbMNo();
+			Member member = mService.selectMember(mNo);
+			if(member != null) {
+				m.addAttribute("b", b)
+				 .addAttribute("files", files)
+				 .addAttribute("currentPage", currentPage)
+				 .addAttribute("member", member)
+				 .addAttribute("r", gson.toJson(r));
+				return "boardDetail";				
+			} else {
+				throw new BoardException("게시글 상세보기 실패");
+			}
 		} else {
 			throw new BoardException("게시글 상세보기 실패");
 		}
@@ -271,6 +321,123 @@ public class BoardController {
 		}
 	}
 	
+	@RequestMapping("searchBoardList.bo")
+	public String searchBoardList(@RequestParam(value="page", required=false) Integer page,  Model m, @RequestParam String type, @RequestParam String search) {
+		
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("type", type);
+		map.put("search", search);
+		map.put("currentPage", ((currentPage-1) * 10) + "");
+		
+		
+		int listCount = bService.searchBListCount(map);
+		ArrayList<Board> bList = bService.searchBList(map);
+		
+		int maxPage;
+		if(listCount % 10 == 0) {
+			maxPage = listCount / 10;
+		} else {
+			maxPage = listCount / 10 + 1;
+		}
+		
+		int startPage = (currentPage - 1) / 10 * 10 + 1;
+		
+		int endPage = startPage + 10 - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = Calendar.getInstance();
+		
+		calendar.add(calendar.DATE, -7);
+		String year = calendar.get(Calendar.YEAR) + "";
+		String month = calendar.get(Calendar.MONTH) + 1 + "";
+		String day = calendar.get(Calendar.DATE) + "";
+		String today = year + "-" + month + "-" + day;
+		
+		ArrayList<Board> bList2 = new ArrayList<Board>(); 
+		for(Board b : bList) {
+			Date boardDate = b.getbCreateDate();			
+			String boardDay = dateFormat.format(boardDate);
+			int result = 1;
+			try {
+				Date boardDate2 = dateFormat.parse(boardDay);
+				Date date = dateFormat.parse(today);
+				
+				result = boardDate2.compareTo(date);
+				if(result == 0) result = 1;
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			b.setBoardNew(result);
+			bList2.add(b);
+		}
+		
+		if(bList != null) {
+			m.addAttribute("bList2", bList2)
+			.addAttribute("maxPage", maxPage)
+			.addAttribute("startPage", startPage)
+			.addAttribute("endPage", endPage)
+			.addAttribute("currentPage", currentPage);
+			return "board";
+		} else {
+			throw new BoardException("없는 페이지 입니다.");
+		}
+		
+	}
+	
+	@RequestMapping("bDelete.bo")
+	public String goBoardUpdate(@RequestParam("bNo") int bNo, HttpServletRequest request, @RequestParam(value="files", required=false) String[] files) {
+		int result = bService.deleteBoard(bNo);
+		
+		ArrayList<BMsgFile> deleteList = new ArrayList<BMsgFile>();
+		for(String d : files) {
+			BMsgFile bmsg = new BMsgFile();
+			bmsg.setfRename(d);
+			deleteList.add(bmsg);
+		}
+		
+		if(result > 0) {
+			deleteFile(request, deleteList, "/buploadFiles");
+			return "redirect:boardList.bo";			
+		} else {
+			throw new BoardException("삭제에 실패하였습니다.");	
+		}
+	}
+	
+	@RequestMapping("insertReply.bo")
+	@ResponseBody
+	public void insertReply(@RequestParam("mNo") int mNo, @RequestParam("bNo") int bNo, 
+						    @RequestParam("content") String content, HttpServletResponse response) {
+		
+		Reply reply = new Reply();
+		reply.setrMNo(mNo);
+		reply.setrBNo(bNo);
+		reply.setrContent(content);
+		
+		ArrayList<Reply> r = bService.insertReply(reply);
+		
+		GsonBuilder gb = new GsonBuilder().setDateFormat("MM-dd");
+		Gson gson  = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		
+		if(r != null) {
+			try {
+				gson.toJson(r, response.getWriter());
+			} catch (JsonIOException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	
 	

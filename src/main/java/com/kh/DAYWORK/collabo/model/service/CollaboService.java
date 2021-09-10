@@ -50,15 +50,14 @@ public class CollaboService {
 	public ArrayList<Collabo> selectCollaboCate(Collabo co) {
 		ArrayList<Collabo> cList = new ArrayList<Collabo>();
 		String cBctNo = co.getcBctNo();
-		String cMNo = co.getcMNo() + "";
+		String cMNo = co.getcMNo()+"";
 		
 		
-		if(cBctNo == cMNo) {
-			cList = cDAO.selectCateCMNo(sqlSession, cMNo);
-		} else if(cBctNo != cMNo){
-			cList = cDAO.selectCateCBctNo(sqlSession, cBctNo);
+		if(cBctNo.equals(cMNo)){
+			cList = cDAO.selectCateCMNo(sqlSession, co);
+		} else if(cBctNo.equals("C1") || cBctNo.equals("C2") || cBctNo.equals("C3") || cBctNo.equals("C4") || cBctNo.equals("C5")) {
+				cList = cDAO.selectCateCBctNo(sqlSession, co);
 		}
-		
 		
 		return cList;
 	}
@@ -81,8 +80,12 @@ public class CollaboService {
 		return cDAO.selectFeedback(sqlSession, fCNo);
 	}
 
-	public ArrayList<Member> selectMemberList() {
-		return cDAO.selectMemberList(sqlSession);
+	public ArrayList<Member> selectMemberListC(String inputString) {
+		return cDAO.selectMemberListC(sqlSession, inputString);
+	}
+
+	public int deleteCollabo(int cBNo) {
+		return cDAO.deleteCollabo(sqlSession, cBNo);
 	}
 
 

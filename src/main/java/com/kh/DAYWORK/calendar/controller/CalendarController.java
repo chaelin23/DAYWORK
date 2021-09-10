@@ -25,7 +25,10 @@ import com.kh.DAYWORK.member.model.vo.Member;
 public class CalendarController {
 	
 	@Autowired
-	private CalendarService calService;	
+	private CalendarService calService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcrypt;
 	
 	@RequestMapping("calendar.ca")
 	public String calendarForm() {

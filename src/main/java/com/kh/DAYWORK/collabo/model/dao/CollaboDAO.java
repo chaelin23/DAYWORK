@@ -42,12 +42,12 @@ public class CollaboDAO {
 		sqlSession.update("collabo-mapper.updateCollaboC", co);
 	}
 
-	public ArrayList<Collabo> selectCateCBctNo(SqlSessionTemplate sqlSession, String cBctNo) {
-		return (ArrayList)sqlSession.selectList("collabo-mapper.selectCateCBctNo", cBctNo);
+	public ArrayList<Collabo> selectCateCBctNo(SqlSessionTemplate sqlSession, Collabo co) {
+		return (ArrayList)sqlSession.selectList("collabo-mapper.selectCateCBctNo", co);
 	}
 
-	public ArrayList<Collabo> selectCateCMNo(SqlSessionTemplate sqlSession, String cMNo) {
-		return (ArrayList)sqlSession.selectList("collabo-mapper.selectCateCMNo", cMNo);
+	public ArrayList<Collabo> selectCateCMNo(SqlSessionTemplate sqlSession, Collabo co) {
+		return (ArrayList)sqlSession.selectList("collabo-mapper.selectCateCMNo", co);
 	}
 	
 	public int updateFBStatus(SqlSessionTemplate sqlSession, Feedback fb) {
@@ -67,8 +67,12 @@ public class CollaboDAO {
 		return sqlSession.selectOne("collabo-mapper.selectCollabo", fCNo);
 	}
 
-	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("collabo-mapper.selectMemberList");
+	public ArrayList<Member> selectMemberListC(SqlSessionTemplate sqlSession, String inputString) {
+		return (ArrayList)sqlSession.selectList("collabo-mapper.selectMemberListC", inputString);
+	}
+
+	public int deleteCollabo(SqlSessionTemplate sqlSession, int cBNo) {
+		return sqlSession.update("collabo-mapper.deleteCollabo", cBNo);
 	}
 
 	

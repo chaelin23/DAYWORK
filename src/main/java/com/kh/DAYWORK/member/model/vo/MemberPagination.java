@@ -8,7 +8,7 @@ public class MemberPagination {
 		int maxPage;
 		int startPage;
 		int endPage;
-		int boardLimit = 5;
+		int boardLimit = 14;
 		
 		maxPage = (int)Math.ceil((double)listCount / boardLimit); 
 		startPage =  ((currentPage-1)/pageLimit) * pageLimit + 1;

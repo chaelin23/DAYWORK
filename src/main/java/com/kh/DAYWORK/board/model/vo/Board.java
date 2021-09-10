@@ -14,6 +14,7 @@ public class Board {
 	private String bStatus;
 	private int bMNo;
 	private String mName;
+	private int boardNew;
 	
 	public Board() {}
 
@@ -121,11 +122,20 @@ public class Board {
 		this.bMNo = bMNo;
 	}
 
+	public int getBoardNew() {
+		return boardNew;
+	}
+
+	public void setBoardNew(int boardNew) {
+		this.boardNew = boardNew;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [bNo=" + bNo + ", bDept=" + bDept + ", bTitle=" + bTitle + ", bContent=" + bContent
 				+ ", bCreateDate=" + bCreateDate + ", bModifyDate=" + bModifyDate + ", bCount=" + bCount + ", bType="
-				+ bType + ", bStatus=" + bStatus + ", bMNo=" + bMNo + ", mName=" + mName + "]";
+				+ bType + ", bStatus=" + bStatus + ", bMNo=" + bMNo + ", mName=" + mName + ", boardNew=" + boardNew
+				+ "]";
 	}
 	
 }

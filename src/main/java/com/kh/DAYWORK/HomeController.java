@@ -28,4 +28,9 @@ public class HomeController {
 		return "index";
 	}
 	
+	@RequestMapping("/reload.do")
+	public String reload() {
+		return "redirect:calendar.ca";
+	}
+	
 }

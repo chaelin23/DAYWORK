@@ -1,11 +1,13 @@
 package com.kh.DAYWORK.board.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.DAYWORK.board.model.vo.Board;
+import com.kh.DAYWORK.board.model.vo.Reply;
 import com.kh.DAYWORK.common.BMsgFile;
 
 @Repository("bDAO")
@@ -62,6 +64,32 @@ public class BoardDAO {
 		
 		return result;
 	}
+
+	public int searchBListCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("board-mapper.searchBListCount", map);
+	}
+
+	public ArrayList<Board> serachBList(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return (ArrayList)sqlSession.selectList("board-mapper.searchBList", map);
+	}
+
+	public int deleteBoard(SqlSessionTemplate sqlSession, int bNo) {
+		return sqlSession.update("board-mapper.deleteBoard", bNo);
+	}
+
+	public int deleteFileBNo(SqlSessionTemplate sqlSession, int bNo) {
+		return sqlSession.delete("board-mapper.deleteFileBNo", bNo);
+	}
+
+	public int insertReply(SqlSessionTemplate sqlSession, Reply reply) {
+		return sqlSession.insert("board-mapper.insertReply", reply);
+	}
+
+	public ArrayList<Reply> selectRList(SqlSessionTemplate sqlSession, int bNo) {
+		return (ArrayList)sqlSession.selectList("board-mapper.selectRList", bNo);
+	}
+	
+	
 
 
 }
