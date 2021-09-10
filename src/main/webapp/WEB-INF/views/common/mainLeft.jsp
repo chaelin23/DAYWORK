@@ -104,7 +104,7 @@
 					<div class="cate-collabo-p" onclick="location.href='workBox.co'">업무공유</div>
 				</div>			
 				<div class="cate day">
-					<div class="cate-day-p">근태관리</div>
+					<div class="cate-day-p" onclick="location.href='workManage.me'">근태관리</div>
 				</div>				
 				<div class="cate message">
 					<div class="cate-message" onclick="location.href='msgAllList.msg'">메세지</div>
@@ -185,7 +185,6 @@
 							var addHtml = '';
 							
 							addHtml += "<div class='chat-memberList-item'>" + member.mName;
-							addHtml += "(" + member.dName + " / " + member.jName + ")";
 							addHtml += "<input type='hidden' value='" + member.mNo + "'>";
 							addHtml += "</div>";
 							
@@ -221,7 +220,6 @@
 							var addHtml = '';
 							
 							addHtml += "<div class='chat-memberList-item2'>" + member.mName;
-							addHtml += "(" + member.dName + " / " + member.jName + ")";
 							addHtml += "<input type='hidden' value='" + member.mNo + "'>";
 							addHtml += "</div>";
 							
@@ -296,13 +294,11 @@
 								
 								if(msg.cMsgWriterNo == loginUserNo) {
 									addHtml += "<div class='chatRight'>";
-									addHtml += "<div class='chatMsgTime'>" + msg.cMsgDate + "</div>";
 									addHtml += "<span class='chatRight_msg'>" + msg.cMsgContent + "</span></div>";
 								} else {
 									addHtml += "<div class='chatLeft'>";
 									addHtml += "<div class='chatUser'>" + msg.cMsgWriterName + "</div>";
-									addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg.cMsgContent + "</span>";
-									addHtml += "<div class='chatMsgTime'>" + msg.cMsgDate + "</div></div></div>";
+									addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg.cMsgContent + "</span></div></div>";
 								}
 								$('.chatContent').append(addHtml);
 							}
@@ -367,23 +363,17 @@
 			
 			webSocket.onmessage = function(message) {
 				var msg = message.data.split("/");
-				let date = new Date();
-				let hours = ('0' + date.getHours()).slice(-2); 
-				let minutes = ('0' + date.getMinutes()).slice(-2);
-				let time = hours + ':' + minutes;
-
+				
 				if(msg[2] == roomNo) {
 					if(msg[0] == ${ loginUser.mNo }) {
 						var addHtml = "<div class='chatRight'>";
-						addHtml += "<div class='chatMsgTime'>" + time + "</div>";
 						addHtml += "<span class='chatRight_msg'>" + msg[3] + "</span></div>";
 						$('.chatContent').append(addHtml);
 						scrollTop();
 					} else {
 						var addHtml = "<div class='chatLeft'>";
 						addHtml += "<div class='chatUser'>" + msg[1] + "</div>";
-						addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg[3] + "</span>";
-						addHtml += "<div class='chatMsgTime'>" + time + "</div></div></div>";
+						addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg[3] + "</span></div></div>";
 						$('.chatContent').append(addHtml);
 						scrollTop();
 					}
@@ -404,10 +394,7 @@
 			   !$(e.target).hasClass('msg-write-receiver-input') && !$(e.target).hasClass('chatRoomList') &&
 			   !$(e.target).hasClass('main-chat-button') && !$(e.target).hasClass('chatRoomItemBox') && 
 			   !$(e.target).hasClass('chatMsgWrite') && !$(e.target).hasClass('chatMsgSendBtn') &&
-			   !$(e.target).hasClass('chatPlusBtn') && !$(e.target).hasClass('chat-memberList-item2') && 
-			   !$(e.target).hasClass('main-chat-text2') && !$(e.target).hasClass('chatRoomUser') &&
-			   !$(e.target).hasClass('chatRoomMsg') && !$(e.target).hasClass('chatProfileImg') &&
-			   !$(e.target).hasClass('chatRoomItem')) {
+			   !$(e.target).hasClass('chatPlusBtn') && !$(e.target).hasClass('chat-memberList-item2') && !$(e.target).hasClass('main-chat-text2')) {
 				
 				$('.msg-write-memberList').removeClass('active');
 				$('.chatRoom').removeClass('active');		
@@ -437,40 +424,30 @@
 						var addHtml = "<div>채팅방이 없습니다.</div>";
 						$('.chatRoomList').append(addHtml);
 					} else {
-						const crList = data["crList"];
-						const msgList = data["msgList"];
-						
-						for(let i in crList) {
-							let room = crList[i];
-							let pList1 = room.cRoomPName.split(",");
-							let mName = room.cRoomMName;
-							let loginUserName = "${ loginUser.mName }";
-							let pList2 = "";
+						for(var i in data) {
+							var room = data[i];
+							var pList1 = room.cRoomPName.split(",");
+							var mName = room.cRoomMName;
+							var loginUserName = "${ loginUser.mName }";
+							var pList2 = "";
 							
 							pList1.pop();
 							pList1.push(mName);
 							
-							for(let j = 0; j < pList1.length; j++) {
-								if(pList1[j] != loginUserName) {
-									pList2 += pList1[j] + ", ";
+							for(var i = 0; i < pList1.length; i++) {
+								if(pList1[i] != loginUserName) {
+									pList2 += pList1[i] + ", ";
 								}
 							}
 							pList2 = pList2.substring(0, pList2.lastIndexOf(","));
 							
-							let addHtml = "<div class='chatRoomItemBox'>";
+							var addHtml = "<div class='chatRoomItemBox'>";
 							addHtml += "<div class='chatProfileImg'></div>";
 							addHtml += "<div class='chatRoomItem'>"
 							addHtml += "<div class='chatRoomUser'>" + pList2;
 							addHtml += "<input type='hidden' value='" + room.cRoomNo + "'>";
 							addHtml += "<div class='chatRoomTime'></div></div>";
-							for(let j in msgList) {
-								let msg = msgList[j];
-								
-								if(msg.cMsgRoomNo == room.cRoomNo) {
-									addHtml += "<div class='chatRoomMsg'>" + msg.cMsgContent + "</div>";
-									addHtml += "<div class='chatMsgDate'>" + msg.cMsgDate + "</div></div></div>";
-								}
-							}
+							addHtml += "<div class='chatRoomMsg'>" + "메세지 내용" + "</div></div></div>";
 								
 							$('.chatRoomList').append(addHtml);
 						}						
@@ -534,13 +511,11 @@
 								
 								if(msg.cMsgWriterNo == loginUserNo) {
 									addHtml += "<div class='chatRight'>";
-									addHtml += "<div class='chatMsgTime'>" + msg.cMsgDate + "</div>";
 									addHtml += "<span class='chatRight_msg'>" + msg.cMsgContent + "</span></div>";
 								} else {
 									addHtml += "<div class='chatLeft'>";
 									addHtml += "<div class='chatUser'>" + msg.cMsgWriterName + "</div>";
-									addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg.cMsgContent + "</span>";
-									addHtml += "<div class='chatMsgTime'>" + msg.cMsgDate + "</div></div></div>";
+									addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg.cMsgContent + "</span></div></div>";
 								}
 								$('.chatContent').append(addHtml);
 							}
