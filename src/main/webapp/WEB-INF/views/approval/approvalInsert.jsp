@@ -9,13 +9,18 @@
 <link rel="stylesheet" href="resources/css/approval.css">
 <link rel="stylesheet" href="resources/css/index.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"/>
-<link rel ="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
-<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+
 <script src="resources/js/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+
 
 </head>
 <body>
@@ -23,21 +28,21 @@
 <%@ include file="../common/mainLeft.jsp"%>
 <!-- 오른쪽 내용 박스 -->
 	<div class="div-main-right">
+		<form class="form-magin" action="goInsert2.ap" method="post">
 			
 		<div class="toolbar">
-			<button>결재요청</button>
-			<button>취소</button>
+			<input type="submit" id="goInsert" value="결재요청">
+			<button onclick="goBack();">취소</button>
 			<button>미리보기</button>
-			<button class="select-ap">결재자선택</button>
+			<button type="button" class="select-ap">결재자선택</button>
 		</div>
-	<!-- 콘텐츠  큰 네모 -->
 			<section class="content_wrap">
 				<div class="report_type">
 					<div class="form_content">
-				<!-- 보낼내용들 -->
 						<div class="style_form_table">
-							<form class="form-magin">
+<!-- 							<form class="form-magin" action="goInsert2.ap" method="post"> -->
 								<table class="table-line">
+<!-- 								<input type="submit" id="goInsert" value="결재"> -->
 						<!-- 기안자박스  -->
 									<colgroup>
 										<col style="width:90px">
@@ -48,37 +53,40 @@
 									</colgroup>
 									<tbody>
 										<tr>
+											<input type="hidden" value="${approvalForm.afCate}" id="cate" name="apCate">
 											<td class="style-pay-title" colspan="2">${ approvalForm.afTitle }</td>
+											<input type="hidden" name="apTitle" value="${ approvalForm.afTitle }">
 											<td class="top-right-pay" colspan="4">
 												<br>
 													<div class="sign-wrap">
 														<table class="tb-sgin" >
 															<tbody>
 																<tr>
-																	<th class="sign-t">신청</th>
+																<th class="sign-t">결재</th>
 																	<td class="sign-td">
-																		<table class="sign-type1">
-																			<tbody>
-																				<tr class="sign-member">
-																					<td class="sign-rank-wrap">
-																						<span class="sign-rank">부장</span>
-																					</td>
-																				</tr>
-																				<tr>
-																					<td class="sign-name-wrap">
-																						<span class="sign-name">도대담</span>
-																					</td>
-																				</tr>
-																				<tr>
-																					<td>
-																						<span class="sign-data"></span>
-																					</td>
-																				</tr>
-																			</tbody>
-																		</table>
+														<table class="sign-type1">
+															<tbody>
+																<tr>
+																	<td class="sign-name-wrap">
+																	<span class="sign-name" ></span>
+<!-- 																<input type="hidden" name="apReceiver" class="sign-name" value=""> -->
+																	<input type="hidden" name="apReceiver" value="1004">
+																	<input type="hidden" name="asApReceiver" value="1004">
+																	<input type="hidden" name="apLine" value="11">
+																	<input type="hidden" name="asLine" value="11">
+																	<input type="hidden" name="asMName" value="문미미">
+																	<input type="hidden" name="asDName" value="회계관리팀">
+																	<input type="hidden" name="asJName" value="차장">
 																	</td>
 																</tr>
-																
+																<tr>
+																	<td>
+																		<span class="sign-rank"></span>
+																</tr>
+															</tbody>
+														</table>
+																	</td>
+																</tr>
 															</tbody>
 														</table>
 													</div>
@@ -86,69 +94,47 @@
 											</td>
 										</tr>
 										<tr>
-												<td class="writer-box">기안소속</td>
-												<td class="writer-input"><input class="input-box" value="영업1팀" readonly></td>
+											<td class="writer-box">기안소속</td>
+											<td class="writer-input"><input class="input-box" value="${ loginUser.dName} " readonly></td>
 											
-												<td class="writer-box">기안일</td>
-												<td class="writer-input"><input class="input-box" value="2021-08-13(금)" readonly></td>
+											<td class="writer-box">기안일</td>
+											<td class="writer-input"><input class="input-box" readonly></td>
 											
-												<td class="writer-box">문서번호</td>
-												<td class="writer-input"><input class="input-box" value="DW20210817003" readonly></td>
+											<td class="writer-box">문서번호</td>
+											<td class="writer-input"><input class="input-box" readonly></td>
 											
 											</tr>
 											<tr>
 												<td class="writer-box">기안자</td>
-												<td class="writer-input"><input class="input-box" value= "${ loginUser.mName }" readonly></td>
-											
+												<td class="writer-input "><input class="input-box sender" value= "${ loginUser.mName }" readonly></td>
+												<input type="hidden" name ="apSender" value= "${ loginUser.mNo }" readonly>
+												
 												<td class="writer-box">보존연한</td>
-												<td class="writer-input"><input class="input-box" value="5년" readonly></td>
+												<td class="writer-input"><input class="input-box"  name="apKeep" value="5년" readonly></td>
 											
 												<td class="writer-box">비밀등급</td>
 												<td class="writer-input"><input class="input-box" value="1등급" readonly></td>
 											</tr>
+											<tr>
+												<td class="con-cate" style="width:120px" colspan="2" >제 목 </td>
+												<td class="con-title" style="width:230" colspan="4" ><input type="text"  name ="apCtitle" class="input-box" value="제목을 입력하여주세요"> </td>
+												<input type="hidden" name ="apCtitle" value= "${ ap.apCtitle }" readonly>
+											</tr>
 									</tbody>
 								</table>
 								<p>&nbsp;</p>
-						<!-- 내용박스 -->
-										
-										<div id="ap-contents">${ approvalForm.afContent }
-										</div>
-<!-- 								<table class="content-table"> -->
-<!-- 									<colgroup> -->
-<!-- 										<col width="120"> -->
-<!-- 										<col width="230"> -->
-<!-- 										<col width="120"> -->
-<!-- 										<col width="330"> -->
-<!-- 									</colgroup> -->
-<!-- 									<tbody> -->
-<!-- 										<tr> -->
-<!-- 											<td class="con-cate">시행일자</td> -->
-<!-- 											<td class="con-date"><input type="text" class="ipt-editor" value="2021-08-11" style="width: 150px;"></td> -->
-<!-- 											<td class="con-cate">협조부서</td> -->
-<!-- 											<td class="con-dep"><input type="text" class="ipt-editor" value="영업팀" style="width: 150px;" ></td> -->
-<!-- 										</tr>		 -->
-<!-- 										<tr> -->
-<!-- 											<td class="con-cate">합의</td> -->
-<!-- 											<td class="con-dep" colspan="3"><input type="text" class="ipt-editor" value="합의하시죠" ></td> -->
-<!-- 										</tr>		 -->
-<!-- 										<tr> -->
-<!-- 											<td class="con-cate">제목</td> -->
-<!-- 											<td class="con-title" colspan="3"><input type="text" class="ipt-editor" value="필수값입니다"></td> -->
-<!-- 										</tr>		 -->
-<!-- 										<tr> -->
-<!-- 											<td colspan="4" class="editor-text"> -->
-<!--  												<div id="editor"></div> --> 
-<!-- 											</td> -->
-<!-- 										</tr>		 -->
-<!-- 									</tbody> -->
-<!-- 								</table> -->
-								
-							</form>
+			<!-- 내용박스 -->
+								<div id="ap-contents">
+<%-- 								<span name="apContent">${ approvalForm.afContent }</span> --%>
+									<textarea id="summernote" name="apContent">${ approvalForm.afContent }</textarea>
+								</div>
 						</div>
 					</div>
-				</div>
 			</section>
-			<!-- 모달 -->
+		</form>
+	</div>
+
+<!-- 모달 -->
 				<div class="ap-king">
 					<div class="overlay">
 						<div class="go_popup layer_normal" id="popup" style="width: 700px; height: 370px; top: 210px; position: fixed; left: 400px; z-index: 99;">				
@@ -161,7 +147,7 @@
 						<div class="ap-search-wrap">
 								<input onkeyup="filter()" type="text" class="ap-search" id="ap-search" placeholder="이름을 입력하세요">
 								<button type="submit" class="ap-btn">검색</button>
-								<span class="tit_type" >결재자선택</span>
+								<span class="tit_type">결재자선택</span>
 						</div>
 						<!-- 조직도트리 -->
 						<div class="set_wrap">
@@ -169,9 +155,9 @@
 								<div class="content_tab_wrap">
 									<div id="apTree" class="jstree">
 										<ul>
-											<li title="인사관리팀" class="jstree-open hr" id="hr">
+											<li title="인사관리팀" class="jstree-open hr" id="d1">
 												인사관리팀
-												<ul>
+												<ul class="jstree-test">
 													<li class="jstree-leaf" id="hr-team1">
 														문미미 부장
 													</li>
@@ -189,7 +175,7 @@
 													</li>
 												</ul>
 											</li>
-											<li title="회계관리팀" class="jstree-open " id="account">
+											<li title="회계관리팀" class="jstree-open " id="d2">
 												회계관리팀
 												<ul>
 													<li class="jstree-leaf" id="ac-team1">
@@ -209,7 +195,7 @@
 													</li>
 												</ul>
 											</li>
-											<li title="마케팅팀" class="jstree-open" id="market">
+											<li title="마케팅팀" class="jstree-open" id="d3">
 												마케팅팀
 												<ul>
 													<li class="jstree-leaf" id="mk-team1">
@@ -229,10 +215,11 @@
 													</li>
 												</ul>
 											</li>
-											<li title="국내영업팀" class="jstree-open ds" id="doSales">
+											<li title="국내영업팀" class="jstree-open ds" id="d4">
 												국내영업팀
 												<ul>
-													<li class="jstree-leaf" id="ds-team1">
+													<li class="jstree-leaf" id="ds-team1" data-mNo="1002" data-mName="남산" data-dName="영업팀">
+													<input type="hidden" id="1002" name="남산" value="영업팀" >
 														남산 부장
 													</li>
 													<li class="jstree-leaf" id="ds-team2">
@@ -249,7 +236,7 @@
 													</li>
 												</ul>
 											</li>
-											<li title="해외영업팀" class="jstree-open os" id="ovSales">
+											<li title="해외영업팀" class="jstree-open os" id="d5">
 												해외영업팀
 												<ul>
 													<li class="jstree-leaf" id="os-team1">
@@ -269,7 +256,7 @@
 													</li>
 												</ul>
 											</li>
-											<li title="기술지원팀" class="jstree-open tc" id="tech">
+											<li title="기술지원팀" class="jstree-open tc" id="d6">
 												기술지원팀
 												<ul>
 													<li class="jstree-leaf" id="tc-team1">
@@ -288,7 +275,7 @@
 														표우빈 팀원
 												</ul>
 											</li>
-											<li title="총무팀" class="jstree-open ad" id="ad">
+											<li title="총무팀" class="jstree-open ad" id="d7">
 												총무팀
 												<ul>
 													<li class="jstree-leaf" id="ad-team1">
@@ -350,6 +337,12 @@
 													<th class="th1 select1"></th>
 													<th class="th1 select11"></th>
 												</tr>
+												<input type="hidden" name="asMName" value="">
+												<input type="hidden" name="asDName" value="">
+												<input type="hidden" name="asJName" value="">
+												<input type="hidden" name="asLine" value="">
+												
+												<span class="add-person" ></span>
 <!-- 												<tr class="ap-select3 draggable" id="3"> -->
 <!-- 													<th class="th1">2</th> -->
 <!-- 													<th class="th1">결재</th> -->
@@ -381,20 +374,17 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	<script>
-	
-	const editor = new toastui.Editor({
-		  el: document.querySelector('#editor'),
-		  height: '600px',
-		  initialEditType: 'wysiwyg',
-		  previewStyle: 'vertical'
+	$(document).ready(function(){
+	$('#summernote').summernote({
+		height: 500,
+		lang:"ko-KR"
 		});
-	document.querySelector('#ap-contents').insertAdjacentHTML('afterbegin' ,editor.getHtML());
-	console.log(editor.getHTML());
-
+	});
+	
+	
 	</script>
-	<script>	
+	<script>
 	$(document).ready(function(){
 		$('.ap-king').hide();
 		$modal = $('.ap-king');
@@ -414,97 +404,164 @@
 			});
 			
 		});
+	
+	
 
 	
 	$(document).ready(function(){
-			$('#apTree').jstree({
-	 			"plugins" : ["wholerow","checkbox" ,"dnd", "search"],
-// 	 			"plugins" : ["wholerow", "checkbox" ,"dnd"],
-			'core' : { 
-				"check_callback" :true ,
-				'data' : [ 
-					{ "id" : "hr", "parent" : "#", "text" : "인사관리팀" },
-					{ "id" : "account", "parent" : "#", "text" : "회계관리팀" },
-					{ "id" : "market", "parent" : "#", "text" : "마케팅팀" },
-					{ "id" : "doSales", "parent" : "#", "text" : "국내영업팀" },
-					{ "id" : "ovSales", "parent" : "#", "text" : "해외영업팀" },
-					{ "id" : "tech", "parent" : "#", "text" : "기술지원팀" },
-					{ "id" : "ad", "parent" : "#", "text" : "총무팀" },
-					
-					{ "id" : "hr-team1", "parent" : "hr", "text" : "문미미 부장" },
-					{ "id" : "hr-team2", "parent" : "hr", "text" : "류라라 차장" },
-					{ "id" : "hr-team3", "parent" : "hr", "text" : "도대담 과장" },
-					{ "id" : "hr-team4", "parent" : "hr", "text" : "남나눔 대리" },
-					{ "id" : "hr-team5", "parent" : "hr", "text" : "강건강 팀원" },
+		
+		var dList="";
+		 dList= [ 
+			{ "id" : "d1", "parent" : "#", "text" : "인사관리팀" },
+			{ "id" : "d2", "parent" : "#", "text" : "회계관리팀" },
+			{ "id" : "d3", "parent" : "#", "text" : "마케팅팀" },
+			{ "id" : "d4", "parent" : "#", "text" : "국내영업팀" },
+			{ "id" : "d5", "parent" : "#", "text" : "해외영업팀" },
+			{ "id" : "d6", "parent" : "#", "text" : "기술지원팀" },
+			{ "id" : "d7", "parent" : "#", "text" : "총무팀" },
+			
+			{ "id" : "hr-team1", "parent" : "d1", "text" : "문미미" },
+			{ "id" : "hr-team2", "parent" : "d1", "text" : "류라라 차장" },
+			{ "id" : "hr-team3", "parent" : "d1", "text" : "도대담 과장" },
+			{ "id" : "hr-team4", "parent" : "d1", "text" : "남나눔 대리" },
+			{ "id" : "hr-team5", "parent" : "d1", "text" : "강건강 팀원" }
+			    ]; 
+		
+		
+		$('#apTree').jstree({
+ 			"plugins" : ["wholerow","checkbox" ,"dnd", "search"],
+//	 			"plugins" : ["wholerow", "checkbox" ,"dnd"],
+		'core' : { 
+			"check_callback" :true ,
+			'data' : dList
+				
+			
+			},
+			dataType: "json",
+		"search": {
+			"show_only_matches": true,
+			"show_only_matches_children" : true,
 
-					{ "id" : "ac-team1", "parent" : "account", "text" : "박하선 부장" },
-					{ "id" : "ac-team2", "parent" : "account", "text" : "김대호 차장" },
-					{ "id" : "ac-team3", "parent" : "account", "text" : "최관우 과장" },
-					{ "id" : "ac-team4", "parent" : "account", "text" : "이다름 대리" },
-					{ "id" : "ac-team5", "parent" : "account", "text" : "박가람 팀원" },
+		}
+		
+		});
+
+			
+			
+		$.ajax({
+			url:"selectMemebers.ap",
+			dataType:"json",
+			contentType:"application/json; charset=UTF-8",
+			success: function(data){
+				
+				if(data != null){
+				 alert("성공")
+				}
+				
 					
-					{ "id" : "mk-team1", "parent" : "market", "text" : "박겨울 부장" },
-					{ "id" : "mk-team2", "parent" : "market", "text" : "최여름 차장" },
-					{ "id" : "mk-team3", "parent" : "market", "text" : "장가을 과장" },
-					{ "id" : "mk-team4", "parent" : "market", "text" : "김봄 대리" },
-					{ "id" : "mk-team5", "parent" : "market", "text" : "이바다 팀원" },
+ 				$("#apTree").on("changed.jstree", function(e, data){
+ 				for (var i = 0; i < data.length; i++) {
 					
-					{ "id" : "ds-team1", "parent" : "doSales", "text" : "남산 부장" },
-					{ "id" : "ds-team2", "parent" : "doSales", "text" : "한강 차장" },
-					{ "id" : "ds-team3", "parent" : "doSales", "text" : "박마루 과장" },
-					{ "id" : "ds-team4", "parent" : "doSales", "text" : "김우빈 대리" },
-					{ "id" : "ds-team5", "parent" : "doSales", "text" : "윤건 팀원" },
+// 					node.attr{ "id" : "date[i].mNo", "parent" : "data[i].dCode", "text" : "data[i].mName" };		
 					
-					{ "id" : "os-team1", "parent" : "ovSales", "text" : "박초록 부장" },
-					{ "id" : "os-team2", "parent" : "ovSales", "text" : "이하얀 차장" },
-					{ "id" : "os-team3", "parent" : "ovSales", "text" : "오파랑 과장" },
-					{ "id" : "os-team4", "parent" : "ovSales", "text" : "박보라 대리" },
-					{ "id" : "os-team5", "parent" : "ovSales", "text" : "강노랑 팀원" },
 					
-					{ "id" : "tc-team1", "parent" : "tech", "text" : "윤가람 부장" },
-					{ "id" : "tc-team2", "parent" : "tech", "text" : "유하나 차장" },
-					{ "id" : "tc-team3", "parent" : "tech", "text" : "이샛별 과장" },
-					{ "id" : "tc-team4", "parent" : "tech", "text" : "김소리 대리" },
-					{ "id" : "tc-team5", "parent" : "tech", "text" : "표우빈 팀원" },
-					
-					{ "id" : "ad-team1", "parent" : "ad", "text" : "이건희 부장" },
-					{ "id" : "ad-team2", "parent" : "ad", "text" : "유제니 차장" },
-					{ "id" : "ad-team3", "parent" : "ad", "text" : "이시영과장" },
-					{ "id" : "ad-team4", "parent" : "ad", "text" : "서현진 대리" },
-					{ "id" : "ad-team5", "parent" : "ad", "text" : "이지은 팀원" }
-					    ] 
-				},
-			"search": {
-				"show_only_matches": true,
-				"show_only_matches_children" : true,
+// // 				$('.jstree-test').append("<li>"+data[i].mName+ data[i].jName +"</li>");
+							
+				console.log("data[0] mNo :" + data[i].mNo);
+				console.log("members[0] mName :" + data[i].mName);
+				console.log("members[0] dName :" + data[i].dName);
+				console.log("members[0] jName :" + data[i].jName);
+				
+				
+ 					}
+ 				});
 
 			}
 			
-			});
+		});	
+			
+			
+
+
 			
 			
 			$("#apTree").on("changed.jstree", function(e, data){
 				if(data.selected.length){
 					
 					$(data.selected).each(function(idx){
-						var node= data.instance.get_node(data.selected[idx]);
-						console.log('the selected node is:' + node.text);
-						$('.select1').append(node.text);
+						var node= data.instance.get_node(data.selected[idx]);						
+// 						console.log('the selected node is:' + node.text);
+// 						$('.select1').append(node.text);
+						
+						
 						var pNode =data.instance.get_node(data.selected[idx]).parent;
-						console.log(pNode);
-						$('.select11').append(pNode);
+// 						console.log(pNode);
+// 						$('.select11').append(pNode);
+						
+						var mName = $('.select1').append(node.text);
+						var dName = $('.select11').append(pNode);
+						
+						
+						
+						$('.ap-btn').on('click',function addPerson(event){
+							$('.sign-name').append(node.text);
+							$('.sign-rank').append(pNode);
+							
+							
+// 							for(var i =0 ,i<jsonArray.length; i++){
+// 								var data=""
+// 								for(key in jsonArray[i]){
+// 									data +=data += key + " = " + jsonArray[i][key] + " ";
+// 								}
+// 							}
+
+// 							var addhtml='';
+// 								addhtml += '<tr class="ap-select2">';
+// 								addhtml += '<th class="th1">2</th>';
+// 								addhtml += '<th class="th1">'+ mName +'</th>';
+// 								addhtml += '<th class="th1">'+ dName +'</th>';
+// 								addhtml += '</tr>'
+
+// 							$('.add-person').html('');
+// 							$('.add-person').append(addhtml);
+
+ 							});	
 
 					});
-				}
+ 				}
 
 
 			});
 			
+// 			$(document).on('click','#goInsert', function(){
+			
+// 				submit;
+// 			});
+			
+		
+			
+			
+// 			$(document).on('click','#goInsert', function(){
+				
+// 				var apReveiver = $('.sign-name').text();
+// 				var apSender = $('.sender').val();
+// 				var apCate = $('#cate').val();
+// 				var apTitle = $('.style-pay-title').text();
+// 				var apContent = $('#ap-contents').text();
+// // 				var apLine = $('.').text();
+				
+				
+// 				console.log(apReveiver);
+// 				console.log(apSender);
+// 				console.log(apCate);
+// 				console.log(apTitle);
+// 				console.log(apContent);
+				
+// // 				location.href="insertAp.ap?mName="+ mName;	
+// 			});
+
 			
 		});
-	
-	
-	
 	
 
 	</script>
@@ -514,10 +571,7 @@
 // // 			$('.select1').append(get);
 // 			//박하선 부장 김대호 차장 최관우 과장 이다름 대리 박가람 팀원 
 // 			//팀이 선택되서 다가져오게됨 
-			
-			
 // 		});
-	
 // 			$(".ap-btn").on("click", function(){
 // 				$("#apTree").submit(function(event){
 // 					  event.preventDefault();
@@ -528,37 +582,34 @@
 // 					  }else{
 
 // 					   $("#jstree").jstree("search", '');
-
 // 					  }
+// 					 });
+// 			$("#apTree").jstree(".ap-search", searchString);
+// 			});
 
-					  
+	//jstree 검색
+	
+	// 			var node = "test";  
+// 			$('#apTree').jstree(true).search(node);
+	
+// 	 function filter(){
+// 			$(".ap-btn").on("click", function(){
+//  				$("#apTree").submit(function(event){
+// 					  event.preventDefault();
+//  					  var searchString = $('.ap-search').val();
+// 					  if( searchString != ''){
+//  					   $("#jstree").jstree("search", searchString).hide_all();
+
+// 					  }else{
+// 					   $("#jstree").jstree("search", '');
+
+//  					  }
 
 // 					 });
-
-
-				
-// 			$("#apTree").jstree(".ap-search", searchString);
-			
-// 			});
-	
-	 function filter(){
-			$(".ap-btn").on("click", function(){
- 				$("#apTree").submit(function(event){
-					  event.preventDefault();
- 					  var searchString = $('.ap-search').val();
-					  if( searchString != ''){
- 					   $("#jstree").jstree("search", searchString).hide_all();
-
-					  }else{
-					   $("#jstree").jstree("search", '');
-
- 					  }
-
-					 });
 		
-		});
+// 		});
 
-	 };
+// 	 };
 	</script>
 	
 	

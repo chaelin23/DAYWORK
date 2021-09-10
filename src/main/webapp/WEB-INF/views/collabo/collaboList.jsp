@@ -33,7 +33,12 @@
 							<div class="create-content-add">
 								<label>시작일자  :  <input class="new-date-s" type="date" name="cStartDate" value="${dat }"> </label>
 								<label>마감일자  :  <input class="new-date-e" type="date" name="cEndDate"> </label>
-								<label><i class="fas fa-user-check"></i><input class="new-people" type="text" placeholder="참여자를 선택하세요" name="cPeople"></label>
+								<div class="input-people">
+									<i class="fas fa-user-check"></i>
+									<div id="plus-box"></div>
+									<input class="new-people" type="text" placeholder="참여자를 선택하세요" name="cPeople">
+								</div>
+								<div class="selectMemberList"></div>
 							</div>
 							<div class="create-content-content">
 								<textarea class="new-content" rows="10" cols="96" placeholder="글을 작성하세요" name="bContent"></textarea>
@@ -122,6 +127,7 @@
 										<div class="list-box-bottom-margin">
 											<div class="box-bottom-btn-update">
 												<input type="hidden" id="whatcNo" value ="${ c.cNo }">
+												<input type="hidden" id="whatcNo" value ="${ c.cBNo }">
 												<button class="b_call updateBtn" value="C1">요청</button>
 												<button class="b_progress updateBtn" value="C2">진행중</button>
 												<button class="b_finish updateBtn" value="C3">완료</button>
@@ -135,6 +141,7 @@
 													<button class="box-bottom-fdbk">피드백</button>
 												<c:if test="${c.bWriter == loginUser.mName }">
 													<button class="box-bottom-btn-up">수정하기</button>
+													<button class="box-bottom-btn-de">삭제하기</button>
 												</c:if>
 											</div>
 										</div>
@@ -173,9 +180,7 @@
 	</div>
 	</div>
 	
-<!-- 	<div class="selectMemberList"> -->
-<!-- 		<div class="selectMemberList-ajax"></div> -->
-<!-- 	</div> -->
+	
 </body>
 
 <script>
@@ -184,7 +189,7 @@
 			document.getElementById('cNoBox').click();
 	}
 
-
+	var inputMember = [];
 	$('#box-bottom-btn-b').on('click',function(){
 		var bTitle = $('.new-title').val();
 		var cStartDate = $('.new-date-s').val();
@@ -196,7 +201,6 @@
 		var bMNo = ${loginUser.mNo};
 		var cMNo = ${loginUser.mNo};
 		
-		
 		$.ajax({
 			url:'insertCollabo.co',
 			data: {bTitle:bTitle,
@@ -207,26 +211,30 @@
 				   cBctNo:cBctNo,
 				   bDept:bDept,
 				   bMNo:bMNo,
-				   cMNo:cMNo},
+				   cMNo:cMNo,
+				   inputMember:inputMember},
+			dataType: 'text',
 			success: function(data){
 				if(data == 'success'){
 					$('.new-title').val('');
 					$('.new-date-e').val('');
 					$('.new-people').val('');
 					$('.new-content').val('');
+					$('#plus-box').html('');
 					$('input[name="cBctNo"]').prop("checked",false);
 					getCollaboList();
+					inputMember = [];
 				}
 			}
 		});
 	});
 	
 	function getCollaboList(){
+		
 		$.ajax({
 			url:'gocollaboListAjax.co',
 			success: function(data){
-				console.log(data);
-						$('.dd').html('');
+			$('.dd').html('');
 				
 				for(var i=0; i< data.length; i++){
 					var c = data[i];
@@ -274,7 +282,7 @@
 						addHtml += "<div class='list-box-bottom-margin'>";
 						addHtml += "<div class='box-bottom-btn-status' >";
 						addHtml += "<input type='hidden' id='whatcNo' value ='" + c.cNo + "'>";
-						addHtml += "<input type='hidden' id='whatcNo' value ='" + c.cBNo + "'>";
+						addHtml += "<input type='hidden' id='whatcBNo' value ='" + c.cBNo + "'>";
 						addHtml += "<button class='b_call updateBtn' value='C1'>요청</button>";
 						addHtml += "<button class='b_progress updateBtn' value='C2'>진행중</button>";
 						addHtml += "<button class='b_finish updateBtn' value='C3'>완료</button>";
@@ -290,6 +298,7 @@
 						addHtml += "<button class='box-bottom-fdbk'>피드백</button>";
 						if(c.bWriter == '${loginUser.mName}'){
 							addHtml += "<button class='box-bottom-btn-up'>수정하기</button>";
+							addHtml += "<button class='box-bottom-btn-de'>삭제하기</button>";
 						}
 						addHtml += "</div>";
 						addHtml += "</div>";
@@ -379,7 +388,7 @@
 							addHtml += "<div class='list-content-add'>";
 							addHtml += "<label><input class='new2-date-s' type='date' name='cStartDate' value='" + c.cStartDate + "'></label>";
 							addHtml += "<label><input class='new2-date-e' type='date' name='cEndDate' value='" + c.cEndDate + "'></label>";
-							addHtml += "<label><i class='fas fa-user-check'></i><input class='new2-people' type='text' name='cPeople' value='"+ c.cPeople + "'></label>";
+							addHtml += "<label><i class='fas fa-user-check'></i><input class='new2-people' type='text' name='cPeople' value='"+ c.cPeople + "' readonly></label>";
 							addHtml += "</div>";
 							
 							addHtml += "<div class='list-content'>";
@@ -392,7 +401,7 @@
 							
 							addHtml += "<div class='box-bottom-btn-status'>";
 							addHtml += "<input type='hidden' id='whatcNo' value ='" + c.cNo + "'>";
-							addHtml += "<input type='hidden' id='whatcNo' value ='" + c.cBNo + "'>";
+							addHtml += "<input type='hidden' id='whatcBNo' value ='" + c.cBNo + "'>";
 							if(c.cBctNo == 'C1'){
 							addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C1' checked>요청";
 							addHtml += "<input type='radio' class='new2-cBctNo' name = 'cBctNo' value='C2' >진행중";
@@ -449,7 +458,6 @@
 		var cPeople = $(this).parent().parent().parent().parent().children().eq(1).children().eq(1).children().eq(2).children().eq(1).val();
 		var bContent = $(this).parent().parent().parent().parent().children().eq(1).children().eq(2).children().val();
 		var cBctNo = $(this).parent().parent().parent().children().eq(0).children().find('input:radio:checked').val();
-		console.log(cPeople);
 		
 		$.ajax({
 			url:'updateCollabo.co',
@@ -474,27 +482,15 @@
 	$(document).on('click', '.cateBtn', function(){
 		var btn =  $(this).val();
 		var cMNo = $(this).parent().children().eq(0).val();
-		var mName = $(this).parent().children().eq(1).val();
+		var cPeople = $(this).parent().children().eq(1).val();
 		var cBctNo = btn;
-// 		if(btn != 'C1' && btn != 'C2' && btn != 'C3' && btn != 'C4' && btn != 'C5'){
-// 			cMNo = btn;
-// 			cBctNo = null;
-// 		} else{
-// 			cBctNo = btn;
-// 			cMNo = 0;
-// 		}
-		
-		console.log(cMNo);
-		console.log(cBctNo)
-		console.log(mName);
 	
 		$.ajax({
 			url:'selectCollaboCate.co',
 			data:{cMNo:cMNo,
 				  cBctNo:cBctNo,
-				  mName:mName},
+				  cPeople:cPeople},
 			success: function(data){
-				console.log(data);
 				$('.dd').html('');
 		
 			for(var i=0; i< data.length; i++){
@@ -531,7 +527,7 @@
 					addHtml += "<div class='list-content-add'>";
 					addHtml += "<label style='margin-right:10px;'>시작일자  :  " + c.cStartDate + "</label>";
 					addHtml += "<label style='margin-right:50px;'>마감일자  :  " + c.cEndDate + "</label>";
-					addHtml += "<label> & <span class='list-people' >" + c.cPeople + "</span></label>";
+					addHtml += "<label><i class='fas fa-user-check'></i><span class='list-people' >" + c.cPeople + "</span></label>";
 					addHtml += "</div>";
 					
 					addHtml += "<div class='list-content'>";
@@ -543,7 +539,7 @@
 					addHtml += "<div class='list-box-bottom-margin'>";
 					addHtml += "<div class='box-bottom-btn-status' >";
 					addHtml += "<input type='hidden' id='whatcNo' value ='" + c.cNo + "'>";
-					addHtml += "<input type='hidden' id='whatcNo' value ='" + c.cBNo + "'>";
+					addHtml += "<input type='hidden' id='whatcBNo' value ='" + c.cBNo + "'>";
 					addHtml += "<button class='b_call updateBtn' value='C1'>요청</button>";
 					addHtml += "<button class='b_progress updateBtn' value='C2'>진행중</button>";
 					addHtml += "<button class='b_finish updateBtn' value='C3'>완료</button>";
@@ -558,6 +554,7 @@
 					addHtml += "<button class='box-bottom-fdbk'>피드백</button>";
 					if(c.bWriter == '${loginUser.mName}'){
 						addHtml += "<button class='box-bottom-btn-up'>수정하기</button>";
+						addHtml += "<button class='box-bottom-btn-de'>삭제하기</button>";
 					}
 					addHtml += "</div>";
 					addHtml += "</div>";
@@ -705,30 +702,77 @@
 		});
 	});
 	
-	$(document).on('keydown', '.new-people', function(){
+	$(document).on('keyup', '.new-people', function(){
 		$('.selectMemberList').addClass('active');
+		
+		var inputString = $(this).val();
 		
 		$.ajax({
 			url:'selcetMemberList.co',
+			data:{inputString: inputString},
 			success:function(data){
-				console.log(data);
 				
-				$('.selectMeberList-ajax').html('');
+				$('.selectMemberList').html('');
 				
 				for(var i=0; i<data.length; i++){
 					var m = data[i];
 					addHtml = '';
 					
-					addHtml += "<div>"+m.dName+"</div>";
-					addHtml += "<div>"+m.mName+"</div>";
-					addHtml += "<input type='hidden' value='"+m.mNo+"'>";
-					addHtml += "<div>"+m.jName+"</div>";
-				$('.selectMeberList-ajax').append(addHtml);
+					addHtml += "<div class='list-padding-box'>";
+						addHtml += "<div class='selectMemberList-ajax'>";
+							addHtml += "<div style='font-weight:bold;'>"+m.mName+"</div>";
+							addHtml += "<div  style='margin:0px 3px;'>("+m.dName+")</div>";
+							addHtml += "<input type='hidden' value='"+m.mNo+"'>";
+							addHtml += "<div>/ "+m.jName+"</div>";
+					addHtml += "</div></div>";
+					
+					$('.selectMemberList').append(addHtml);
 					}
 				
 					
 				}
 		})
+	});
+	
+	
+	$(document).on('click', '.list-padding-box', function(){
+		var mName = $(this).children().eq(0).children().eq(0).text();
+		inputMember.push(mName + " ");
+		
+		var addHtml = "<div class='plus-people'>"+mName+", </div>"; 
+		$('#plus-box').append(addHtml);
+		$('.new-people').val('');
+		$('.selectMemberList').removeClass('active');
+		$('.new-people').focus();
+	});
+	
+	$(document).on('keydown', '.new-people', function(e){
+		if(e.keyCode == 8){
+			$(this).prev().children().last().remove();
+			inputMember.pop();
+		};
+		
+		
+	});
+	
+	
+	$(document).on('click', '.box-bottom-btn-de', function(){
+		var cBNo = $(this).parent().parent().children().eq(0).children().eq(1).val();
+		console.log(cBNo);
+		var bool = window.confirm("업무게시글을 삭제하시겠어요?");
+		
+		if(bool){
+			$.ajax({
+				url:'deleteCollabo.co',
+				data:{cBNo:cBNo},
+				success:function(data){
+					if(data == 'success'){
+						alert("삭제가 완료되었어요.");
+						getCollaboList();		
+					}	
+				}
+			});
+		}
 	});
 	
 </script>

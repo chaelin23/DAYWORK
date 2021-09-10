@@ -154,6 +154,16 @@
 	font-size: 12px;
 	margin-top: 5px;
 }
+.board-delete {
+	float: right;
+	margin-left: 10px;
+	width: 50px;
+	height: 20px;
+	background-color: cornflowerblue;
+	border: none;
+	font-size: 12px;
+	margin-top: 5px;
+}
 	
 /* ------------- board 메인 --------------*/
 .board-title{
@@ -161,15 +171,17 @@
 }
 .board-middle{
 	height: 50px;
+	line-height: 50px;
 }
 .board-search-select{
-	
+	height: 31px;
 }
 .board-search-item{
 	
 }
 .board-search{
-	
+	height: 25px;
+	font-size: 16px;
 }
 .board-write-btn{
 	display: inline;
@@ -181,6 +193,16 @@
 	text-align: center;
 	border: none;
 	font-size: 16px;
+}
+.board-search-btn{
+	display: inline-block;
+	width: 60px;
+	height: 30px;
+	line-height: 30px;
+	background-color: cornflowerblue;
+	text-align: center;
+	border: none;
+	font-size: 15px;
 }
 .line{
 	height: 2px;
@@ -233,7 +255,7 @@
     margin-left: 5px;
 }
 .board-date{
-	color: lightgray;
+	color: #999;
     height: 25px;
     line-height: 25px;
     margin-left: 10px;
@@ -242,7 +264,7 @@
 	height: 25px;
     line-height: 25px;
     margin-left: 10px;
-    color: lightgray;
+    color: #999;
 }
 .board-new{
 	width: 17px;

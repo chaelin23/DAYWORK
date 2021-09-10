@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="login-king" >
-		<div class="login-logo"><img src ="resources/image/데이워크로고2.png" style="width: 230px; height: 100%;"></div>
+		<div class="login-logo"><img src ="resources/image/데이워크로그인로고.png" ></div>
 		<div class="loginArea">
 			<c:if test="${ empty sessionScope.loginUser }">
 				<form action="login.me" method="post">
@@ -25,7 +25,7 @@
 					<div class="login-service">
 							<button onclick="location.href='joinMember.me'" class="login-service-btn">회원가입</button>
 							<button onclick="location.href='gowhereMno.me'" class="login-service-btn">사번찾기</button>
-							<button onclick="location.href='wherePwd.me'" class="login-service-btn">비밀번호찾기</button>
+							<button onclick="location.href='gowherePwd.me'" class="login-service-btn">비밀번호찾기</button>
 					</div>
 			</c:if>
 <%-- 			<c:if test="${ !empty sessionScope.loginUser }"> --%>
@@ -45,6 +45,10 @@
 				$('#login-btn').removeClass('active');
 			}
 		});
+		
+		if( "${msg}" != ""){
+			alert("${msg}");
+		}
 	</script>
 </body>
 </html>

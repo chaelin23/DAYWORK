@@ -62,7 +62,7 @@
 	padding: 25px 20px 10px 20px;
 	}
 	
-		td{
+	td{
 	padding: 0px 0px 0px 0px;
 	}
 	
@@ -80,6 +80,10 @@
     height: 32px;
     line-height: 33px;
     display: inline-block;
+	}
+	
+	.ap-table{
+	width:100%;
 	}
 	
 	.writeBtn{
@@ -154,12 +158,10 @@
 	
 	}
 	
-
 	
 	.set_wrap{
 	    margin-top: 4px;
 	}
-	
 	
 	
 	.set_nav{
@@ -170,7 +172,6 @@
 	}
 
 	
-	
 	fieldset {
     
     border: none;
@@ -179,14 +180,11 @@
 	
 	}
 	
-
 	
 	.ap-search{
 	width: 167px;
 	
 	}
-
-
 
 
 	.div.tit_type2 {
@@ -196,7 +194,6 @@
     padding: 8px;
 
 }
-	
 	
 	.layer_normal .ap_pop_content {
     padding: 16px 24px;
@@ -235,6 +232,15 @@
     color: #fff;
 	}
 	
+	.fin-btn{
+	width: 55px;
+    height: 25px;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	background-color: #eee;
+    color: rgb(133, 133, 133);
+	}
 	
 	
 	
@@ -266,14 +272,26 @@
 	padding: 25px 20px 10px 20px;
 	}
 	
+/* 	.div-main-right{ */
+/* 	width: 65%; */
+/*     height: 85%; */
+/*     border: 1px solid lightgrey; */
+/*     border-radius: 5px; */
+/*     padding: 40px; */
+    
+/* } */
 	.div-main-right{
-	width: 65%;
-    height: 85%;
+	width: 900px;
+    height: 650px;
     border: 1px solid lightgrey;
     border-radius: 5px;
     padding: 40px;
+    overflow: auto;
     
 }
+
+
+
 	
 	
 	/* ------------ approvalModal1--------------*/
@@ -311,6 +329,9 @@
 	height:40px;
 	
 	}
+	.dnd-table{
+	width: 100%;
+	}
 	
 	.th1{
 	padding : 10px 10px 0px 0px;
@@ -330,7 +351,9 @@
 	
 	
 	
-	
+	.form_content{
+		margin:15px;
+	}
 	
 	
 	

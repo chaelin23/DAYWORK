@@ -29,8 +29,11 @@
 					</c:url>
 					<c:url var="boardDelete" value="bDelete.bo">
 						<c:param name="bNo" value="${ b.bNo }" />
+						<c:forEach var="f" items="${ files }">
+							<c:param name="files" value="${ f.fRename }" />		
+						</c:forEach>
 					</c:url>
-					<button class="board-update" onclick="'${ boardDelete }'">삭제</button>					
+					<button class="board-delete">삭제</button>					
 					<button class="board-update" onclick="location.href='${ boardUpdate }'">수정</button>
 				</div>
 				<div class="board-detail-title">${ b.bTitle }</div>
@@ -38,7 +41,8 @@
 						<div class="board-itsme">
 							<div class="board-itsme-photo"></div>
 							<div class="board-itsme-name">${ b.mName }</div>
-							<div class="board-itsme-position">팀원</div>
+							<div class="board-itsme-position">(${ member.dName }&nbsp;</div>
+							<div class="board-itsme-position">/ ${ member.jName })</div>
 						</div>
 						<div class="board-detail-num">
 							<div class="board-num-date">${ b.bModifyDate }</div>
@@ -78,20 +82,20 @@
 					<div class="board-comment-new-btn"><button id="new-btn">등록</button></div>
 				</div>
 				<div class="board-comment-old">
-					<div class="board-comment-old-itsme">
-						<div class="board-comment-old-itsme-photo" id="nam"></div>
-						<div class="board-comment-old-itsme-name">남나눔</div>
-						<div class="board-comment-old-itsme-position">팀장</div>
-						<div class="board-comment-old-itsme-date">7.15</div>
-					</div>
-					<div class="board-comment-old-text">같이 갑시다.</div>
-					<div class="board-comment-old-itsme">
-						<div class="board-comment-old-itsme-photo" id="do"></div>
-						<div class="board-comment-old-itsme-name">도대담</div>
-						<div class="board-comment-old-itsme-position">대리</div>
-						<div class="board-comment-old-itsme-date">7.15</div>
-					</div>
-					<div class="board-comment-old-text">저도 갈래요. 너무 덥네요.</div>
+<!-- 					<div class="board-comment-old-itsme"> -->
+<!-- 						<div class="board-comment-old-itsme-photo" id="nam"></div> -->
+<!-- 						<div class="board-comment-old-itsme-name">남나눔</div> -->
+<!-- 						<div class="board-comment-old-itsme-position">팀장</div> -->
+<!-- 						<div class="board-comment-old-itsme-date">7.15</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="board-comment-old-text">같이 갑시다.</div> -->
+<!-- 					<div class="board-comment-old-itsme"> -->
+<!-- 						<div class="board-comment-old-itsme-photo" id="do"></div> -->
+<!-- 						<div class="board-comment-old-itsme-name">도대담</div> -->
+<!-- 						<div class="board-comment-old-itsme-position">대리</div> -->
+<!-- 						<div class="board-comment-old-itsme-date">7.15</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="board-comment-old-text">저도 갈래요. 너무 덥네요.</div> -->
 				</div>
 			</div>
 		</div>
@@ -99,6 +103,49 @@
 	<script>
 		var date = $('.board-num-date').text().substring(5, 10);
 		$('.board-num-date').text(date);
+		
+		$('.board-delete').off().on('click', function(){
+			let bool = confirm('게시글을 삭제하시겠습니까?');
+			if(bool) {
+				location.href='${boardDelete}';
+			}
+		});
+		
+		const replyList = (rList) => {
+			for(let i = 0; i < rList.length; i++) {
+				let r = rList[i];
+				
+				let addHtml = "<div class='board-comment-old-itsme'>";
+				addHtml += "<div class='board-comment-old-itsme-photo' id='nam'></div>";
+				addHtml += "<div class='board-comment-old-itsme-name'>" + r.mName + "</div>";
+				addHtml += "<div class='board-comment-old-itsme-position'>(" + r.dName + " / " + r.jName + ")</div>";
+				addHtml += "<div class='board-comment-old-itsme-date'>" + r.rCreateDate + "</div>";
+				addHtml += "</div>";
+				addHtml += "<div class='board-comment-old-text'>" + r.rContent + "</div>";
+				$('.board-comment-old').append(addHtml);
+			}	
+		}
+		
+		replyList(${r});
+		
+		$('#new-btn').on('click', function(){
+			let mNo = ${ loginUser.mNo };
+			let bNo = ${ b.bNo };
+			let content = $('#new-text').val();
+			$('.board-comment-old').html('');
+			
+			$.ajax({
+				url: 'insertReply.bo',
+				data: {mNo:mNo, bNo:bNo, content:content},
+				success: function(data) {
+// 					console.log(data);
+// 					console.log(${r});
+					$('#new-text').val('');
+					replyList(data);
+				}
+			});
+		});
+		
 	</script>
 		
 </body>

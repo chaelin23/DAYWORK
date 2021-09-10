@@ -3,7 +3,7 @@
 }
 .chatRoom.active{
 	width: 250px;
-	height: 400px;
+	height: 405px;
 	border: 1px solid lightgrey;
 	border-radius: 5px;
 	z-index: 100;
@@ -17,6 +17,7 @@
 	height: 327px;
 	padding-top: 1px;
 	overflow: auto;
+	margin-bottom: 5px;
 }
 .chatLeft{
 	margin-top: 5px;
@@ -116,9 +117,11 @@
     display: flex;
 }
 .chatRoomItem{
-    display: flex;
-    flex-direction: column;
+/*     display: flex; */
+/*     flex-direction: column; */
     margin-top: 10px;
+    width: 188px;
+    position: relative;
 }
 .chatProfileImg{
 	width: 40px;
@@ -134,8 +137,18 @@
     font-size: 13px;
     font-weight: bold;
 }
-.chatRoomTime{
-	
+.chatMsgDate{
+	position: absolute;
+	top: 3px;
+	right: 5px;
+	color: #777;
+}
+.chatMsgTime{
+	height: 27px;
+	line-height: 41px;
+	font-size: 11px;
+	color: #555;
+	margin: 0 5px;
 }
 .chatRoomMsg{
     height: 20px;

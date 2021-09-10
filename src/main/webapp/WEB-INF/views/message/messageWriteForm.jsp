@@ -48,6 +48,14 @@
 		});
 		
 		var formData = new FormData();
+		if("${mNo}" != "" && "${mWriter}" != "" && "${msgTitle}" != "") {
+			let addHtml = "<div class='msg-write-receiver'>${mWriter}</div>";
+			$('.msg-write-receiver-box').append(addHtml);
+			formData.set('receiver', ${mNo});
+	
+			$('#msgTitle').val("[RE]" + "${msgTitle}");
+		}
+		
 		let filesNum = [];
 		let deleteFiles = [];
 		$('#uploadFile').on('change', function(){		
@@ -104,7 +112,7 @@
 				url: 'msgSearchMember.msg',
 				data: {receiver:receiver},
 				success: function(data) {
-// 					console.log(data);
+					console.log(data);
 					if(data == "일치하는 회원이 없습니다.") {
 						var addHtml = '';
 						
@@ -116,6 +124,7 @@
 							var addHtml = '';
 							
 							addHtml += "<div class='msg-write-memberList-item'>" + member.mName;
+							addHtml += "(" + member.dName + " / " + member.jName + ")";
 							addHtml += "<input type='hidden' value='" + member.mNo + "'>";
 							addHtml += "</div>";
 							

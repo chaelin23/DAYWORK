@@ -10,11 +10,14 @@
 
 	html {font-family: 'Pretendard-Regular'; }
 
-* {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-/*     font-family: 'NanumBarunGothic'; */
+.admin-king{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-top{
+	margin-left: -600px;
 }
 	
 .login-king{
@@ -37,10 +40,11 @@
 	border-style: none;
 	background-color: lightgray;
 	color: white;
+	cursor: pointer;
 }
 
 .loginArea{
-	width: 380px;
+	width: 315px;
     height: 330px;
     padding: 20px 30px;
 	margin: auto;
@@ -97,14 +101,14 @@
 	color: white;
 }
 
-/* whereMno */
-.whereMno-king{
+/* whereMno & wherePwd*/
+.whereMno-king, .input-wrap{
 	width: 300px;
 	margin:auto;
 	margin-top: 250px;
 }
 
-.whereMnoArea{
+.whereMnoArea, .wherePwdArea{
 	width: 300px;
     height: 200px;
     padding: 20px;
@@ -118,12 +122,12 @@
 }
 
 
-.whereMno-input{
+.whereMno-input, .wherePwd-input{
 	display: flex;
 	flex-direction: column;
 }
 
-.whereMnoText{
+.whereMnoText, .title{
 	font-size: 25px;
 	width: 300px;
 	margin:auto;
@@ -132,21 +136,21 @@
 	color:#4e4e4e;
 }
 
-#inputmName{
+#inputmName, #inputmNo{
 	width: 100%;
 	height: 40px;
 	border-style: none;
 	border-bottom: 1px solid gray;
 	margin: 20px 0 10px 0;
 }
-#inputmPhone{
+#inputmPhone, #inputmEmail{
 	width: 100%;
 	height: 40px;
 	border-style: none;
 	border-bottom: 1px solid gray;
 }
 
-.whereMno-btn{
+.whereMno-btn, .wherePwd-btn{
 	display: flex;	
 	justify-content: flex-end;
 }
@@ -157,6 +161,17 @@
     border-radius: 5px;
     background-color: #526ab9;
     width: 80px;
+    height: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+#wherePwd-btn{
+	margin-top: 15px;
+    border-style: none;
+    border-radius: 5px;
+    background-color: #526ab9;
+    width: 100px;
     height: 25px;
     color: white;
     cursor: pointer;
@@ -458,8 +473,8 @@ select[name=jCode]{
     content: "\f002";
     cursor: pointer;
     position: absolute;
-	top: 24%;
-	left: 51%;
+	top: 23.5%;
+	left: 46%;
 	transform: translate(-50%, -50%);
 	background-color: white;
 }

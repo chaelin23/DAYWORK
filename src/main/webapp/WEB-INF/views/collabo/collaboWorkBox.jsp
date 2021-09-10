@@ -173,7 +173,6 @@
 		    	data: {cNo:dropid,
 		    		   cBctNo:dropele.id},
 		    	success: function(data){
-		    		console.log(0);	
 		    	}
 		    });
 		}

@@ -30,7 +30,12 @@
 					<input type="text" class="message-search">
 <!-- 					<button class="message-search-btn">검색</button> -->
 					<i class="fas fa-search"></i>
-					<div class="message-write-btn" onclick="location.href='goMessageWrite.msg'">답장</div>
+					<c:url var="msgReply" value="goMessageWrite.msg">
+						<c:param name="mNo" value="${ msg.msgWriterMNo }"/>
+						<c:param name="mWriter" value="${ msg.msgWriter }"/>
+						<c:param name="msgTitle" value="${ msg.msgTitle }"/>
+					</c:url>
+					<div class="message-write-btn" onclick="location.href='${msgReply}'">답장</div>
 				</div>
 				
 				<div class="line"></div>

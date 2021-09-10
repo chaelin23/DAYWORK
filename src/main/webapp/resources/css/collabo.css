@@ -19,7 +19,7 @@
 .collabo-workBox-top{
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-end;
+	justify-content: space-evenly;
 }
 
 .collabo-workBox-top-text{
@@ -182,7 +182,7 @@
 	padding: 8px 0px;
 }
 
-.new-title, .list-title, new2-title{
+.new-title, .list-title, .new2-title{
 	width: 700px;
 	border-style: none;
 	font-weight: bold;
@@ -196,6 +196,7 @@
 	border-bottom: 1px solid grey;
 	padding: 8px 0px;
 	font-size: 12px;
+	position: relative;
 }
 
 .b_call, .b_progress, .b_finish, .b_feedback, .b_postpone{
@@ -239,7 +240,7 @@
 	margin-right: 20px;
 	border-style: none;
 }
-.new-people, .list-people, #up-people, .new2-people{
+.list-people, #up-people, .new2-people{
 	border-style: none;
 }
 
@@ -251,7 +252,16 @@
 .list-content{
 	padding:20px 0px 20px 10px;
 }
-
+.input-people{
+/* 	width: 200px; */
+}
+.new-people{
+	border-style: none;
+	
+}
+.plus-people{
+	display: inline;	
+}
 
 /*------------ 업무리스트 ------------*/
 .collabo-create{
@@ -322,7 +332,7 @@
 	font-size: 0px;
 }
 
-#box-bottom-btn-a, #box-bottom-btn-b, .box-bottom-btn-up, .box-bottom-fdbk, .box-bottom-btn-end{
+#box-bottom-btn-a, #box-bottom-btn-b, .box-bottom-btn-up, .box-bottom-fdbk, .box-bottom-btn-end, .box-bottom-btn-de{
 	border-color: darkgrey;
 	width: 100px;
 	height: 30px;
@@ -340,7 +350,8 @@
 
 .box-bottom-btn-b:hover,
 .box-bottom-btn-up:hover,
-.box-bottom-btn-end:hover{
+.box-bottom-btn-end:hover,
+.box-bottom-btn-de:hover{
 	cursor: pointer;
 	background-color: black;
 	color: white;
@@ -603,18 +614,35 @@
 
 /* selectMemberList */
 .selectMemberList{
-	width: 250px;
+	width: 190px;
     height: 100px;
-    border-radius: 4px;
-    box-shadow: 0px 0px 4px 4px #ebebeb;
+    border-radius: 2px;
+    border: 1px solid #aeaeae;
     position: absolute;
-    top: 40%;
-    left: 87%;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
+    top: 103%;
+    left: 60%;
     overflow: auto;
+    display: none;
+    background-color: white;
 }
 
-..selectMemberList active{
+.selectMemberList.active{
 	display: block;
+}
+
+.selectMemberList-ajax{
+	display: flex;
+    cursor: pointer;
+    flex-direction: row;
+    height: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.list-padding-box:hover{
+	background: gray;
+}
+
+#plus-box{
+	display: inline;
 }

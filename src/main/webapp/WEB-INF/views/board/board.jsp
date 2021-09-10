@@ -23,9 +23,11 @@
 			<div class="board-middle">
 				<select class="board-search-select">
 					<option class="board-search-item">제목</option>
-					<option class="board-search-item">팀</option>
+					<option class="board-search-item">부서</option>
+					<option class="board-search-item">글 종류</option>
 				</select>
 				<input type="text" class="board-search">
+				<div class="board-search-btn" onclick="searchBoard()">검색</div>
 				<div class="board-write-btn" onclick="location.href='goBoardWrite.bo'">글쓰기</div>
 			</div>
 			<div class="line"/>
@@ -40,7 +42,7 @@
 <!-- 						<div class="board-new">N</div> -->
 <!-- 					</div> -->
 <!-- 				</div> -->
-				<c:forEach var="b" items="${ bList }">
+				<c:forEach var="b" items="${ bList2 }">
 					<c:url var="bdetail" value="bdetail.bo">
 						<c:param name="bNo" value="${ b.bNo }"/>
 						<c:param name="currentPage" value="${ currentPage }"/>
@@ -52,7 +54,9 @@
 							<div class="board-writer">${ b.bDept }</div>
 							<div class="board-date">${ b.bModifyDate }</div>
 							<div class="board-comment-num"><i class="far fa-comment"></i>12</div>
-							<div class="board-new">N</div>
+							<c:if test="${ b.boardNew eq 1 }">
+								<div class="board-new">N</div>
+							</c:if>
 						</div>
 					</div>
 				</c:forEach>
@@ -86,6 +90,27 @@
 	<script>
 		var date = $('.board-date').text().substring(5, 10);
 		$('.board-date').text(date);
+		
+		const searchBoard = () => {
+			const type = $('.board-search-select').val();
+			const search = $('.board-search').val();
+			
+			location.href='searchBoardList.bo?' + "type=" + type + "&search=" + search;
+		}
+		
+// 		console.log(${bList});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	</script>
 		
 </body>

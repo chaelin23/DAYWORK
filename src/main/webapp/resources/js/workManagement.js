@@ -128,6 +128,11 @@
 			textHour--;
 		}
 		
+		if(textMin == 60) {
+			textHour++;
+			textMin = 0;
+		}
+		
 		if(textHour < 10 && textHour > 0) {
 			textHour = "0" + textHour;
 		}
@@ -139,7 +144,7 @@
 		if(textHour < 0) {
 			$('#week-work').text("00h 00m 00s");
 			
-		} else if(week[0] == 0 && week[1] == 0) {
+		} else if(isNaN(week[0]) && isNaN(week[1])) {
 			$('#week-work').text("40h 00m 00s");
 		} else {
 			$('#week-work').text(textHour+ "h " + textMin + "m 00s");

@@ -3,9 +3,6 @@
  */
 
 
-	
-
-
 //	캘린더 일정에 시간 표시
 	function getTimeTemplate(schedule, isAllDay) {
 		var html = [];
@@ -48,23 +45,22 @@
 	    this.category = '';
 	    this.dueDateClass = '';
 		this.isReadOnly = false;
-		
+		this.raw = {
+	            memo: '',
+	    }
+
+
 	    this.color = null;
 	    this.bgColor = null;
 	    this.dragBgColor = null;
 	    this.borderColor = null;
-	    
-	    this.raw = {
-	    		memo: ''
-	    }
-	    
 	}
 	
 	
 	
 	
 	
-	//	카테고리에 따른 기본 설정
+//	카테고리에 따른 기본 설정
 	var CalendarList = [];
 
 	function CalendarInfo() {
@@ -111,17 +107,17 @@
 	    calendar.id = 3;
 	    calendar.name = 'Vacation';
 	    calendar.color = '#000000';
-	    calendar.bgColor = '#999999';
-	    calendar.dragBgColor = '#999999';
-	    calendar.borderColor = '#999999';
-	    CalendarList.push(calendar);
+	    calendar.bgColor = '#a6a6a6';
+	    calendar.dragBgColor = '#a6a6a6';
+	    calendar.borderColor = '#a6a6a6';
+	    CalendarList.push(calendar)
 	})();
+
 	
 	
 	
 	
-		
-	// 	달력 오른쪽 상단 년/월 표시
+// 	달력 오른쪽 상단 년/월 표시
 	function setRenderRangeText() {
 		var renderRange = document.getElementById('renderRange');
 		var options = cal.getOptions();
@@ -151,11 +147,11 @@
 		cal.next();
 		setRenderRangeText();
 	});
-		
 	
 	
 	
-		
+	
+	
 // 	일정 모달 일시 Picker
 	function datePicker(e) {
 		if(e.schedule == null) {
@@ -176,7 +172,7 @@
 		        },
 		        timePicker: true
 			});
-		    
+	    
 		} else {
 			var startDate = new tui.DatePicker('#startpicker-container-update', {
 		        date: e.schedule.start._date,
@@ -196,13 +192,10 @@
 		        timePicker: true
 			});
 		}
-		
-		
 	        
 	};	        
 	
 	
-	    
 	
 	
 	function setSchedules() {

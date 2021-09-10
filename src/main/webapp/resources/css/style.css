@@ -8,14 +8,11 @@
 	}
 	
 	.report_type {
-	    margin: 11px -15px;
+	    margin: 12px 0px;
 	    border: 5px solid #e8e8e8;
 	}
 	
-	.style_form_table{
-		border:1px solid blcak;
-		
-	}
+
 	
 	
 	.table-line{
@@ -29,7 +26,6 @@
 	
 	
 	.form-magin{
-	
 	margin: 15px;
 	
 	}
@@ -41,7 +37,7 @@
 		    height: 18px;
 		    text-align: center;
 		    color: rgb(0, 0, 0);
-		    font-size: 12px;
+		    font-size: 14px;
 		    font-weight: bold;
 		    vertical-align: middle;
 		
@@ -88,7 +84,6 @@
 	table{
 	
 	border-collapse: collapse;
-   	width: 100%;
 	}
 	
 	
@@ -315,7 +310,9 @@
 	}
 	
 	
-	.content-table{
+	.
+
+-table{
 	border: 0px solid rgb(0, 0, 0);
     border-image: none;
     width: 800px;
@@ -567,7 +564,7 @@
 	}
 	
 	.content-input{
-	width: 770px;
+	width: 800px;
     margin: 9px;
     color: black;
     background: white;

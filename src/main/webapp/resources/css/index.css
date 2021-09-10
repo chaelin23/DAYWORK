@@ -34,7 +34,7 @@
 	}
 	
 	.main-right{
-		width: 65%;
+		width: 900px;
 		height: 650px;
  		border: 1px solid lightgrey;
 		border-radius: 5px; 
@@ -43,9 +43,8 @@
 	}
 	
 	.logo{
-		min-width: 120px;
 		height: 100px;
-		background: no-repeat center url("../image/데이워크로고2.png");
+		background: no-repeat center url("../image/데이워크로그인로고.png");
 		cursor: pointer;
 		margin-bottom:10px;
 	}
@@ -69,8 +68,7 @@
 	
 	.main-profile-photo{
 		min-width: 50px;
-		height: 40px;
-		background: url("../image/man.png");
+		height: 50px;
 	}
 	
 	.main-profile-name{
@@ -93,6 +91,25 @@
 	.main-active-one-text:hover, .main-active-two-text:hover, .main-active-three-text:hover{
 		border-bottom: 1px solid black;
 	}
+	
+	.main-line{
+		display: flex;
+		justify-content: center;
+		margin-top:10px;
+	}
+	
+	.main-active{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+	}
+	
+	.main-mypage:hover{
+		cursor: pointer;
+		border-bottom: 1px solid;
+	}
+	
+	
 	.main-commute{
 /* 		border: 1px solid lightgrey; */
 		height: 10%;
@@ -192,11 +209,9 @@
 		opacity: 1;
 	}
 	
-	
 	.cate-collabo-p{
 		cursor:pointer;
 	}
-	
 	.cate-day-p{
 		cursor:pointer;
 	}

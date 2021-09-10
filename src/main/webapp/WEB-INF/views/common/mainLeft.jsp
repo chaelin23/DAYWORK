@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/index.css">
 <link rel="stylesheet" href="resources/css/chat.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	
@@ -34,58 +33,49 @@
 					</div>
 				</div>
 				<div class="main-line">
-					<hr style="border:1px color= silver;" width="80%">
+					<hr style="border:1px color: silver;" width="80%">
 				</div>
 				<div class="main-active">
 					<div class="main-mypage" onclick="location.href='goMypage.me'">내 정보 수정</div>
-					<div class="main-mypage" onclick="location.href='goAdmin.me'">관리자페이지</div>
-<!-- 					<div class="main-active-one"> -->
-<!-- 						<div class="main-active-one-text">내가 쓴 글</div> -->
-<!-- 						<div class="main-active-one-num">3개</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="main-active-two" id="active-two"> -->
-<!-- 						<div class="main-active-two-text">임시 보관함</div> -->
-<!-- 						<div class="main-active-two-num">5개</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="main-active-three"> -->
-<!-- 						<div class="main-active-three-text">휴지통</div> -->
-<!-- 						<div class="main-active-three-num">18개</div> -->
-<!-- 					</div> -->
+					<c:if test="${loginUser.mAdmin == 0 }">
+						<div class="main-mypage" onclick="location.href='goAdmin.me'">관리자페이지</div>
+					</c:if>
+					<div class="main-mypage" onclick="location.href='logout.me'">로그아웃</div>
 				</div>
 			</div>
-			<!-- 출퇴근 버튼 -->
-	        <div class="main-commute">
-	            
-	            <c:if test="${ !empty comTime }">
-		            <div class="commute-button">
-	            		<button class="commute" id="start" disabled>출근</button>
-	                	<button class="commute" id="end" onclick="location.href='workEnd.me'">퇴근</button>
-	                </div>  
-	                <div class="commute-progressbar">
-	               		<progress class="commute-real" value=0 max=9 id="progressBar"></progress>
-	               	</div>
-	               	
-	               	<div class="commute-text">
-	                	<div class="commute-text-start" style="margin-left:10px;">${ comTime.comStart }</div>
-	               		<div class="commute-text-end" style="margin-right:10px;">${ comTime.comEnd }</div>
-	                </div>  
-	            </c:if>   
-	               
-	            <c:if test="${ empty comTime }">
-	              	<div class="commute-button">
-	               		<button class="commute" id="start" onclick="location.href='workStart.me'">출근</button>
-	               		<button class="commute" id="end" disabled>퇴근</button>
-	               	</div>
-	        		<div class="commute-progressbar">
-	               		<progress class="commute-real" id="progressBar"></progress>
-	            	</div>
-	            	
-	            	<div class="commute-text">
-	                  <div class="commute-text-start" style="margin-left:10px;">--:--</div>
-	                  <div class="commute-text-end" style="margin-right:10px;">--:--</div>
-	        		</div>
-				</c:if>
-			</div>
+			  <div class="main-commute">
+               
+               <c:if test="${ !empty comTime }">
+                  <div class="commute-button">
+                     <button class="commute" id="start" disabled>출근</button>
+                      <button class="commute" id="end" onclick="location.href='workEnd.me'">퇴근</button>
+                   </div>  
+                   <div class="commute-progressbar">
+                        <progress class="commute-real" value=0 max=9 id="progressBar"></progress>
+                     </div>
+                     
+                     <div class="commute-text">
+                      <div class="commute-text-start" style="margin-left:10px;">${ comTime.comStart }</div>
+                        <div class="commute-text-end" style="margin-right:10px;">${ comTime.comEnd }</div>
+                   </div>  
+               </c:if>   
+                  
+               <c:if test="${ empty comTime }">
+                    <div class="commute-button">
+                        <button class="commute" id="start" onclick="location.href='workStart.me'">출근</button>
+                        <button class="commute" id="end" disabled>퇴근</button>
+                     </div>
+                 <div class="commute-progressbar">
+                        <progress class="commute-real" id="progressBar"></progress>
+                  </div>
+                  
+                  <div class="commute-text">
+                     <div class="commute-text-start" style="margin-left:10px;">--:--</div>
+                     <div class="commute-text-end" style="margin-right:10px;">--:--</div>
+                 </div>
+            	</c:if>
+         	</div>
+	         
          
 			<!-- 카테고리 박스 -->
 			<div class="main-category">
@@ -114,7 +104,7 @@
 					<div class="cate-collabo-p" onclick="location.href='workBox.co'">업무공유</div>
 				</div>			
 				<div class="cate day">
-					<div class="cate-day-p" onclick="location.href='workManage.me'">근태관리</div>						
+					<div class="cate-day-p">근태관리</div>
 				</div>				
 				<div class="cate message">
 					<div class="cate-message" onclick="location.href='msgAllList.msg'">메세지</div>
@@ -150,6 +140,11 @@
 		</div>
 
 	<script>
+		$(document).on('click', '.logo', function(){
+			location.href='reload.do';
+		});
+	
+	
 		var noticeP = document.querySelector('.cate-notice-p');
 		var noticeBox = document.querySelector('.cate-notice-c');
 		var theyP = document.querySelector('.cate-they-p');
@@ -168,41 +163,7 @@
 		approvalP.addEventListener('click', function() {
             approvalBox.classList.toggle('active');
     	});
-		
-		
-		// 프로그래스바 설정
-		var interval = setInterval(function() {setBar();}, (30 * 60 * 1000));
-		function setBar() {
-			if("${comTime}" != "") {
-				var now = new Date();
-				var nowHour = now.getHours();
-				if(nowHour < 10) {
-					nowHour = "0" + nowHour;
-				}
-				
-				var startHour = "${comTime.comStart}".substring(0, 2);
-				var endHour = "${comTime.comEnd}".substring(0,2);
-				
-				if(startHour != nowHour) {				
-					$('#progressBar').val(nowHour - startHour);
-				} 
-				
-				if(nowHour == endHour) {
-					$('#progressBar').val(9);
-				}
-				
-				if(nowHour > endHour) {
-					$('#progressBar').val(9);
-					clearInterval(interval);
-				}
-			}
-		}
-		
-		$(function(){
-			setBar();			
-			interval;
-		})
-		
+	
 		$('.main-chat-text').on('keyup', function(){
 			var receiver = $(this).val();
 			
@@ -224,6 +185,7 @@
 							var addHtml = '';
 							
 							addHtml += "<div class='chat-memberList-item'>" + member.mName;
+							addHtml += "(" + member.dName + " / " + member.jName + ")";
 							addHtml += "<input type='hidden' value='" + member.mNo + "'>";
 							addHtml += "</div>";
 							
@@ -259,6 +221,7 @@
 							var addHtml = '';
 							
 							addHtml += "<div class='chat-memberList-item2'>" + member.mName;
+							addHtml += "(" + member.dName + " / " + member.jName + ")";
 							addHtml += "<input type='hidden' value='" + member.mNo + "'>";
 							addHtml += "</div>";
 							
@@ -333,11 +296,13 @@
 								
 								if(msg.cMsgWriterNo == loginUserNo) {
 									addHtml += "<div class='chatRight'>";
+									addHtml += "<div class='chatMsgTime'>" + msg.cMsgDate + "</div>";
 									addHtml += "<span class='chatRight_msg'>" + msg.cMsgContent + "</span></div>";
 								} else {
 									addHtml += "<div class='chatLeft'>";
 									addHtml += "<div class='chatUser'>" + msg.cMsgWriterName + "</div>";
-									addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg.cMsgContent + "</span></div></div>";
+									addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg.cMsgContent + "</span>";
+									addHtml += "<div class='chatMsgTime'>" + msg.cMsgDate + "</div></div></div>";
 								}
 								$('.chatContent').append(addHtml);
 							}
@@ -402,17 +367,23 @@
 			
 			webSocket.onmessage = function(message) {
 				var msg = message.data.split("/");
-				
+				let date = new Date();
+				let hours = ('0' + date.getHours()).slice(-2); 
+				let minutes = ('0' + date.getMinutes()).slice(-2);
+				let time = hours + ':' + minutes;
+
 				if(msg[2] == roomNo) {
 					if(msg[0] == ${ loginUser.mNo }) {
 						var addHtml = "<div class='chatRight'>";
+						addHtml += "<div class='chatMsgTime'>" + time + "</div>";
 						addHtml += "<span class='chatRight_msg'>" + msg[3] + "</span></div>";
 						$('.chatContent').append(addHtml);
 						scrollTop();
 					} else {
 						var addHtml = "<div class='chatLeft'>";
 						addHtml += "<div class='chatUser'>" + msg[1] + "</div>";
-						addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg[3] + "</span></div></div>";
+						addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg[3] + "</span>";
+						addHtml += "<div class='chatMsgTime'>" + time + "</div></div></div>";
 						$('.chatContent').append(addHtml);
 						scrollTop();
 					}
@@ -433,7 +404,10 @@
 			   !$(e.target).hasClass('msg-write-receiver-input') && !$(e.target).hasClass('chatRoomList') &&
 			   !$(e.target).hasClass('main-chat-button') && !$(e.target).hasClass('chatRoomItemBox') && 
 			   !$(e.target).hasClass('chatMsgWrite') && !$(e.target).hasClass('chatMsgSendBtn') &&
-			   !$(e.target).hasClass('chatPlusBtn') && !$(e.target).hasClass('chat-memberList-item2') && !$(e.target).hasClass('main-chat-text2')) {
+			   !$(e.target).hasClass('chatPlusBtn') && !$(e.target).hasClass('chat-memberList-item2') && 
+			   !$(e.target).hasClass('main-chat-text2') && !$(e.target).hasClass('chatRoomUser') &&
+			   !$(e.target).hasClass('chatRoomMsg') && !$(e.target).hasClass('chatProfileImg') &&
+			   !$(e.target).hasClass('chatRoomItem')) {
 				
 				$('.msg-write-memberList').removeClass('active');
 				$('.chatRoom').removeClass('active');		
@@ -463,30 +437,40 @@
 						var addHtml = "<div>채팅방이 없습니다.</div>";
 						$('.chatRoomList').append(addHtml);
 					} else {
-						for(var i in data) {
-							var room = data[i];
-							var pList1 = room.cRoomPName.split(",");
-							var mName = room.cRoomMName;
-							var loginUserName = "${ loginUser.mName }";
-							var pList2 = "";
+						const crList = data["crList"];
+						const msgList = data["msgList"];
+						
+						for(let i in crList) {
+							let room = crList[i];
+							let pList1 = room.cRoomPName.split(",");
+							let mName = room.cRoomMName;
+							let loginUserName = "${ loginUser.mName }";
+							let pList2 = "";
 							
 							pList1.pop();
 							pList1.push(mName);
 							
-							for(var i = 0; i < pList1.length; i++) {
-								if(pList1[i] != loginUserName) {
-									pList2 += pList1[i] + ", ";
+							for(let j = 0; j < pList1.length; j++) {
+								if(pList1[j] != loginUserName) {
+									pList2 += pList1[j] + ", ";
 								}
 							}
 							pList2 = pList2.substring(0, pList2.lastIndexOf(","));
 							
-							var addHtml = "<div class='chatRoomItemBox'>";
+							let addHtml = "<div class='chatRoomItemBox'>";
 							addHtml += "<div class='chatProfileImg'></div>";
 							addHtml += "<div class='chatRoomItem'>"
 							addHtml += "<div class='chatRoomUser'>" + pList2;
 							addHtml += "<input type='hidden' value='" + room.cRoomNo + "'>";
 							addHtml += "<div class='chatRoomTime'></div></div>";
-							addHtml += "<div class='chatRoomMsg'>" + "메세지 내용" + "</div></div></div>";
+							for(let j in msgList) {
+								let msg = msgList[j];
+								
+								if(msg.cMsgRoomNo == room.cRoomNo) {
+									addHtml += "<div class='chatRoomMsg'>" + msg.cMsgContent + "</div>";
+									addHtml += "<div class='chatMsgDate'>" + msg.cMsgDate + "</div></div></div>";
+								}
+							}
 								
 							$('.chatRoomList').append(addHtml);
 						}						
@@ -550,11 +534,13 @@
 								
 								if(msg.cMsgWriterNo == loginUserNo) {
 									addHtml += "<div class='chatRight'>";
+									addHtml += "<div class='chatMsgTime'>" + msg.cMsgDate + "</div>";
 									addHtml += "<span class='chatRight_msg'>" + msg.cMsgContent + "</span></div>";
 								} else {
 									addHtml += "<div class='chatLeft'>";
 									addHtml += "<div class='chatUser'>" + msg.cMsgWriterName + "</div>";
-									addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg.cMsgContent + "</span></div></div>";
+									addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg.cMsgContent + "</span>";
+									addHtml += "<div class='chatMsgTime'>" + msg.cMsgDate + "</div></div></div>";
 								}
 								$('.chatContent').append(addHtml);
 							}
@@ -569,6 +555,38 @@
 				});
 		});
 		
-		
+		// 프로그래스바 설정
+	      var interval = setInterval(function() {setBar();}, (30 * 60 * 1000));
+	      function setBar() {
+	         if("${comTime}" != "") {
+	            var now = new Date();
+	            var nowHour = now.getHours();
+	            if(nowHour < 10) {
+	               nowHour = "0" + nowHour;
+	            }
+	            
+	            var startHour = "${comTime.comStart}".substring(0, 2);
+	            var endHour = "${comTime.comEnd}".substring(0,2);
+	            
+	            if(startHour != nowHour) {            
+	               $('#progressBar').val(nowHour - startHour);
+	            } 
+	            
+	            if(nowHour == endHour) {
+	               $('#progressBar').val(9);
+	            }
+	            
+	            if(nowHour > endHour) {
+	               $('#progressBar').val(9);
+	               clearInterval(interval);
+	            }
+	            
+	         }
+	      }
+	      
+	      $(function(){
+	         setBar();         
+	         interval;
+	      })
 	</script>
 </html>
