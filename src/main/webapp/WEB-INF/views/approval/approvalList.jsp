@@ -1,29 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+<% int count = 0; %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>결재리스트</title>
-<link rel="stylesheet" href="resources/css/approval.css">
-<link rel="stylesheet" href="resources/css/index.css">
-<script src="resources/js/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
+<!-- <script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<!-- <link rel="stylesheet" href="resources/js/jstree.min.js"> -->
+<!-- <link rel="stylesheet" href="resources/js/jstree.js"> -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" /> -->
+<!-- <link rel="stylesheet" href="resources/css/approval.css"> -->
+<!-- <link rel="stylesheet" href="resources/css/index.css"> -->
 </head>
 <body>
 
 <div class="main-king">
 
 <%@ include file="../common/mainLeft.jsp"%>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+<link rel="stylesheet" href="resources/css/approval.css">
+<link rel="stylesheet" href="resources/css/index.css">
 
 <!-- 오른쪽 내용 박스 -->
 		<div class="div-main-right">
@@ -34,25 +39,26 @@
 			<div class="board-header"> <!-- 제목 -->
 				<div class="ap-box-line">
 					<input type='hidden' name="mNo" value="${ loginUser.mNo }">
-					<c:choose> 
-						<c:when test="${!empty list}">
-							<c:forEach var="ap" items="${list}">
+							<c:forEach var="ap" items="${list }">
+<%-- 								<c:if test="${ap.apReceiver == loginUser.mNo  && ap.apStatus ne '0'}"> --%>
+<!-- 									<div class="empty"> 결재할 문서가 없습니다.</div> -->
+<%-- 								</c:if> --%>
 									<c:url var="apDetail" value="apDetail.ap">
 										<c:param name="apNo" value="${ap.apNo}"></c:param>
-									</c:url>
-								<c:if test="${ap.apReceiver == loginUser.mNo && ap.apStatus == '0' }">
+									</c:url>	
+								<c:if test="${ap.apReceiver == loginUser.mNo && ap.apStatus eq '0' }">
 									<div class="ap-box" id="ap-box" onclick="location.href='${apDetail}'">
 										<div class="af-title">제목 : <c:out value="${ap.apTitle }"></c:out> </div>
 										<div class="ap-date">기안일:<c:out value="${ap.apDate }"></c:out></div>
-										<div class="ap-sender">기안자:<c:out value="${ap.apSender }"></c:out></div>
+										<div class="ap-sender">기안자:<c:out  value="${ sender.mName}"></c:out></div>
 									</div>
+									<% count++; %>
 								</c:if>
 							</c:forEach>
-						</c:when>
-						<c:when test="${empty list}">
-							<div>결재할 문서가 없습니다.</div>
-						</c:when>
-					</c:choose>
+							<% if(count == 0) { %>
+								<div class="empty"> 결재할 문서가 없습니다.</div>
+							<% } %>
+						
 				</div>
 					<div class="board-title-wrap">
 					</div>
@@ -62,7 +68,6 @@
 			<hr style="margin-bottom:20px; border:1px color= silver;">
 			<div class="board-body">
 			<!-- 결재진행문서 테이블-->
-			<div class="detail" id="detail" onclick="location.href='${apDetail}'">
 				<table class="ap-table type_nomal">
 					<thead>
 						 <tr class="title_sort">
@@ -87,7 +92,10 @@
 					<tbody>
 						<c:forEach var="ap" items="${list}">
 							<c:if test="${ap.apStatus == '0' }">
-						<tr>
+							<c:url var="apDetail" value="apDetail.ap">
+								<c:param name="apNo" value="${ap.apNo}"/>
+							</c:url>
+						<tr id="gogo" onclick="location.href='${apDetail}'">
 							<td class="th2">
 								<span><c:out value="${ ap.apDate }"></c:out></span>
 							</td>
@@ -95,10 +103,11 @@
 								<span><c:out value="${ap.apCtitle}"></c:out></span>
 							</td>
 							<td class="th2">
-								<span><c:out value="${ap.apSender}"></c:out></span>
+							<span><c:out  value="${ sender.mName}"></c:out></span>
 							</td>
 							<td class="th2">
 								<span><c:out value="${ap.apNo}"></c:out></span>
+								<input type='hidden' name="apNo" value="${ap.apNo }">
 							</td>
 							<td class="th2">
 								<span><button type="submit" class="ap-not-btn" readonly>진행</button></span>
@@ -108,7 +117,6 @@
 						</c:forEach>
 					</tbody>
 				</table>
-</div> 
 				</div>
 			</div>
 			<div class="ap-footer">
@@ -138,31 +146,35 @@
 					
 					<tbody>
 					<c:forEach var="ap" items="${list}" >
+					<div onclick="location.href='${apDetail}'">
 						<c:if test="${ap.apStatus == '1'}">
-						<tr>
-						
-							<td class="th2">
-								<span><c:out value="${ap.apDate}"></c:out></span>
-							</td>
-							<td class="th2">
-								<span><c:out value="${ap.apCtitle}"></c:out></span>
-							</td>
-							<td class="th2">
-								<span><c:out value="${ap.apSender}"></c:out></span>
-							</td>
-							<td class="th2">
-								<span><c:out value="${ap.apNo}"></c:out></span>
-							</td>
-							<td class="th2">
-								<span><button class="fin-btn" readonly>완료</button></span>
-							</td>
-						</tr>
+							<c:url var="apDetail" value="apDetail.ap">
+								<c:param name="apNo" value="${ap.apNo}"/>
+							</c:url>
+								<tr onclick="location.href='${apDetail}'">
+									<td class="th2">
+										<span><c:out value="${ap.apDate}"></c:out></span>
+									</td>
+									<td class="th2">
+										<span><c:out value="${ap.apCtitle}"></c:out></span>
+									</td>
+									<td class="th2">
+										<span><c:out  value="${ sender.mName}"></c:out>
+										</span>
+									</td>
+									<td class="apNo">
+										<span><c:out value="${ap.apNo}"></c:out></span>
+									</td>
+									<td class="th2">
+										<span><button class="fin-btn" readonly>완료</button></span>
+									</td>
+								</tr>
 						</c:if>
-					</c:forEach>	
+						</div>
+					</c:forEach>
 					</tbody>
 				</table> 
 				</div>
-			</div>
 		</div>
 	</div>
 	<!-- 모달 -->
@@ -351,19 +363,12 @@
 $(document).ready(function(){
 	
 	$('.ap-box').hover(function(){
-		$(this).css("background-color","red");
+			$(this).css("background-color","#6495ed5e");
 		
 		},function(){
-			$(this).css("background-color","black");
+			$(this).css("background-color","#eeeeee");
 		});
 	
-	
-	
-		
-// 		$('.ap-box').on("click", function(){
-// 		alert("클릭");
-
-// 		});
 		
 	});
 </script>

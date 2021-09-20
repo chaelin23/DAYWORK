@@ -32,9 +32,8 @@
 		align-items: baseline
 	}
 	.board-itsme-photo{
-		min-width: 50px;
-		height: 40px;
-		background: url("../image/man.png");
+		width: 50px;
+		height: 50px;
 		margin-bottom:10px;
 	}
 	
@@ -68,9 +67,8 @@
 	}
 	
 	.board-comment-new-photo{
-		min-width: 50px;
-		height: 40px;
-		background: url("../image/man.png");
+		width: 50px;
+		height: 50px;
 	}
 	
 	#new-text{
@@ -91,12 +89,14 @@
 		width: 48px;
 		margin-top: 30px;
 	}
+	#new-btn.active{
+		background-color: cornflowerblue;
+	}
 	
 	.board-comment-old-itsme{
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		margin-bottom: 10px;
 	}
 	
 	.board-comment-old-itsme-name{
@@ -213,7 +213,7 @@
 }
 .board-list-item{
 	height: 80px;
-	background: rgba(226, 233, 243, 0.3);
+	background: rgba(226, 233, 243, 0.6);
 	padding: 15px 20px;
 	border-bottom: 1px solid lightgray;
 }
@@ -359,6 +359,16 @@
 	width: 110px;
 	margin-left: 15px;
 	float: right;
+}
+.board-write-dept{
+	height: 26px;
+    font-size: 15px;
+    width: 110px;
+    margin-left: 15px;
+    float: right;
+    border: 1px solid gray;
+    text-align: center;
+    border-radius: 5px;
 }
 .board-type-selct option{
 	background: cornflowerblue; 

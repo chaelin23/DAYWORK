@@ -31,14 +31,18 @@
 						${ member.mName }님의 사번은 [${ member.mNo }] 입니다.
 					</c:if>
 					<c:if test="${ member.mStatus == 'N'}">
-					  	${ member.mNo }님은 탈퇴한 정보입니다.
+					  	입력하신 정보는 확인되지 않습니다.
 					</c:if>
 				</div>
 					<button class='mNo-home-btn' onclick="location.href='home.do'">홈으로</button> 		
 			</c:if>
 		</div>
 	</div>
-	
-
 </body>
+
+<script>
+	if( "${msg}" != ""){
+		alert("${msg}");
+	}
+</script>
 </html>

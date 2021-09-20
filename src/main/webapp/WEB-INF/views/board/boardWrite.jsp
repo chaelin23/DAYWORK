@@ -23,17 +23,23 @@
 				<input type="text" class="board-write-title" name="bTitle" id="bTitle">
 				<div class="board-write-middle">
 					<span class="board-write-file-btn" id="selectFile">파일선택</span>
-					<select class="board-type-select" name="bType" id="bType">
-						<option>전체공지</option>
-						<option>일반공지</option>
-						<option>이벤트공지</option>
-					</select>
-					<select class="board-type-select" name="bDept" id="bDept">
-						<option>개발1팀</option>
-						<option>개발2팀</option>
-						<option>디자인팀</option>
-						<option>마케팅팀</option>
-					</select>
+					<c:if test="${ loginUser.mAdmin eq 1 }">
+						<select class="board-type-select" name="bType" id="bType">
+							<option>전체공지</option>
+							<option>일반공지</option>
+							<option>이벤트공지</option>
+						</select>
+					</c:if>
+					<c:if test="${ loginUser.mAdmin eq 0 }">
+						<div style="float: right;"> 
+							<input type="checkbox" id= "bTopFixed" name="bTopFixed" value="Y">상단고정
+							<input type="text" class="board-write-dept" value="전체공지" name="bType" id="bType" readonly>
+							<input type="hidden" id="bDept" name="bDept" value="관리자">
+						</div>
+					</c:if>
+					<c:if test="${ loginUser.mAdmin eq 1 }">
+						<input type="text" class="board-write-dept" value="${ loginUser.dName }" id="bDept" name="bDept" readonly>
+					</c:if>
 					<div class="board-write-filelist"></div>
 				</div>
 				<textarea class="board-write-content" name="bContent" id="bContent"></textarea>
@@ -80,11 +86,16 @@
 			var bType = $('#bType').val(); 
 			var bDept = $('#bDept').val(); 
 			var bContent = $('#bContent').val(); 
+			let bTopFixed = 'N';
+			if($('#bTopFixed').is(':checked') == true) {
+				bTopFixed = 'Y';
+			}
 			
 			formData.append('bTitle', bTitle);
 			formData.append('bType', bType);
 			formData.append('bDept', bDept);
 			formData.append('bContent', bContent);
+			formData.append('bTopFixed', bTopFixed);
 			
 			$.ajax({
 			    url: 'binsert.bo',

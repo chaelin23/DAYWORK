@@ -25,7 +25,7 @@
 }
 
 .point {
-	background: skyblue;
+	background: #b3daff;
 }
 
 .photo {
@@ -34,9 +34,9 @@
 }
 
 .basic-photo {
-	width: 120px;
-	height: 120px;
-	background: url('../image/man.png');
+	width: 100px;
+	height: 100px;
+/* 	background: url('../image/기본이미지.jpg'); */
 	background-repeat: no-repeat;
 	background-size: cover; 
 }
@@ -47,6 +47,11 @@
 	border: 1px solid lightgray;
 	background: white;
 	cursor: pointer;
+}
+
+.addImg {
+	width: 100px;
+	height: 100px;
 }
 
 
@@ -89,6 +94,14 @@
 	width: 100px;
 	height: 25px;
 	border-radius: 3px;
+}
+
+td[onclick] {
+	cursor: pointer;
+}
+
+a {
+	text-decoration: none;
 }
 
 

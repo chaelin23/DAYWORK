@@ -201,6 +201,11 @@
     width: auto;
     height: 229px;
 }
+	.layer_normal .print_pop_content {
+    padding: 16px 24px;
+    display: block;
+    width: auto;
+}
 	
 	.go-ap-btn{
 	
@@ -356,7 +361,10 @@
 	}
 	
 	
+	.empty{
+	  margin: 50px 0px 76px;
 	
+	}
 	
 	
 	

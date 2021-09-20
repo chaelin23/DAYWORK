@@ -443,7 +443,7 @@
 }
 	
 	.sign-wrap{
-	display: inline-block;
+	display:inline-flex ;
     margin-right: -1px;
     font-size: 12px;
 	

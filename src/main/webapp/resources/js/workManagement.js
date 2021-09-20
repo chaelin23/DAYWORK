@@ -47,7 +47,6 @@
 			var mm = thisMM.length == 1 ? '0' + thisMM : thisMM;
 			var dd =  thisDD.length == 1 ? '0' + thisDD : thisDD;
 			var dateInfo = mm + "." + dd;					
-			
 			thisWeek[i] = dateInfo;
 			
 			$date = $('<td>').text(dateInfo);
@@ -59,7 +58,7 @@
 		 	$etc =$('<td>').text("-");
 			
 			for(var j in data) {
-				data[j].comStart = data[j].comStart.replace("-", ".");
+				data[j].comStart = data[j].comStart.replaceAll("-", ".");
 				if(dateInfo === data[j].comStart.substring(5, 10)) {
 					var startTime = data[j].comStart.substring(11, 16);
 					var endTime = data[j].comEnd.substring(11, 16);	
@@ -147,7 +146,7 @@
 		} else if(isNaN(week[0]) && isNaN(week[1])) {
 			$('#week-work').text("40h 00m 00s");
 		} else {
-			$('#week-work').text(textHour+ "h " + textMin + "m 00s");
+			$('#week-work').text(textHour + "h " + textMin + "m 00s");
 		}
 		
 		setChart(thisWeek, workTimes, overTimes, vacTimes);
@@ -188,7 +187,7 @@
 		var minutes = time % 3600 / 60;
 		
 		if(time < 0) {
-			time = time * (-1);
+//			time = time * (-1);
 			minutes = 60 - (time % 3600) / 60;
 		}
 		var hours = time / 3600;

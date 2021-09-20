@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%-- <%@page import="org.springframework.ui.Model, java.util.ArrayList, com.kh.DAYWORK.common.BMsgFile"%> --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% pageContext.setAttribute("replaceChar", "\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +41,7 @@
 				<div class="board-detail-title">${ b.bTitle }</div>
 					<div class="board-detail-title-wrap">
 						<div class="board-itsme">
-							<div class="board-itsme-photo"></div>
+							<image class="board-itsme-photo" src="resources/mProfileFiles/${ member.mRenameProfile }">
 							<div class="board-itsme-name">${ b.mName }</div>
 							<div class="board-itsme-position">(${ member.dName }&nbsp;</div>
 							<div class="board-itsme-position">/ ${ member.jName })</div>
@@ -60,42 +62,18 @@
 			</div>
 			<div class="board-detail-body"> <!-- 내용 -->
 				<div class="board-detail-content">
-					${ b.bContent }
-<!-- 					안녕하세요!<br> -->
-<!-- 					저희 회사에서 도보 5분거리에 새로운 식당이 생겼습니다.<br> -->
-<!-- 					<br> -->
-<!-- 					<br> -->
-<!-- 					지난주부터 오픈 준비에 정신 없어보이던데 어제 오픈을 해 행사를 하더군요.<br> -->
-<!-- 					이미 다들 알고계시죠? :)<br> -->
-<!-- 					<br> -->
-<!-- 					<br> -->
-<!-- 					제가 오늘 출근 길에 오픈행사 쿠폰 4장을 받아왔으니, 같이 가실 분 계시면 댓글 부탁드립니다.<br> -->
-<!-- 					메뉴는 오늘 더위를 날려줄 냉면입니다.<br> -->
+					${ fn:replace(b.bContent, replaceChar, "<br>") }
 				</div>
 			</div>
 			<div class="board-detail-footer"> <!-- 댓글 -->
-				<div class="board-comment-title">댓글 2</div>
+				<div class="board-comment-title">댓글 ${ b.bReply }</div>
 				<hr style="margin-bottom:30px; border:1px color= silver;">
 				<div class="board-comment-new">
-					<div class="board-comment-new-photo"></div>
+					<image class="board-comment-new-photo" src="resources/mProfileFiles/${ loginUser.mRenameProfile }">
 					<div class="board-comment-new-text"><input type="text" id="new-text"></div>
-					<div class="board-comment-new-btn"><button id="new-btn">등록</button></div>
+					<div class="board-comment-new-btn"><button id="new-btn" disabled="disabled">등록</button></div>
 				</div>
 				<div class="board-comment-old">
-<!-- 					<div class="board-comment-old-itsme"> -->
-<!-- 						<div class="board-comment-old-itsme-photo" id="nam"></div> -->
-<!-- 						<div class="board-comment-old-itsme-name">남나눔</div> -->
-<!-- 						<div class="board-comment-old-itsme-position">팀장</div> -->
-<!-- 						<div class="board-comment-old-itsme-date">7.15</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="board-comment-old-text">같이 갑시다.</div> -->
-<!-- 					<div class="board-comment-old-itsme"> -->
-<!-- 						<div class="board-comment-old-itsme-photo" id="do"></div> -->
-<!-- 						<div class="board-comment-old-itsme-name">도대담</div> -->
-<!-- 						<div class="board-comment-old-itsme-position">대리</div> -->
-<!-- 						<div class="board-comment-old-itsme-date">7.15</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="board-comment-old-text">저도 갈래요. 너무 덥네요.</div> -->
 				</div>
 			</div>
 		</div>
@@ -111,12 +89,22 @@
 			}
 		});
 		
+		$('#new-text').on('keyup', function(){
+			if($(this).val().length > 0) {
+				$('#new-btn').addClass('active');
+				$('#new-btn').attr('disabled', false);
+			} else {
+				$('#new-btn').removeClass('active');
+				$('#new-btn').attr('disabled', true);
+			}
+		});
+		
 		const replyList = (rList) => {
 			for(let i = 0; i < rList.length; i++) {
 				let r = rList[i];
 				
 				let addHtml = "<div class='board-comment-old-itsme'>";
-				addHtml += "<div class='board-comment-old-itsme-photo' id='nam'></div>";
+				addHtml += "<image class='board-comment-new-photo' src='resources/mProfileFiles/" + r.rMRenameProfile + "'>";
 				addHtml += "<div class='board-comment-old-itsme-name'>" + r.mName + "</div>";
 				addHtml += "<div class='board-comment-old-itsme-position'>(" + r.dName + " / " + r.jName + ")</div>";
 				addHtml += "<div class='board-comment-old-itsme-date'>" + r.rCreateDate + "</div>";
@@ -129,18 +117,22 @@
 		replyList(${r});
 		
 		$('#new-btn').on('click', function(){
-			let mNo = ${ loginUser.mNo };
 			let bNo = ${ b.bNo };
 			let content = $('#new-text').val();
 			$('.board-comment-old').html('');
 			
 			$.ajax({
 				url: 'insertReply.bo',
-				data: {mNo:mNo, bNo:bNo, content:content},
+				data: {bNo:bNo, content:content},
 				success: function(data) {
 // 					console.log(data);
 // 					console.log(${r});
+					$('.board-comment-title').html('');
+					$('.board-comment-title').append("댓글" + data.length);
+					
 					$('#new-text').val('');
+					$('#new-btn').removeClass('active');
+					$('#new-btn').attr('disabled', true);
 					replyList(data);
 				}
 			});

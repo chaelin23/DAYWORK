@@ -4,6 +4,10 @@ textarea {
 	resize: none;
 }
 
+a {
+	text-decoration: none;
+}
+
 .button {
 	width: 80px;
 	height: 30px;
@@ -13,7 +17,7 @@ textarea {
 }
 
 .point {
-	background: skyblue;
+	background-color: #b3daff;
 }
 
 .button-margin {
@@ -22,18 +26,18 @@ textarea {
 
 
 /* suveyList.jsp */
-.suveyList {
+.surveyList {
 	text-align: center;
 	line-height: 40px;
 	border-collapse: collapse;
 }
 
-.suveyList th {
+.surveyList th {
 	font-size: 14px;
 	border-bottom: 1px solid black;
 }
 
-.suveyList tr {
+.surveyList tr {
 	border-bottom: 1px solid lightgray;
 	font-size: 12px;
 }
@@ -55,7 +59,11 @@ textarea {
 	width: 100px;
 }
 
-/* suveyFinal */
+.surveyTitle {
+	cursor: pointer;
+}
+
+/* surveyFinal */
 .title {
 	font-size: 20px;
 }
@@ -114,6 +122,10 @@ table {
 	line-height: 30px;
 }
 
+.main-table {
+	line-height: 30px;	
+}
+
 .td-margin {
 	width: 150px;
 }
@@ -122,7 +134,7 @@ table {
 	width: 500px;
 }
 
-.answer {
+.option {
 	width: 350px;
 }
 
@@ -130,13 +142,13 @@ table {
 	width: 400px;
 }
 
-.add-object {
+.add-opt {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 7px;
 }
 
-.short-question {
+.deleteArea {
 	display: flex;
 	justify-content: flex-end;
 	margin-bottom: 7px;
@@ -155,11 +167,52 @@ table {
 	cursor: pointer;
 }
 
-.deleteObject {
+.deleteopt {
 	font-size: 12px;
 	margin-left: 10px;
 }
 
 .br {
 	height: 20px;
+}
+
+.progress {
+	height: 15px;
+	overflow: hidden;
+	background-color: #f5f5f5;
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 1px 2px rgb(0 0 0/ 10%);
+	box-shadow: inset 0 1px 2px rgb(0 0 0/ 10%);
+}
+
+.prog-bar {
+	float: left;
+	width: 0%;
+	height: 100%;
+	font-size: 12px;
+	line-height: 15px;
+	color: #fff;
+	text-align: center;
+	background-color: #337ab7;
+	-webkit-box-shadow: inset 0 -1px 0 rgb(0 0 0/ 15%);
+	box-shadow: inset 0 -1px 0 rgb(0 0 0/ 15%);
+	-webkit-transition: width .6s ease;
+	-o-transition: width .6s ease;
+}
+
+.col_success {
+	background-color: #5cb85c;
+}
+
+.col_info {
+	background-color: #5bc0de;
+}
+
+.essayList {
+	margin: 5px 0px;
+}
+
+.resultTable {
+	line-height: 30px;
+	font-size: 14px;
 }

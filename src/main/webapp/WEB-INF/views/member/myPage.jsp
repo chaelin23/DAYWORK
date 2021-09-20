@@ -22,7 +22,7 @@
 				<form action="update.me" method="post" id="joinForm" enctype="Multipart/form-data">
 						<div class="myProfileImage">
 							<c:if test="${m.mRenameProfile == null}">
-								<img class="myProfileImage-size" src="resources/image/기본이미지.jpg">
+								<img class="myProfileImage-size" src="resources/image/기본이미지.png">
 							</c:if>
 							<c:if test="${m.mRenameProfile != null}">
 							<img class="myProfileImage-size" src="resources/mProfileFiles/${ m.mRenameProfile }">
@@ -95,8 +95,10 @@
 						</tr>
 						
 						<!-- jQuery와 Postcodify를 로딩한다. -->
-						<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-						<script>
+						<script type="text/javascript" src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js">
+						</script>
+						
+						<script type="text/javascript">
 							// 검색 단추를 누르면 팝업 레이어가 열리도록 설정한다.
 							$(function(){
 								$("#postcodify_search_button").postcodifyPopUp();

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,33 +33,41 @@
 			</div>
 			<div class="line"/>
 			<div class="board-list">
-<!-- 				<div class="board-list-item"> -->
-<!-- 					<div class="board-item-title">제목입니다.</div> -->
-<!-- 					<div class="board-item-content"> -->
-<!-- 						<div class="board-type">전체공지</div> -->
-<!-- 						<div class="board-writer">개발1팀</div> -->
-<!-- 						<div class="board-date">7.23</div> -->
-<!-- 						<div class="board-comment-num"><i class="far fa-comment"></i>12</div> -->
-<!-- 						<div class="board-new">N</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-				<c:forEach var="b" items="${ bList2 }">
+				<c:forEach var="b" items="${ bListTop2 }" varStatus="i">
 					<c:url var="bdetail" value="bdetail.bo">
 						<c:param name="bNo" value="${ b.bNo }"/>
 						<c:param name="currentPage" value="${ currentPage }"/>
 					</c:url>
-					<div class="board-list-item2" onclick="location.href='${ bdetail }'">
-						<div class="board-item-title">${ b.bTitle }</div>
-						<div class="board-item-content">
-							<div class="board-type">${ b.bType }</div>
-							<div class="board-writer">${ b.bDept }</div>
-							<div class="board-date">${ b.bModifyDate }</div>
-							<div class="board-comment-num"><i class="far fa-comment"></i>12</div>
-							<c:if test="${ b.boardNew eq 1 }">
-								<div class="board-new">N</div>
-							</c:if>
+						<div class="board-list-item" onclick="location.href='${ bdetail }'">
+							<div class="board-item-title">${ b.bTitle }</div>
+							<div class="board-item-content">
+								<div class="board-type">${ b.bType }</div>
+								<div class="board-writer">${ b.bDept }</div>
+								<div class="board-date" id="dateA${ i.index }">${ b.bCreateDate }</div>
+								<div class="board-comment-num"><i class="far fa-comment" style="margin-right: 5px"></i>${ b.bReply }</div>
+								<c:if test="${ b.boardNew eq 1 }">
+									<div class="board-new">N</div>
+								</c:if>
+							</div>
 						</div>
-					</div>
+				</c:forEach>
+				<c:forEach var="b" items="${ bList2 }" varStatus="i">
+					<c:url var="bdetail" value="bdetail.bo">
+						<c:param name="bNo" value="${ b.bNo }"/>
+						<c:param name="currentPage" value="${ currentPage }"/>
+					</c:url>
+						<div class="board-list-item2" onclick="location.href='${ bdetail }'">
+							<div class="board-item-title">${ b.bTitle }</div>
+							<div class="board-item-content">
+								<div class="board-type">${ b.bType }</div>
+								<div class="board-writer">${ b.bDept }</div>
+								<div class="board-date" id="dateB${ i.index }">${ b.bCreateDate }</div>
+								<div class="board-comment-num"><i class="far fa-comment" style="margin-right: 5px"></i>${ b.bReply }</div>
+								<c:if test="${ b.boardNew eq 1 }">
+									<div class="board-new">N</div>
+								</c:if>
+							</div>
+						</div>
 				</c:forEach>
 
 				<div class="pages_box">
@@ -88,8 +97,18 @@
 		</div>
 	</div>
 	<script>
-		var date = $('.board-date').text().substring(5, 10);
-		$('.board-date').text(date);
+// 		var date = $('.board-date').text().substring(5, 10);
+// 		$('.board-date').text(date);
+
+		for(let i = 0; i < ${ fn:length(bList2) }; i++) {
+			let date = $('#dateA' + i).text().substring(5, 10);
+			$('#dateA' + i).text(date);
+		}
+		for(let i = 0; i < ${ fn:length(bList2) }; i++) {
+			let date = $('#dateB' + i).text().substring(5, 10);
+			$('#dateB' + i).text(date);
+		}
+
 		
 		const searchBoard = () => {
 			const type = $('.board-search-select').val();

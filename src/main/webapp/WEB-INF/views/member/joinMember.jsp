@@ -66,28 +66,19 @@
 					<tr>
 						<th>우편번호</th>
 						<td>
-							<input type="text" class='inputBorder' name="post" class="postcodify_postcode5" value="" size="6">
+							<input type="text"name="post" class="postcodify_postcode5" value="" size="6">
 							<button type="button" id="postcodify_search_button">검색</button>
 						</td>
 					</tr>
 					<tr>
 						<th>도로명 주소</th>
-						<td><input type="text" class='inputBorder' name="address1" class="postcodify_address" value=""></td>
+						<td><input type="text"  name="address1" class="postcodify_address" value=""></td>
 					</tr>
 					<tr>
 						<th>상세 주소</th>
-						<td><input type="text" class='inputBorder' name="address2" class="postcodify_extra_info" value=""></td>
+						<td><input type="text" name="address2" class="postcodify_extra_info" value=""></td>
 					</tr>
-					
-					
-				</table>
-				<button class='join-btn' onclick="validate();">가입하기</button>
-			</form>
-		</div>	
-	</div>
-</body>
-
-<!-- jQuery와 Postcodify를 로딩한다. -->
+					<!-- jQuery와 Postcodify를 로딩한다. -->
 					<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js">
 					</script>
 					
@@ -97,4 +88,14 @@
 							$("#postcodify_search_button").postcodifyPopUp();
 						});
 					</script>
+					
+				</table>
+				<button class='join-btn' onclick="validate();">가입하기</button>
+			</form>
+		</div>	
+	</div>
+</body>
+
+
+
 </html>

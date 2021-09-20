@@ -5,12 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>업무기안서</title>
+
+
+</head>
+<body>
+	<div class="main-king">
+<%@ include file="../common/mainLeft.jsp"%>
+
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/approval.css">
 <link rel="stylesheet" href="resources/css/index.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"/>
 
-<script src="resources/js/jquery-3.6.0.min.js"></script>
+<script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -22,18 +29,14 @@
 <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 
 
-</head>
-<body>
-	<div class="main-king">
-<%@ include file="../common/mainLeft.jsp"%>
+
 <!-- 오른쪽 내용 박스 -->
 	<div class="div-main-right">
 		<form class="form-magin" action="goInsert2.ap" method="post">
 			
 		<div class="toolbar">
-			<input type="submit" id="goInsert" value="결재요청">
-			<button onclick="goBack();">취소</button>
-			<button>미리보기</button>
+			<button class="goInsert" >결재요청</button>
+<!-- 			<button onclick="goBack(); return false;">취소</button> -->
 			<button type="button" class="select-ap">결재자선택</button>
 		</div>
 			<section class="content_wrap">
@@ -58,38 +61,35 @@
 											<input type="hidden" name="apTitle" value="${ approvalForm.afTitle }">
 											<td class="top-right-pay" colspan="4">
 												<br>
-													<div class="sign-wrap">
+												
+													<span class="sign-wrap new-sign">
 														<table class="tb-sgin" >
 															<tbody>
 																<tr>
-																<th class="sign-t">결재</th>
+																	<th class="sign-t">결재</th>
 																	<td class="sign-td">
-														<table class="sign-type1">
-															<tbody>
-																<tr>
-																	<td class="sign-name-wrap">
-																	<span class="sign-name" ></span>
-<!-- 																<input type="hidden" name="apReceiver" class="sign-name" value=""> -->
-																	<input type="hidden" name="apReceiver" value="1004">
-																	<input type="hidden" name="asApReceiver" value="1004">
-																	<input type="hidden" name="apLine" value="11">
-																	<input type="hidden" name="asLine" value="11">
-																	<input type="hidden" name="asMName" value="문미미">
-																	<input type="hidden" name="asDName" value="회계관리팀">
-																	<input type="hidden" name="asJName" value="차장">
+																		<table class="sign-type1">
+																			<tbody>
+																				<tr>
+																					<td class="sign-name-wrap">
+																						<span class="sign-name"></span>
+																						<input type="hidden" class="sign-mNo" name="apReceiver">
+																						<input type="hidden" name="apLine" value="11">
+																					</td>
+																				</tr>
+																				<tr>
+																					<td>
+																						<span class="sign-rank"></span>
+																					</td>
+																				</tr>
+																			</tbody>
+																		</table>
 																	</td>
 																</tr>
-																<tr>
-																	<td>
-																		<span class="sign-rank"></span>
-																</tr>
+																
 															</tbody>
 														</table>
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
+													</span>
 												<br>
 											</td>
 										</tr>
@@ -117,7 +117,7 @@
 											</tr>
 											<tr>
 												<td class="con-cate" style="width:120px" colspan="2" >제 목 </td>
-												<td class="con-title" style="width:230" colspan="4" ><input type="text"  name ="apCtitle" class="input-box" value="제목을 입력하여주세요"> </td>
+												<td class="con-title" style="width:230" colspan="4" ><input type="text"  name ="apCtitle" class="input-box" value="제목을 입력해주세요"> </td>
 												<input type="hidden" name ="apCtitle" value= "${ ap.apCtitle }" readonly>
 											</tr>
 									</tbody>
@@ -125,7 +125,6 @@
 								<p>&nbsp;</p>
 			<!-- 내용박스 -->
 								<div id="ap-contents">
-<%-- 								<span name="apContent">${ approvalForm.afContent }</span> --%>
 									<textarea id="summernote" name="apContent">${ approvalForm.afContent }</textarea>
 								</div>
 						</div>
@@ -146,7 +145,7 @@
 						<hr style="border:1px color= silver;">
 						<div class="ap-search-wrap">
 								<input onkeyup="filter()" type="text" class="ap-search" id="ap-search" placeholder="이름을 입력하세요">
-								<button type="submit" class="ap-btn">검색</button>
+								<button type="submit" class="sap-btn">검색</button>
 								<span class="tit_type">결재자선택</span>
 						</div>
 						<!-- 조직도트리 -->
@@ -218,8 +217,7 @@
 											<li title="국내영업팀" class="jstree-open ds" id="d4">
 												국내영업팀
 												<ul>
-													<li class="jstree-leaf" id="ds-team1" data-mNo="1002" data-mName="남산" data-dName="영업팀">
-													<input type="hidden" id="1002" name="남산" value="영업팀" >
+													<li class="jstree-leaf" id="ds-team1">
 														남산 부장
 													</li>
 													<li class="jstree-leaf" id="ds-team2">
@@ -295,13 +293,6 @@
 													</li>
 												</ul>
 											</li>
-											
-											
-											
-											
-											
-										
-										
 										</ul>
 									</div>
 								</div>
@@ -329,33 +320,8 @@
 													<th class="th1">영업팀</th>
 												</tr>
 												<tr>
-												<th colspan="4" class="th1" >결재</th>
+													<th colspan="4" class="th1" >결재</th>
 												</tr>
-												<tr class="ap-select2 draggable" id="2">
-													<th class="th1">1</th>
-													<th class="th1">결재</th>
-													<th class="th1 select1"></th>
-													<th class="th1 select11"></th>
-												</tr>
-												<input type="hidden" name="asMName" value="">
-												<input type="hidden" name="asDName" value="">
-												<input type="hidden" name="asJName" value="">
-												<input type="hidden" name="asLine" value="">
-												
-												<span class="add-person" ></span>
-<!-- 												<tr class="ap-select3 draggable" id="3"> -->
-<!-- 													<th class="th1">2</th> -->
-<!-- 													<th class="th1">결재</th> -->
-<!-- 													<th class="th1 select2"></th> -->
-<!-- 													<th class="th1">영업팀</th> -->
-<!-- 												</tr> -->
-<!-- 												<tr class="ap-select4 draggable" id="4"> -->
-<!-- 													<th class="th1">3</th> -->
-<!-- 													<th class="th1">결재</th> -->
-<!-- 													<th class="th1 select3"></th> -->
-<!-- 													<th class="th1">영업팀</th> -->
-<!-- 												</tr> -->
-												
 												</table>
 											</div>
 										</div>
@@ -374,6 +340,135 @@
 				</div>
 			</div>
 		</div>
+
+<script>
+
+		
+		
+</script>
+<script>
+	$(document).ready(function(){
+
+		var mList=[ ];
+		
+		function mInfo() {
+	         this.id = '';
+	         this.parent = "#";
+	         this.text = '';
+	      }
+		
+		$.ajax({
+			url:"selectMemebers.ap",
+			dataType:"json",
+			contentType:"application/json; charset=UTF-8",
+			error:function(data){
+			},
+			success: function(data){
+                var mList = [];
+                
+          if(data != null){
+//            alert("성공");
+          }
+          
+             for (var i in data){
+
+                var member = new mInfo();
+                member.id = data[i].mNo;
+                member.text = data[i].mName;
+                mList.push(member);
+
+                }
+             test(mList);
+      		 }
+	});
+
+		
+		
+		
+		function test(mList) {
+		      $('#apTree').jstree({
+		          "plugins" : ["wholerow","checkbox" ,"dnd", "search"],
+				"checkbox": {
+                    "keep_selected_style": false,
+                },
+		      'core' : { 
+		         "check_callback" :true ,
+		         
+		         'data' : mList
+		            
+		      },
+		      "search": {
+		         "show_only_matches": true,
+		         "show_only_matches_children" : true,
+		      }
+		   
+		      
+		   })
+		   };
+	});
+		
+
+	
+ 	
+		   $("#apTree").on("changed.jstree", function(e,data){
+			if(data.selected.length){
+				var i = data.selected.length;
+				//console.log(i);
+				
+				var $tr = $('<tr class="ap-select2 draggable" id="2">');
+				var $th1 = $('<th>').addClass('th1').text(data.selected.length);
+				var $th2 = $('<th>').addClass('th1').text('결재');
+				var $th3 = $('<th>').addClass('th1 select1');
+				var $th4 = $('<th>').addClass('th1 select11');
+				
+				
+				$(data.selected).each(function(idx){
+					 var node= data.instance.get_node(data.selected[idx]);						
+					//console.log('the selected node is:' + node.text);
+					
+					$th3.text(node.text);
+					$th4.text(node.id);
+					
+				});
+				
+				$tr.append($th1);
+				$tr.append($th2);
+				$tr.append($th3);
+				$tr.append($th4);
+				$('.dnd-table').append($tr);
+ 					
+			};	
+		
+		});	
+	
+		   $('.ap-btn').on('click',function addPerson(event){
+				
+				var select = $('.select1');
+				var select2 = $('.select11');
+				
+				var co = $('.new-sign').clone();
+				
+				if(select.length != 0){
+					$('.new-sign').remove();
+
+					for(var i = 0; i < select.length; i++){
+						$('.top-right-pay').append(co.clone());
+						$('.sign-name')[i].innerText = select[i].innerText;
+						$('.sign-mNo')[i].innerText = select2[i].innerText;
+					
+ 						var he = select2[i].innerText;
+ 						//console.log(he);
+						//$('input[name= apReceiver]').attr("value", he);
+						var she =$('input[name= apReceiver]').val(he);
+ 						console.log(she);
+ 						$('.ap-king').hide();
+					}
+					
+				}
+				
+			});	
+		   
+	</script>	
 	<script>
 	$(document).ready(function(){
 	$('#summernote').summernote({
@@ -381,6 +476,12 @@
 		lang:"ko-KR"
 		});
 	});
+	
+	function goBack(){
+		if(confirm("작성을 취소하시겠습니까?") == true){
+			window.history.back();
+		}
+	}
 	
 	
 	</script>
@@ -400,217 +501,16 @@
 				$('.ap-king').removeClass('active');
 				$('.go_popup').removeClass('active');
 				$('.ap_pop_content').addClass('stop-scroll');
+				$('.ap-select2').empty();
+			
+				$('.new-sign').remove();
 				$modal.hide();
 			});
 			
 		});
 	
-	
-
-	
-	$(document).ready(function(){
-		
-		var dList="";
-		 dList= [ 
-			{ "id" : "d1", "parent" : "#", "text" : "인사관리팀" },
-			{ "id" : "d2", "parent" : "#", "text" : "회계관리팀" },
-			{ "id" : "d3", "parent" : "#", "text" : "마케팅팀" },
-			{ "id" : "d4", "parent" : "#", "text" : "국내영업팀" },
-			{ "id" : "d5", "parent" : "#", "text" : "해외영업팀" },
-			{ "id" : "d6", "parent" : "#", "text" : "기술지원팀" },
-			{ "id" : "d7", "parent" : "#", "text" : "총무팀" },
-			
-			{ "id" : "hr-team1", "parent" : "d1", "text" : "문미미" },
-			{ "id" : "hr-team2", "parent" : "d1", "text" : "류라라 차장" },
-			{ "id" : "hr-team3", "parent" : "d1", "text" : "도대담 과장" },
-			{ "id" : "hr-team4", "parent" : "d1", "text" : "남나눔 대리" },
-			{ "id" : "hr-team5", "parent" : "d1", "text" : "강건강 팀원" }
-			    ]; 
-		
-		
-		$('#apTree').jstree({
- 			"plugins" : ["wholerow","checkbox" ,"dnd", "search"],
-//	 			"plugins" : ["wholerow", "checkbox" ,"dnd"],
-		'core' : { 
-			"check_callback" :true ,
-			'data' : dList
-				
-			
-			},
-			dataType: "json",
-		"search": {
-			"show_only_matches": true,
-			"show_only_matches_children" : true,
-
-		}
-		
-		});
-
-			
-			
-		$.ajax({
-			url:"selectMemebers.ap",
-			dataType:"json",
-			contentType:"application/json; charset=UTF-8",
-			success: function(data){
-				
-				if(data != null){
-				 alert("성공")
-				}
-				
-					
- 				$("#apTree").on("changed.jstree", function(e, data){
- 				for (var i = 0; i < data.length; i++) {
-					
-// 					node.attr{ "id" : "date[i].mNo", "parent" : "data[i].dCode", "text" : "data[i].mName" };		
-					
-					
-// // 				$('.jstree-test').append("<li>"+data[i].mName+ data[i].jName +"</li>");
-							
-				console.log("data[0] mNo :" + data[i].mNo);
-				console.log("members[0] mName :" + data[i].mName);
-				console.log("members[0] dName :" + data[i].dName);
-				console.log("members[0] jName :" + data[i].jName);
-				
-				
- 					}
- 				});
-
-			}
-			
-		});	
-			
-			
-
-
-			
-			
-			$("#apTree").on("changed.jstree", function(e, data){
-				if(data.selected.length){
-					
-					$(data.selected).each(function(idx){
-						var node= data.instance.get_node(data.selected[idx]);						
-// 						console.log('the selected node is:' + node.text);
-// 						$('.select1').append(node.text);
-						
-						
-						var pNode =data.instance.get_node(data.selected[idx]).parent;
-// 						console.log(pNode);
-// 						$('.select11').append(pNode);
-						
-						var mName = $('.select1').append(node.text);
-						var dName = $('.select11').append(pNode);
-						
-						
-						
-						$('.ap-btn').on('click',function addPerson(event){
-							$('.sign-name').append(node.text);
-							$('.sign-rank').append(pNode);
-							
-							
-// 							for(var i =0 ,i<jsonArray.length; i++){
-// 								var data=""
-// 								for(key in jsonArray[i]){
-// 									data +=data += key + " = " + jsonArray[i][key] + " ";
-// 								}
-// 							}
-
-// 							var addhtml='';
-// 								addhtml += '<tr class="ap-select2">';
-// 								addhtml += '<th class="th1">2</th>';
-// 								addhtml += '<th class="th1">'+ mName +'</th>';
-// 								addhtml += '<th class="th1">'+ dName +'</th>';
-// 								addhtml += '</tr>'
-
-// 							$('.add-person').html('');
-// 							$('.add-person').append(addhtml);
-
- 							});	
-
-					});
- 				}
-
-
-			});
-			
-// 			$(document).on('click','#goInsert', function(){
-			
-// 				submit;
-// 			});
-			
-		
-			
-			
-// 			$(document).on('click','#goInsert', function(){
-				
-// 				var apReveiver = $('.sign-name').text();
-// 				var apSender = $('.sender').val();
-// 				var apCate = $('#cate').val();
-// 				var apTitle = $('.style-pay-title').text();
-// 				var apContent = $('#ap-contents').text();
-// // 				var apLine = $('.').text();
-				
-				
-// 				console.log(apReveiver);
-// 				console.log(apSender);
-// 				console.log(apCate);
-// 				console.log(apTitle);
-// 				console.log(apContent);
-				
-// // 				location.href="insertAp.ap?mName="+ mName;	
-// 			});
-
-			
-		});
-	
-
 	</script>
-	<script>
-// 	$(document).on ('click','.jstree-leaf', function(){
-// 			var get= $('.jstree-leaf').text();
-// // 			$('.select1').append(get);
-// 			//박하선 부장 김대호 차장 최관우 과장 이다름 대리 박가람 팀원 
-// 			//팀이 선택되서 다가져오게됨 
-// 		});
-// 			$(".ap-btn").on("click", function(){
-// 				$("#apTree").submit(function(event){
-// 					  event.preventDefault();
-// 					  var searchString = $('#apTree input[name=groupName]').val();
-// 					  if(groupName != ''){
-// 					   $("#jstree").jstree("search", searchString);
 
-// 					  }else{
-
-// 					   $("#jstree").jstree("search", '');
-// 					  }
-// 					 });
-// 			$("#apTree").jstree(".ap-search", searchString);
-// 			});
-
-	//jstree 검색
-	
-	// 			var node = "test";  
-// 			$('#apTree').jstree(true).search(node);
-	
-// 	 function filter(){
-// 			$(".ap-btn").on("click", function(){
-//  				$("#apTree").submit(function(event){
-// 					  event.preventDefault();
-//  					  var searchString = $('.ap-search').val();
-// 					  if( searchString != ''){
-//  					   $("#jstree").jstree("search", searchString).hide_all();
-
-// 					  }else{
-// 					   $("#jstree").jstree("search", '');
-
-//  					  }
-
-// 					 });
-		
-// 		});
-
-// 	 };
-	</script>
 	
 	
 

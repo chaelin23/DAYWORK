@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="resources/calendarTool/tui-calendar.css">
 <link rel="stylesheet" type="text/css" href="resources/calendarTool/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="resources/calendarTool/calendar.css">
+<script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
 .vac_text{font-size: 11pt;}
@@ -438,8 +439,11 @@
             if(schedule.raw.memo === 1) {
             	
                 $('#vacNo').val(Number(schedule.id));
-                $('#vacStart').text("기간 : " + moment(schedule.start).format('YYYY-MM-DD'));
-                $('#vacEnd').text(moment(schedule.end).format('YYYY-MM-DD'));
+//                 $('#vacStart').text("기간 : " + moment(schedule.start).format('YYYY-MM-DD'));
+//                 $('#vacEnd').text(moment(schedule.end).format('YYYY-MM-DD'));
+				$('#vacStart').text("기간 : " + moment(schedule.start._date).format('YYYY-MM-DD'));
+                $('#vacEnd').text(moment(schedule.end._date).format('YYYY-MM-DD'));
+
                 
                 var nameEnd = schedule.title.substring(5).indexOf(" ") + 8;                
                 var cate = schedule.title.substring(nameEnd + 1, nameEnd + 3);

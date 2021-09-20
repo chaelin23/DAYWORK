@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/index.css">
 <link rel="stylesheet" href="resources/css/chat.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+<script src ="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	
@@ -20,7 +22,7 @@
 				<div class="main-profile">
 					<div class="main-profile-photo">
 						<c:if test="${loginUser.mRenameProfile == null }">
-							<img class="myProfileImage-size" src="resources/image/기본이미지.jpg">
+							<img class="myProfileImage-size" src="resources/image/기본이미지.png">
 						</c:if>
 						<c:if test="${loginUser.mRenameProfile != null }">
 						<img src="resources/mProfileFiles/${ loginUser.mRenameProfile }">
@@ -79,36 +81,45 @@
          
 			<!-- 카테고리 박스 -->
 			<div class="main-category">
-				<div class="cate notice">
-					<div class="cate-notice-p" onclick="location.href='boardList.bo'">공지사항</div>
-					<div class="cate-notice-c">
-						<div class="notice-c-1">ㄴ전체게시판</div>
-						<div class="notice-c-2">ㄴ일반게시판</div>
+				<div class="main-cate-item-box">
+					<div class="main-cate-item" onclick="location.href='boardList.bo'">
+						공지사항
 					</div>
-				</div>				
-				<div class="cate they">
-					<div class="cate-they-p">사내관리</div>
-					<div class="cate-they-c">
-						<div class="they-c-1">ㄴ조직도</div>
-						<div class="they-c-2" onclick="location.href='address.ad'">ㄴ주소록</div>
+				</div>
+				<div class="main-cate-item-box" id="main-cate-ad">
+					<div class="main-cate-item">
+						사내관리
+						<div class="main-cate-arrow">
+							<i class="fas fa-sort-up"></i>
+						</div>
 					</div>
-				</div>				
-				<div class="cate approval">
-					<div class="cate-approval-p" onclick="location.href='goList.ap'">전자결재</div>
-					<div class="cate-approval-c">
-						<div class="approval-c-1">ㄴ결재양식목록</div>
-						<div class="approval-c-1">ㄴ결재현황</div>
+					<div class="main-cate-sub-item" onclick="location.href='surveyList.su'">
+						ㄴ설문조사
 					</div>
-				</div>		
-				<div class="cate collabo">
-					<div class="cate-collabo-p" onclick="location.href='workBox.co'">업무공유</div>
-				</div>			
-				<div class="cate day">
-					<div class="cate-day-p" onclick="location.href='workManage.me'">근태관리</div>
-				</div>				
-				<div class="cate message">
-					<div class="cate-message" onclick="location.href='msgAllList.msg'">메세지</div>
-				</div>	
+					<div class="main-cate-sub-item" onclick="location.href='address.ad'">
+						ㄴ주소록
+					</div>
+				</div>
+				<div class="main-cate-item-box">
+					<div class="main-cate-item" onclick="location.href='goList.ap'">
+						전자결재
+					</div>
+				</div>
+				<div class="main-cate-item-box">
+             		<div class="main-cate-item" onclick="location.href='workManage.me'">
+             			     근태현황
+	                </div>
+	            </div>
+				<div class="main-cate-item-box">
+					<div class="main-cate-item" onclick="location.href='workBox.co'">
+						업무공유
+					</div>
+				</div>
+				<div class="main-cate-item-box">
+					<div class="main-cate-item" onclick="location.href='msgAllList.msg'">
+						메세지
+					</div>
+				</div>
 			</div>
 			
 			
@@ -145,24 +156,26 @@
 		});
 	
 	
-		var noticeP = document.querySelector('.cate-notice-p');
-		var noticeBox = document.querySelector('.cate-notice-c');
-		var theyP = document.querySelector('.cate-they-p');
-		var theyBox = document.querySelector('.cate-they-c');
-		var approvalP = document.querySelector('.cate-approval-p');
-		var approvalBox = document.querySelector('.cate-approval-c');
+// 		var noticeP = document.querySelector('.cate-notice-p');
+// 		var noticeBox = document.querySelector('.cate-notice-c');
+// 		var theyP = document.querySelector('.cate-they-p');
+// 		var theyBox = document.querySelector('.cate-they-c');
+// 		var approvalP = document.querySelector('.cate-approval-p');
+// 		var approvalBox = document.querySelector('.cate-approval-c');
 		
-		noticeP.addEventListener('click', function() {
-	            noticeBox.classList.toggle('active');
-	    });
+// 		noticeP.addEventListener('click', function() {
+// 	            noticeBox.classList.toggle('active');
+// 	    });
 		
-		theyP.addEventListener('click', function() {
-            theyBox.classList.toggle('active');
-    	});
+// 		theyP.addEventListener('click', function() {
+//             theyBox.classList.toggle('active');
+//     	});
 		
-		approvalP.addEventListener('click', function() {
-            approvalBox.classList.toggle('active');
-    	});
+// 		approvalP.addEventListener('click', function() {
+//             approvalBox.classList.toggle('active');
+//     	});
+	
+		
 	
 		$('.main-chat-text').on('keyup', function(){
 			var receiver = $(this).val();
@@ -185,6 +198,7 @@
 							var addHtml = '';
 							
 							addHtml += "<div class='chat-memberList-item'>" + member.mName;
+							addHtml += "(" + member.dName + " / " + member.jName + ")";
 							addHtml += "<input type='hidden' value='" + member.mNo + "'>";
 							addHtml += "</div>";
 							
@@ -220,6 +234,7 @@
 							var addHtml = '';
 							
 							addHtml += "<div class='chat-memberList-item2'>" + member.mName;
+							addHtml += "(" + member.dName + " / " + member.jName + ")";
 							addHtml += "<input type='hidden' value='" + member.mNo + "'>";
 							addHtml += "</div>";
 							
@@ -294,11 +309,13 @@
 								
 								if(msg.cMsgWriterNo == loginUserNo) {
 									addHtml += "<div class='chatRight'>";
+									addHtml += "<div class='chatMsgTime'>" + msg.cMsgDate + "</div>";
 									addHtml += "<span class='chatRight_msg'>" + msg.cMsgContent + "</span></div>";
 								} else {
 									addHtml += "<div class='chatLeft'>";
 									addHtml += "<div class='chatUser'>" + msg.cMsgWriterName + "</div>";
-									addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg.cMsgContent + "</span></div></div>";
+									addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg.cMsgContent + "</span>";
+									addHtml += "<div class='chatMsgTime'>" + msg.cMsgDate + "</div></div></div>";
 								}
 								$('.chatContent').append(addHtml);
 							}
@@ -363,17 +380,23 @@
 			
 			webSocket.onmessage = function(message) {
 				var msg = message.data.split("/");
-				
+				let date = new Date();
+				let hours = ('0' + date.getHours()).slice(-2); 
+				let minutes = ('0' + date.getMinutes()).slice(-2);
+				let time = hours + ':' + minutes;
+
 				if(msg[2] == roomNo) {
 					if(msg[0] == ${ loginUser.mNo }) {
 						var addHtml = "<div class='chatRight'>";
+						addHtml += "<div class='chatMsgTime'>" + time + "</div>";
 						addHtml += "<span class='chatRight_msg'>" + msg[3] + "</span></div>";
 						$('.chatContent').append(addHtml);
 						scrollTop();
 					} else {
 						var addHtml = "<div class='chatLeft'>";
 						addHtml += "<div class='chatUser'>" + msg[1] + "</div>";
-						addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg[3] + "</span></div></div>";
+						addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg[3] + "</span>";
+						addHtml += "<div class='chatMsgTime'>" + time + "</div></div></div>";
 						$('.chatContent').append(addHtml);
 						scrollTop();
 					}
@@ -394,7 +417,10 @@
 			   !$(e.target).hasClass('msg-write-receiver-input') && !$(e.target).hasClass('chatRoomList') &&
 			   !$(e.target).hasClass('main-chat-button') && !$(e.target).hasClass('chatRoomItemBox') && 
 			   !$(e.target).hasClass('chatMsgWrite') && !$(e.target).hasClass('chatMsgSendBtn') &&
-			   !$(e.target).hasClass('chatPlusBtn') && !$(e.target).hasClass('chat-memberList-item2') && !$(e.target).hasClass('main-chat-text2')) {
+			   !$(e.target).hasClass('chatPlusBtn') && !$(e.target).hasClass('chat-memberList-item2') && 
+			   !$(e.target).hasClass('main-chat-text2') && !$(e.target).hasClass('chatRoomUser') &&
+			   !$(e.target).hasClass('chatRoomMsg') && !$(e.target).hasClass('chatProfileImg') &&
+			   !$(e.target).hasClass('chatRoomItem')) {
 				
 				$('.msg-write-memberList').removeClass('active');
 				$('.chatRoom').removeClass('active');		
@@ -402,6 +428,10 @@
 				$('.main-chat-text2').removeClass('active');		
 				$('.chat-memberList2').removeClass('active');		
 				closeSocket();
+			}
+			
+			if(!$(e.target).hasClass('main-chat-text2')) {
+				$('.main-chat-text2').val('');
 			}
 		});
 		
@@ -414,6 +444,9 @@
 		$(document).on('click', '.main-chat-button', function(){
 			$('.chatRoomList').addClass('active');
 			$('.chatRoomList').html("");
+			$('.chatRoom').removeClass('active');
+			$('.main-chat-text2').removeClass('active');
+			$('.chat-memberList2').removeClass('active');
 			
 			$.ajax({
 				url: 'getChatRoomList.chat',
@@ -424,30 +457,40 @@
 						var addHtml = "<div>채팅방이 없습니다.</div>";
 						$('.chatRoomList').append(addHtml);
 					} else {
-						for(var i in data) {
-							var room = data[i];
-							var pList1 = room.cRoomPName.split(",");
-							var mName = room.cRoomMName;
-							var loginUserName = "${ loginUser.mName }";
-							var pList2 = "";
+						const crList = data["crList"];
+						const msgList = data["msgList"];
+						
+						for(let i in crList) {
+							let room = crList[i];
+							let pList1 = room.cRoomPName.split(",");
+							let mName = room.cRoomMName;
+							let loginUserName = "${ loginUser.mName }";
+							let pList2 = "";
 							
 							pList1.pop();
 							pList1.push(mName);
 							
-							for(var i = 0; i < pList1.length; i++) {
-								if(pList1[i] != loginUserName) {
-									pList2 += pList1[i] + ", ";
+							for(let j = 0; j < pList1.length; j++) {
+								if(pList1[j] != loginUserName) {
+									pList2 += pList1[j] + ", ";
 								}
 							}
 							pList2 = pList2.substring(0, pList2.lastIndexOf(","));
 							
-							var addHtml = "<div class='chatRoomItemBox'>";
-							addHtml += "<div class='chatProfileImg'></div>";
+							let addHtml = "<div class='chatRoomItemBox'>";
+							addHtml += "<img class='chatProfileImg' src='resources/mProfileFiles/" + room.cRoomProfile + "'>";
 							addHtml += "<div class='chatRoomItem'>"
 							addHtml += "<div class='chatRoomUser'>" + pList2;
 							addHtml += "<input type='hidden' value='" + room.cRoomNo + "'>";
 							addHtml += "<div class='chatRoomTime'></div></div>";
-							addHtml += "<div class='chatRoomMsg'>" + "메세지 내용" + "</div></div></div>";
+							for(let j in msgList) {
+								let msg = msgList[j];
+								
+								if(msg.cMsgRoomNo == room.cRoomNo) {
+									addHtml += "<div class='chatRoomMsg'>" + msg.cMsgContent + "</div>";
+									addHtml += "<div class='chatMsgDate'>" + msg.cMsgDate + "</div></div></div>";
+								}
+							}
 								
 							$('.chatRoomList').append(addHtml);
 						}						
@@ -511,11 +554,13 @@
 								
 								if(msg.cMsgWriterNo == loginUserNo) {
 									addHtml += "<div class='chatRight'>";
+									addHtml += "<div class='chatMsgTime'>" + msg.cMsgDate + "</div>";
 									addHtml += "<span class='chatRight_msg'>" + msg.cMsgContent + "</span></div>";
 								} else {
 									addHtml += "<div class='chatLeft'>";
 									addHtml += "<div class='chatUser'>" + msg.cMsgWriterName + "</div>";
-									addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg.cMsgContent + "</span></div></div>";
+									addHtml += "<div class='chat_msg_box'><span class='chatLeft_msg'>" + msg.cMsgContent + "</span>";
+									addHtml += "<div class='chatMsgTime'>" + msg.cMsgDate + "</div></div></div>";
 								}
 								$('.chatContent').append(addHtml);
 							}
@@ -557,11 +602,23 @@
 	            }
 	            
 	         }
-	      }
+	      };
 	      
 	      $(function(){
 	         setBar();         
 	         interval;
-	      })
+	      });
+	      
+	      $('#main-cate-ad').click(function() {
+				let arrow = $(this).children().eq(0).children().eq(0).children().eq(0);
+				if(arrow.attr('class') == 'fas fa-sort-up') {
+					arrow.attr('class', 'fas fa-sort-down down');
+				} else {
+					arrow.attr('class', 'fas fa-sort-up');
+				} 
+				
+					
+				$(this).children('.main-cate-sub-item').slideToggle('active');
+			});
 	</script>
 </html>

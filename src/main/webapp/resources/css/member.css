@@ -218,7 +218,8 @@
 	margin-top: 5px;
 }
 
-.inputBorder{
+
+.inputBorder, .postcodify_postcode5, .postcodify_address, .postcodify_extra_info{
 	border-style: none;
     width: 400px;
     height: 31px;
@@ -472,10 +473,10 @@ select[name=jCode]{
 .fa-search:before {
     content: "\f002";
     cursor: pointer;
-    position: absolute;
-	top: 23.5%;
-	left: 46%;
-	transform: translate(-50%, -50%);
+/*     position: absolute; */
+/* 	top: 23.5%; */
+/* 	left: 46%; */
+/* 	transform: translate(-50%, -50%); */
 	background-color: white;
 }
 
