@@ -10,12 +10,16 @@
 	<select id="selectBList" resultMap="boardResultSet">
 		select *
 		from (select rownum r, b_no, b_dept, b_title, b_content, b_create_date, 
-			  b_modify_date, b_count, b_type, b_status, b_m_no  
+			  b_modify_date, b_count, b_type, b_status, b_m_no, b_reply, b_topfixed
 			  from board
-			  where b_status='Y' 
-			  and b_collabo='N'
-			  order by b_no desc
-			  )
+			  where b_status='Y'  and b_collabo='N' and
+			  <if test='bTopFixed == "Y"'>
+			  	b_topfixed = 'Y'	 	
+			  </if>
+			  <if test='bTopFixed == "N"'>
+			  	b_topfixed = 'N'
+			  </if>
+			  order by b_no desc)
 		where r between #{currentPage} + 1 and #{currentPage} + 10
 	</select>
 	
@@ -31,12 +35,14 @@
 		<result column="B_STATUS" property="bStatus"/>
 		<result column="B_M_NO" property="bMNo"/>
 		<result column="m_name" property="mName"/>
+		<result column="B_REPLY" property="bReply"/>		
+		<result column="B_TOPFIXED" property="bTopFixed"/>		
 	</resultMap>
 	
 	<insert id="insertBoard">
 		insert into board
 		values(bo_seq.nextval, #{bDept}, #{bTitle}, #{bContent}, default, default, default, 
-			   #{bType}, default, #{bMNo}, default)
+			   #{bType}, default, #{bMNo}, default,  default, #{bTopFixed})
 	</insert>
 	
 	<select id="selectBNo" resultType="_int">
@@ -58,7 +64,7 @@
 	
 	<select id="selectBoard" resultMap="boardResultSet">
 		select b_no, b_dept, b_title, b_content, b_create_date, 
-			   b_modify_date, b_count, b_type, b_status, b_m_no, m_name  
+			   b_modify_date, b_count, b_type, b_status, b_m_no, m_name, b_reply
 		from board join member on (m_no = b_m_no)
 			  where b_status='Y' and b_no = #{bNo}
 	</select>
@@ -104,9 +110,9 @@
 	<select id="searchBList" resultMap="boardResultSet">
 		select *
 		from (select rownum r, b_no, b_dept, b_title, b_content, b_create_date, 
-			  b_modify_date, b_count, b_type, b_status, b_m_no  
+			  b_modify_date, b_count, b_type, b_status, b_m_no, b_reply, b_topfixed
 			  from board
-			  where b_status='Y' and b_collabo ='N' and
+			  where b_status='Y' and b_collabo ='N' and b_topfixed = 'N' and
 			  <if test="type == '제목'">
 			  	b_title like '%' || #{search} || '%'
 			  </if>
@@ -133,7 +139,7 @@
 	
 	<insert id="insertReply">
 		insert into reply
-		values(re_seq.nextval, #{rContent}, default, default, default, #{rMNo}, #{rBNo})
+		values(re_seq.nextval, #{rContent}, default, default, default, #{rMNo}, #{rBNo}, #{rMRenameProfile})
 	</insert>
 	
 	<select id="selectRList" resultMap="replyResultSet">
@@ -154,7 +160,14 @@
 		<result column="M_NAME" property="mName"/>
 		<result column="J_NAME" property="jName"/>
 		<result column="D_NAME" property="dName"/>
+		<result column="R_M_RENAMEPROFILE" property="rMRenameProfile"/>
 	</resultMap>
+	
+	<update id="updateCountReply">
+		update board
+		set b_reply = b_reply + 1
+		where b_no = #{rBNo}
+	</update>
 	
 	
 </mapper>

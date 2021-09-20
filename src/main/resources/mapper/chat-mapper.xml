@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="chat-mapper">
 	<select id="getChatRoom" resultMap="chatRoomResultSet">
-		select c_room_no, c_room_m, c_room_p, c_room_p_name, m_name
+		select c_room_no, c_room_m, c_room_p, c_room_p_name, m_name, c_room_profile
 			  from chatroom join member on (c_room_m = m_no)
 		where (c_room_m = #{cRoomM} or c_room_m = #{cRoomP})
 			   and (c_room_p = #{pComma} or c_room_p = #{mComma})
@@ -26,7 +26,7 @@
 	
 	<insert id="createChatRoom">
 		insert into chatroom
-		values(chat_room_seq.nextval, #{cRoomM}, #{cRoomP}, #{cRoomPName})
+		values(chat_room_seq.nextval, #{cRoomM}, #{cRoomP}, #{cRoomPName}, #{cRoomProfile})
 	</insert>
 	
 	<insert id="insertChatMsg">
@@ -36,7 +36,7 @@
 	
 	<select id="getChatRoomList" resultMap="chatRoomResultSet">
 		select *
-		from(select c_room_no, c_room_m, c_room_p, c_room_p_name, m_name
+		from(select c_room_no, c_room_m, c_room_p, c_room_p_name, m_name, c_room_profile
 			 from chatroom join member on (c_room_m = m_no)
 			 order by c_room_no desc)
 		where c_room_m = #{mNo} or c_room_p like '%' || #{mNo} || '%' 
@@ -48,6 +48,7 @@
 		<result column="C_ROOM_P" property="cRoomP"/>
 		<result column="m_name" property="cRoomMName"/>
 		<result column="C_ROOM_P_NAME" property="cRoomPName"/>
+		<result column="C_ROOM_PROFILE" property="cRoomProfile"/>
 	</resultMap>
 	
 	<update id="addParticipant">
@@ -56,7 +57,7 @@
 	</update>
 	
 	<select id="selectChatRoom" resultMap="chatRoomResultSet">
-		select c_room_no, c_room_m, c_room_p, c_room_p_name, m_name
+		select c_room_no, c_room_m, c_room_p, c_room_p_name, m_name, c_room_profile
 		from chatroom join member on (c_room_m = m_no) 
 		where c_room_no = #{roomNo}
 	</select>
@@ -70,6 +71,10 @@
 		from chatmessage join member on (c_msg_writer = m_no)
 		where c_msg_room_no = #{cRoomNo} and
 		c_msg_no = (select max(c_msg_no) from chatmessage)
+	</select>
+	
+	<select id="getPProfile" resultType="string">
+		select m_renameprofile from member where m_no = #{participant}
 	</select>
 	
 	

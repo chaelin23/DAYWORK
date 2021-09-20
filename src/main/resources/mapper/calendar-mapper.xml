@@ -51,7 +51,7 @@
 	<insert id="insertVac">
 		insert into calendar
 		values (cal_seq.nextval, 3, to_date(#{calStart}, 'YYYY-MM-DD HH24:MI'), to_date(#{calEnd}, 'YYYY-MM-DD HH24:MI'), 
-				#{calContent}, #{calAllDay}, default, #{mNo}, #{dCode}, #{jCode})
+				#{calContent}, 'Y', default, #{mNo}, #{dCode}, #{jCode})
 	</insert>
 	
 	<update id="acceptVac">

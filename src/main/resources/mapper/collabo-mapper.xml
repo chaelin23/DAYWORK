@@ -3,7 +3,7 @@
 <mapper namespace="collabo-mapper">
 	<insert id="insertBoardC">
 		insert into board values
-		(BO_seq.nextval, #{bDept}, #{bTitle}, #{bContent}, SYSDATE, SYSDATE, 0, 3, default, #{bMNo}, 'Y')
+		(BO_seq.nextval, #{bDept}, #{bTitle}, #{bContent}, SYSDATE, SYSDATE, 0, 3, default, #{bMNo}, 'Y', default, default)
 	</insert>
 	
 	<select id="selectBNo" resultType="_int">

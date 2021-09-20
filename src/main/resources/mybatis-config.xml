@@ -22,6 +22,9 @@
 		<typeAlias alias="Approval" type="com.kh.DAYWORK.approval.model.vo.Approval"/>
 		<typeAlias alias="ApprovalForm" type="com.kh.DAYWORK.approval.model.vo.ApprovalForm"/>
 		<typeAlias alias="ApprovalStatus" type="com.kh.DAYWORK.approval.model.vo.ApprovalStatus"/>
+		<typeAlias type="com.kh.DAYWORK.survey.model.vo.Survey" alias="Survey"/>
+		<typeAlias type="com.kh.DAYWORK.survey.model.vo.Question" alias="Question"/>
+		<typeAlias type="com.kh.DAYWORK.survey.model.vo.Answer" alias="Answer"/>
 		
 	</typeAliases>
 	<mappers>

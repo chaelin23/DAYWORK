@@ -2,18 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="address-mapper">
 
-	<!-- <select id="selectAddress" resultMap="AddressResultSet">
-		select * from address where e_no = #{mNo} and a_status = 'Y' order by a_no desc
-	</select> -->
-	
-	<!-- <select id="getListCount" resultType="_int">
-		select count(*) from address where e_no = #{getmNo} and a_status = 'Y'
-	</select> -->
-	
-	<select id="detailAddress" resultMap="AddressResultSet">
-		select * from address where a_no = #{ aNo } and a_status = 'Y'
-	</select>
-	
 	<select id="deleteAddress">
 		update address set a_status = 'N' where a_no = #{ list[i] }
 	</select>
@@ -30,24 +18,12 @@
 		</if>
 		where a_no = #{aNo}
 	</select>
-	
-	<select id="searchList" parameterType="HashMap" resultMap="AddressResultSet">
-		select * from address where a_name like '%' || #{key} || '%' and e_no = #{mNo} order by a_no desc
+
+	<select id="detailAddress" resultMap="AddressResultSet">
+		select * from address where a_no = #{ aNo } and a_status = 'Y'
 	</select>
 	
-	<select id="getSearchListCount" resultType="_int">
-		select count(*) from address where a_name like '%' || #{key} || '%' and e_no = #{mNo} 
-	</select>
-	
-	<!-- <select id="getListCount2" resultType="_int">
-		select count(*) from member join job using(j_code) join department using(d_code) where m_status = 'Y'
-	</select> -->
-	
-<!-- 	<select id="selectAddress2" resultMap="MemberResultSet">
-		select * from member join job using(j_code) join department using(d_code) where m_status = 'Y' order by m_ent_date desc
-	</select> -->
-	
-	<select id="detailMember" resultMap="MemberResultSet2">
+	<select id="detailMember" resultMap="MemberResultSet">
 		select * from member 
 			left join job using(j_code) 
 			left join department using(d_code) 
@@ -84,7 +60,7 @@
 		order by m_ent_date desc
 	</select>
 	
-	<select id="selectAddress2" resultMap="MemberResultSet2">
+	<select id="selectAddress2" resultMap="MemberResultSet">
 		select * from member join job using(j_code) join department using(d_code) where m_status = 'Y'
 		<if test="key != null">
 			and m_name like '%' || #{key} || '%'
@@ -117,20 +93,6 @@
 	</resultMap>
 	
 	<resultMap type="Member" id="MemberResultSet">
-		<id column="M_NO" property="mNo"/>
-		<result column="M_NAME" property="mName"/>
-		<result column="M_GENDER" property="mGender"/>
-		<result column="M_BIRTHDAY" property="mBirthDay"/>
-		<result column="M_PHONE" property="mPhone"/>
-		<result column="M_EMAIL" property="mEmail"/>
-		<result column="M_ADDRESS" property="mAddress"/>
-		<result column="M_ENT_DATE" property="mEntDate"/>
-		<result column="M_HIRE_DATE" property="mHireDate"/>
-		<result column="J_NAME" property="jCode"/>
-		<result column="D_NAME" property="dCode"/>
-	</resultMap>
-	
-	<resultMap type="Member" id="MemberResultSet2">
 		<id column="M_NO" property="mNo"/>
 		<result column="M_NAME" property="mName"/>
 		<result column="M_GENDER" property="mGender"/>
