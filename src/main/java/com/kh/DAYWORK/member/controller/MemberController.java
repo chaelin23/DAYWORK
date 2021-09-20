@@ -138,7 +138,8 @@ public class MemberController {
 //				return "redirect:home.do";
 //			}
 		}else {
-			throw new MemberException("사번찾기에 실패했습니다.");
+			model.addAttribute("msg", "입력하신 정보는 확인되지 않습니다.");
+			return "redirect:goWhereMno.me";
 		}
 	}
 	
@@ -315,10 +316,7 @@ public class MemberController {
 		}
 		return sb.toString();
 	}
-	
-	
-	
-	
+
 	
 	// 관리자 페이지
 	
@@ -369,7 +367,7 @@ public class MemberController {
 		if(result>0) {
 			return "redirect:goAdmin.me";
 		} else {
-			throw new MemberException("퇴사 처리에 실패하였습니다.");
+			throw new MemberException("입사 처리에 실패하였습니다.");
 		}
 	}
 	

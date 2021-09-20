@@ -13,6 +13,7 @@ public class Reply {
 	private String mName;
 	private String jName;
 	private String dName;
+	private String rMRenameProfile;
 	
 	public Reply() {}
 
@@ -111,10 +112,18 @@ public class Reply {
 		this.dName = dName;
 	}
 
+	public String getrMRenameProfile() {
+		return rMRenameProfile;
+	}
+
+	public void setrMRenameProfile(String rMRenameProfile) {
+		this.rMRenameProfile = rMRenameProfile;
+	}
+
 	@Override
 	public String toString() {
 		return "Reply [rNo=" + rNo + ", rContent=" + rContent + ", rCreateDate=" + rCreateDate + ", rModifyDate="
 				+ rModifyDate + ", rStatus=" + rStatus + ", rMNo=" + rMNo + ", rBNo=" + rBNo + ", mName=" + mName
-				+ ", jName=" + jName + ", dName=" + dName + "]";
+				+ ", jName=" + jName + ", dName=" + dName + ", rMRenameProfile=" + rMRenameProfile + "]";
 	}
 }

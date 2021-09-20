@@ -65,7 +65,7 @@ public class MemberDAO {
 	public int updateDeptJob(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("member-mapper.updateDeptJob", m);
 	}
-
+ 
 	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("member-mapper.selectMemberListBasic");
 	}

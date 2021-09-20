@@ -1,13 +1,12 @@
-package com.kh.DAYWORK.approval.service;
+package com.kh.DAYWORK.approval.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.DAYWORK.approval.DAO.ApprovalDAO;
+import com.kh.DAYWORK.approval.model.dao.ApprovalDAO;
 import com.kh.DAYWORK.approval.model.vo.Approval;
 import com.kh.DAYWORK.approval.model.vo.ApprovalForm;
 import com.kh.DAYWORK.approval.model.vo.ApprovalStatus;
@@ -49,11 +48,6 @@ public class ApprovalService {
 		return aDAO.apDetail(sqlSession,apNo);
 	}
 
-	public int apUpdate(int apNo) {
-		return aDAO.apUpdate(sqlSession,apNo);
-		
-	}
-
 	public int selectApNo() {
 		return aDAO.selectApNo(sqlSession);
 	}
@@ -65,6 +59,25 @@ public class ApprovalService {
 	public List<ApprovalStatus> asList() {
 		return aDAO.asList(sqlSession);
 	}
+	
+	public int apUpdate(int apNo) {
+		return aDAO.apUpdate(sqlSession,apNo);
+		
+	}
+	public int apRejected(int apNo) {
+		return aDAO.apRejected(sqlSession,apNo);
+	}
+
+	public int apDelete(int apNo) {
+		return aDAO.apDelete(sqlSession,apNo);
+	}
+
+	public Approval selectSender(int apNo) {
+		return  aDAO.selectSender(sqlSession,apNo);
+	}
+
+
+
 
 
 

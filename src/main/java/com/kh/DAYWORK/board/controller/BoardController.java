@@ -54,8 +54,15 @@ public class BoardController {
 			currentPage = page;
 		}
 		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("currentPage", (currentPage-1) * 10 + "");
+		map.put("bTopFixed", "N");
+		
 		int listCount = bService.getListCount();
-		ArrayList<Board> bList = bService.selectBList((currentPage-1) * 10);
+		ArrayList<Board> bList = bService.selectBList(map);
+		map.put("bTopFixed", "Y");
+		ArrayList<Board> bListTop = bService.selectBList(map);
+		
 		
 		int maxPage;
 		if(listCount % 10 == 0) {
@@ -71,36 +78,12 @@ public class BoardController {
 			endPage = maxPage;
 		}
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar calendar = Calendar.getInstance();
-		
-		calendar.add(calendar.DATE, -7);
-		String year = calendar.get(Calendar.YEAR) + "";
-		String month = calendar.get(Calendar.MONTH) + 1 + "";
-		String day = calendar.get(Calendar.DATE) + "";
-		String today = year + "-" + month + "-" + day;
-		
-		ArrayList<Board> bList2 = new ArrayList<Board>(); 
-		for(Board b : bList) {
-			Date boardDate = b.getbCreateDate();			
-			String boardDay = dateFormat.format(boardDate);
-			int result = 1;
-			try {
-				Date boardDate2 = dateFormat.parse(boardDay);
-				Date date = dateFormat.parse(today);
-				
-				result = boardDate2.compareTo(date);
-				if(result == 0) result = 1;
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			
-			b.setBoardNew(result);
-			bList2.add(b);
-		}
+		ArrayList<Board> bList2 = newBoard(bList);
+		ArrayList<Board> bListTop2 = newBoard(bListTop);
         
 		if(bList != null) {
 			m.addAttribute("bList2", bList2)
+			.addAttribute("bListTop2", bListTop2)
 			.addAttribute("maxPage", maxPage)
 			.addAttribute("startPage", startPage)
 			.addAttribute("endPage", endPage)
@@ -333,10 +316,13 @@ public class BoardController {
 		map.put("type", type);
 		map.put("search", search);
 		map.put("currentPage", ((currentPage-1) * 10) + "");
+		map.put("bTopFixed", "Y");
 		
 		
 		int listCount = bService.searchBListCount(map);
 		ArrayList<Board> bList = bService.searchBList(map);
+//		map.put("bTopFixed", "Y");
+		ArrayList<Board> bListTop = bService.selectBList(map);
 		
 		int maxPage;
 		if(listCount % 10 == 0) {
@@ -352,36 +338,12 @@ public class BoardController {
 			endPage = maxPage;
 		}
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar calendar = Calendar.getInstance();
-		
-		calendar.add(calendar.DATE, -7);
-		String year = calendar.get(Calendar.YEAR) + "";
-		String month = calendar.get(Calendar.MONTH) + 1 + "";
-		String day = calendar.get(Calendar.DATE) + "";
-		String today = year + "-" + month + "-" + day;
-		
-		ArrayList<Board> bList2 = new ArrayList<Board>(); 
-		for(Board b : bList) {
-			Date boardDate = b.getbCreateDate();			
-			String boardDay = dateFormat.format(boardDate);
-			int result = 1;
-			try {
-				Date boardDate2 = dateFormat.parse(boardDay);
-				Date date = dateFormat.parse(today);
-				
-				result = boardDate2.compareTo(date);
-				if(result == 0) result = 1;
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			
-			b.setBoardNew(result);
-			bList2.add(b);
-		}
+		ArrayList<Board> bList2 = newBoard(bList);
+		ArrayList<Board> bListTop2 = newBoard(bListTop);
 		
 		if(bList != null) {
 			m.addAttribute("bList2", bList2)
+			.addAttribute("bListTop2", bListTop2)
 			.addAttribute("maxPage", maxPage)
 			.addAttribute("startPage", startPage)
 			.addAttribute("endPage", endPage)
@@ -414,11 +376,13 @@ public class BoardController {
 	
 	@RequestMapping("insertReply.bo")
 	@ResponseBody
-	public void insertReply(@RequestParam("mNo") int mNo, @RequestParam("bNo") int bNo, 
-						    @RequestParam("content") String content, HttpServletResponse response) {
+	public void insertReply(@RequestParam("bNo") int bNo, 
+						    @RequestParam("content") String content, HttpServletResponse response, HttpSession session) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		
 		Reply reply = new Reply();
-		reply.setrMNo(mNo);
+		reply.setrMNo(loginUser.getmNo());
+		reply.setrMRenameProfile(loginUser.getmRenameProfile());
 		reply.setrBNo(bNo);
 		reply.setrContent(content);
 		
@@ -437,6 +401,38 @@ public class BoardController {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public ArrayList<Board> newBoard(ArrayList<Board> bList) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = Calendar.getInstance();
+		
+		calendar.add(calendar.DATE, -7);
+		String year = calendar.get(Calendar.YEAR) + "";
+		String month = calendar.get(Calendar.MONTH) + 1 + "";
+		String day = calendar.get(Calendar.DATE) + "";
+		String today = year + "-" + month + "-" + day;
+		
+		ArrayList<Board> bList2 = new ArrayList<Board>(); 
+		for(Board b : bList) {
+			Date boardDate = b.getbCreateDate();			
+			String boardDay = dateFormat.format(boardDate);
+			int result = 1;
+			try {
+				Date boardDate2 = dateFormat.parse(boardDay);
+				Date date = dateFormat.parse(today);
+				
+				result = boardDate2.compareTo(date);
+				if(result == 0) result = 1;
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			b.setBoardNew(result);
+			bList2.add(b);
+		}
+		
+		return bList2;
 	}
 	
 	

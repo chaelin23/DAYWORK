@@ -25,8 +25,8 @@ public class BoardService {
 		return bDAO.getListCount(sqlSession);
 	}
 
-	public ArrayList<Board> selectBList(int currentPage) {
-		return bDAO.selectBList(sqlSession, currentPage);
+	public ArrayList<Board> selectBList(HashMap<String, String> map) {
+		return bDAO.selectBList(sqlSession, map);
 	}
 
 	public int insertBoard(Board b, ArrayList<BMsgFile> fileList) {
@@ -105,7 +105,10 @@ public class BoardService {
 		ArrayList<Reply> r = null;
 		
 		if(result > 0) {
-			r = selectRList(reply.getrBNo());
+			int result2 = bDAO.updateCountReply(sqlSession, reply);
+			if(result2 > 0) {
+				r = selectRList(reply.getrBNo());				
+			}
 		}
 		
 		return r;

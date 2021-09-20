@@ -60,4 +60,8 @@ public class ChatDAO {
 		return msgList;
 	}
 
+	public String getPProfile(SqlSessionTemplate sqlSession, String participant) {
+		return sqlSession.selectOne("chat-mapper.getPProfile", participant);
+	}
+
 }

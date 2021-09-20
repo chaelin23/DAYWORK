@@ -74,5 +74,9 @@ public class ChatService {
 	public ArrayList<ChatMessage> firstMsgList(ArrayList<Integer> roomNoList) {
 		return chatDAO.firstMsgList(sqlSession, roomNoList);
 	}
+
+	public String getPProfile(String participant) {
+		return chatDAO.getPProfile(sqlSession, participant);
+	}
 	
 }

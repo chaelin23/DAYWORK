@@ -21,7 +21,7 @@ public class MemberService {
 	private MemberDAO mDAO;
 	
 	
-public int insertMember(Member m) {
+	public int insertMember(Member m) {
 		
 		return mDAO.insertMember(sqlSession, m);
 	}

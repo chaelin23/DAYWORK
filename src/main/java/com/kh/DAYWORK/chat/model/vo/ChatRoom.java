@@ -9,6 +9,7 @@ public class ChatRoom {
 	private String cRoomPName;
 	private String mComma;
 	private String pComma;
+	private String cRoomProfile;
 	
 	public ChatRoom() {}
 	
@@ -84,10 +85,18 @@ public class ChatRoom {
 		this.pComma = pComma;
 	}
 
+	public String getcRoomProfile() {
+		return cRoomProfile;
+	}
+
+	public void setcRoomProfile(String cRoomProfile) {
+		this.cRoomProfile = cRoomProfile;
+	}
+
 	@Override
 	public String toString() {
 		return "ChatRoom [cRoomNo=" + cRoomNo + ", cRoomM=" + cRoomM + ", cRoomP=" + cRoomP + ", cRoomMName="
-				+ cRoomMName + ", cRoomPName=" + cRoomPName + "]";
+				+ cRoomMName + ", cRoomPName=" + cRoomPName + ", mComma=" + mComma + ", pComma=" + pComma
+				+ ", cRoomProfile=" + cRoomProfile + "]";
 	}
-
 }

@@ -1,4 +1,4 @@
-package com.kh.DAYWORK.approval.DAO;
+package com.kh.DAYWORK.approval.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +34,6 @@ public class ApprovalDAO {
 		return sqlSession.selectOne("approval-mapper.apDetail", apNo);
 	}
 
-	public int apUpdate(SqlSessionTemplate sqlSession, int apNo) {
-		return sqlSession.update("approval-mapper.apUpdate", apNo);
-	}
 
 	public int selectApNo(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("approval-mapper.selectApNo");
@@ -49,6 +46,25 @@ public class ApprovalDAO {
 	public List<ApprovalStatus> asList(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectList("approval-mapper.asList");
 	}
+	
+	public int apUpdate(SqlSessionTemplate sqlSession, int apNo) {
+		return sqlSession.update("approval-mapper.apUpdate", apNo);
+	}
+
+
+	public int apRejected(SqlSessionTemplate sqlSession, int apNo) {
+		return sqlSession.update("approval-mapper.apRejected", apNo);
+	}
+	
+	public int apDelete(SqlSessionTemplate sqlSession, int apNo) {
+		return sqlSession.update("approval-mapper.apDelete", apNo);
+	}
+
+	public Approval selectSender(SqlSessionTemplate sqlSession, int apNo) {
+		return sqlSession.selectOne("approval-mapper.selectSender", apNo);
+	}
+
+
 
 
 

@@ -223,7 +223,7 @@ public class CollaboController {
 		
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson  = gb.create();
-		
+			
 		try {
 			gson.toJson(mList, response.getWriter());
 		} catch (JsonIOException e) {

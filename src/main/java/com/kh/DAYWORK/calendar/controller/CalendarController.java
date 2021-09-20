@@ -139,6 +139,8 @@ public class CalendarController {
 	public String insertVac(@ModelAttribute Calendar cal, @RequestParam("vacCate") String vacCate, HttpServletRequest request) {
 				
 		cal = setCalendar(cal, vacCate, request);
+		cal.setCalEnd(cal.getCalEnd() + "22:00");
+
 		
 		int result = calService.insertVac(cal);
 		

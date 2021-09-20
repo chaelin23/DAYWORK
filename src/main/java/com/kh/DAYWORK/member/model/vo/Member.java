@@ -1,4 +1,4 @@
-package com.kh.DAYWORK.member.model.vo;
+ package com.kh.DAYWORK.member.model.vo;
 
 import java.sql.Date;
 

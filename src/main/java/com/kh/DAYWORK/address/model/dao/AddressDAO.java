@@ -14,67 +14,36 @@ import com.kh.DAYWORK.member.model.vo.Member;
 @Repository
 public class AddressDAO {
 
-//	public ArrayList<Address> selectAddress(SqlSessionTemplate sqlSession, PageInfo pi, int mNo) {
-//		
-//		int offset = pi.getBoardLimit() * (pi.getCurrentPage() - 1);
-//		RowBounds row = new RowBounds(offset, pi.getBoardLimit());
-//
-//		return (ArrayList)sqlSession.selectList("address-mapper.selectAddress", mNo, row);
-//	}
-
-	public int getListCount(SqlSessionTemplate sqlSession, int getmNo) {
-		return sqlSession.selectOne("address-mapper.getListCount", getmNo);
-	}
-
-	public Address detailAddress(SqlSessionTemplate sqlSession, Integer aNo) {
-		return sqlSession.selectOne("address-mapper.detailAddress", aNo);
-	}
-
+	// 주소록 삭제
 	public int deleteAddress(SqlSessionTemplate sqlSession, String[] list) {
 		int result = 0;
 		
 		for(int i = 0 ; i < list.length ; i++) {
 			result += sqlSession.update("address-mapper.deleteAddress", list[i]);
 		}
-		
 		return result;
 	}
 
+	// 주소록 추가
 	public int insertAddress(SqlSessionTemplate sqlSession, Address a) {
 		return sqlSession.insert("address-mapper.insertAddress", a);
 	}
 
+	// 주소록 수정
 	public int updateAddress(SqlSessionTemplate sqlSession, Address a) {
 		return sqlSession.update("address-mapper.updateAddress", a);
 	}
 
-	public ArrayList<Address> searchAddress(SqlSessionTemplate sqlSession, PageInfo pi, HashMap map) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		RowBounds row = new RowBounds(offset, pi.getBoardLimit()); 
-		
-		return (ArrayList)sqlSession.selectList("address-mapper.searchList", map, row);
+	// 주소록 상세 조회
+	public Address detailAddress(SqlSessionTemplate sqlSession, Integer aNo) {
+		return sqlSession.selectOne("address-mapper.detailAddress", aNo);
 	}
-
-	public int getSearchListCount(SqlSessionTemplate sqlSession, HashMap map) {
-		return sqlSession.selectOne("address-mapper.getSearchListCount", map);
-	}
-
-//	public int getListCount2(SqlSessionTemplate sqlSession) {
-//		return sqlSession.selectOne("address-mapper.getListCount2");
-//	}
-
-//	public ArrayList<Address> selectAddress2(SqlSessionTemplate sqlSession, PageInfo pi) {
-//		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-//		RowBounds row = new RowBounds(offset, pi.getBoardLimit()); 
-//		
-//		return (ArrayList)sqlSession.selectList("address-mapper.selectAddress2", null, row);
-//	}
 
 	public Member detailMember(SqlSessionTemplate sqlSession, Integer mNo) {
 		return sqlSession.selectOne("address-mapper.detailMember", mNo);
 	}
-
-	/////////////////////
+	
+	// 주소록 목록 조회, 2가 붙은 것은 사내 주소록
 	public int getListCount(SqlSessionTemplate sqlSession, HashMap map) {
 		return sqlSession.selectOne("address-mapper.getListCount", map);
 	}
@@ -93,6 +62,7 @@ public class AddressDAO {
 	public ArrayList<Address> selectAddress2(SqlSessionTemplate sqlSession, PageInfo pi, HashMap map) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds row = new RowBounds(offset, pi.getBoardLimit()); 
+		
 		return (ArrayList)sqlSession.selectList("address-mapper.selectAddress2", map, row);
 	}
 

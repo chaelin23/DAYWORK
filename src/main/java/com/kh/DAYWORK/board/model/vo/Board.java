@@ -15,11 +15,13 @@ public class Board {
 	private int bMNo;
 	private String mName;
 	private int boardNew;
+	private String bReply;
+	private String bTopFixed;
 	
 	public Board() {}
 
 	public Board(int bNo, String bDept, String bTitle, String bContent, Date bCreateDate, Date bModifyDate, int bCount,
-			String bType, String bStatus, int bMNo, String mName) {
+			String bType, String bStatus, int bMNo, String mName, int boardNew, String bReply) {
 		super();
 		this.bNo = bNo;
 		this.bDept = bDept;
@@ -32,6 +34,8 @@ public class Board {
 		this.bStatus = bStatus;
 		this.bMNo = bMNo;
 		this.mName = mName;
+		this.boardNew = boardNew;
+		this.bReply = bReply;
 	}
 
 	public int getbNo() {
@@ -82,22 +86,6 @@ public class Board {
 		this.bModifyDate = bModifyDate;
 	}
 
-	public String getbStatus() {
-		return bStatus;
-	}
-
-	public void setbStatus(String bStatus) {
-		this.bStatus = bStatus;
-	}
-
-	public String getmName() {
-		return mName;
-	}
-
-	public void setmName(String mName) {
-		this.mName = mName;
-	}
-
 	public int getbCount() {
 		return bCount;
 	}
@@ -114,12 +102,28 @@ public class Board {
 		this.bType = bType;
 	}
 
+	public String getbStatus() {
+		return bStatus;
+	}
+
+	public void setbStatus(String bStatus) {
+		this.bStatus = bStatus;
+	}
+
 	public int getbMNo() {
 		return bMNo;
 	}
 
 	public void setbMNo(int bMNo) {
 		this.bMNo = bMNo;
+	}
+
+	public String getmName() {
+		return mName;
+	}
+
+	public void setmName(String mName) {
+		this.mName = mName;
 	}
 
 	public int getBoardNew() {
@@ -130,12 +134,28 @@ public class Board {
 		this.boardNew = boardNew;
 	}
 
+	public String getbReply() {
+		return bReply;
+	}
+
+	public void setbReply(String bReply) {
+		this.bReply = bReply;
+	}
+
+	public String getbTopFixed() {
+		return bTopFixed;
+	}
+
+	public void setbTopFixed(String bTopFixed) {
+		this.bTopFixed = bTopFixed;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [bNo=" + bNo + ", bDept=" + bDept + ", bTitle=" + bTitle + ", bContent=" + bContent
 				+ ", bCreateDate=" + bCreateDate + ", bModifyDate=" + bModifyDate + ", bCount=" + bCount + ", bType="
 				+ bType + ", bStatus=" + bStatus + ", bMNo=" + bMNo + ", mName=" + mName + ", boardNew=" + boardNew
-				+ "]";
+				+ ", bReply=" + bReply + ", bTopFixed=" + bTopFixed + "]";
 	}
-	
+
 }

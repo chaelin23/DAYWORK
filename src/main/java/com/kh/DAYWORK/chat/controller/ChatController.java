@@ -36,6 +36,7 @@ public class ChatController {
 		
 		int makerNo = ((Member)session.getAttribute("loginUser")).getmNo();
 		String pName = chatService.getPName(participant);
+		String pProfile = chatService.getPProfile(participant);
 		
 //		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmsssss");
 //		int ranNum = (int)(Math.random() * 10000);
@@ -46,6 +47,7 @@ public class ChatController {
 		chatRoom.setpComma(participant + ",");
 		
 		ChatRoom chatRoom2 = new ChatRoom(makerNo, participant + ",", pName + ",");
+		chatRoom2.setcRoomProfile(pProfile);
 		
 		ChatRoom cr1 = chatService.getChatRoom(chatRoom);
 		ChatRoom cr2 = null;
@@ -132,7 +134,6 @@ public class ChatController {
 		HashMap<String, ArrayList> map = new HashMap<String, ArrayList>();
 		map.put("crList", crList);
 		map.put("msgList", msgList);
-		System.out.println(msgList);
 //		for(int i = 0; i < crList.size(); i++) {
 //			ChatRoom cr1 = crList.get(i);
 //			

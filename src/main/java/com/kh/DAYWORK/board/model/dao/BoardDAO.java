@@ -17,8 +17,8 @@ public class BoardDAO {
 		return sqlSession.selectOne("board-mapper.getListCount");
 	}
 
-	public ArrayList<Board> selectBList(SqlSessionTemplate sqlSession, int currentPage) {
-		return (ArrayList)sqlSession.selectList("board-mapper.selectBList", currentPage);
+	public ArrayList<Board> selectBList(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return (ArrayList)sqlSession.selectList("board-mapper.selectBList", map);
 	}
 
 	public int insertBoard(SqlSessionTemplate sqlSession, Board b) {
@@ -87,6 +87,10 @@ public class BoardDAO {
 
 	public ArrayList<Reply> selectRList(SqlSessionTemplate sqlSession, int bNo) {
 		return (ArrayList)sqlSession.selectList("board-mapper.selectRList", bNo);
+	}
+
+	public int updateCountReply(SqlSessionTemplate sqlSession, Reply reply) {
+		return sqlSession.update("board-mapper.updateCountReply", reply);
 	}
 	
 	

@@ -20,18 +20,6 @@ public class AddressService {
 	
 	@Autowired
 	private AddressDAO aDAO = new AddressDAO();
-	
-//	public ArrayList<Address> selectAddress(PageInfo pi, int mNo) {
-//		return aDAO.selectAddress(sqlSession, pi, mNo);
-//	}
-
-//	public int getListCount(int getmNo) {
-//		return aDAO.getListCount(sqlSession, getmNo);
-//	}
-
-	public Address detailAddress(Integer aNo) {
-		return aDAO.detailAddress(sqlSession, aNo);
-	}
 
 	public int deleteAddress(String[] list) {
 		return aDAO.deleteAddress(sqlSession, list);
@@ -45,21 +33,9 @@ public class AddressService {
 		return aDAO.updateAddress(sqlSession, a);
 	}
 
-	public ArrayList<Address> searchAddress(PageInfo pi, HashMap map) {
-		return aDAO.searchAddress(sqlSession, pi, map);
+	public Address detailAddress(Integer aNo) {
+		return aDAO.detailAddress(sqlSession, aNo);
 	}
-
-//	public int getListCount(HashMap map) {
-//		return aDAO.getSearchListCount(sqlSession, map);
-//	}
-
-//	public int getListCount2() {
-//		return aDAO.getListCount2(sqlSession);
-//	}
-
-//	public ArrayList<Address> selectAddress2(PageInfo pi) {
-//		return aDAO.selectAddress2(sqlSession, pi);
-//	}
 
 	public Member detailMember(Integer mNo) {
 		return aDAO.detailMember(sqlSession, mNo);
